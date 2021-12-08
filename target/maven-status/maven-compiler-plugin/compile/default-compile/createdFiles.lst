@@ -1,0 +1,6 @@
+com\group11\configs\HibernateConfig.class
+com\group11\configs\WebApplicationContextConfig.class
+com\group11\configs\TilesConfig.class
+com\group11\controllers\AdminController.class
+com\group11\configs\DispatcherServletInitializer.class
+com\group11\controllers\HomeController.class
