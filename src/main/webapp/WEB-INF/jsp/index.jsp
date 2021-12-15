@@ -25,7 +25,7 @@
             <div class="col-md-12">
                 <div class="ftco-search d-flex justify-content-center">
                     <div class="row">
-                        <div class="col-md-12 nav-link-wrap">
+                        <div class="col-md-10 nav-link-wrap">
                             <div class="nav nav-pills text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                 <a class="nav-link active mr-md-1" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">Tìm chuyến</a>
 
@@ -41,7 +41,7 @@
                                         <div class="row no-gutters">
                                             <div class="col-md d-flex">
                                                 <div class="form-group p-4 border-0">
-                                                    <label for="#">Điểm đi</label>
+                                                    <label for="start">Điểm đi</label>
                                                     <div class="form-field">
                                                         <div class="icon"><span class="fa fa-bus"></span></div>
                                                         <input type="text" class="form-control" placeholder="Search place">

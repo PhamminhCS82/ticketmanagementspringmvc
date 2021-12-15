@@ -17,8 +17,14 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item "><a href="<c:url value="/" />" class="nav-link">Trang chủ</a></li>
                 <li class="nav-item"><a href="destination.html" class="nav-link">Các tuyến</a></li>
+                <c:if test="${pageContext.request.userPrincipal.name == null}">
                 <li class="nav-item"><a href="<c:url value="/signup" />" class="nav-link">Đăng ký</a></li>
                 <li class="nav-item"><a href="<c:url value="/signin" />" class="nav-link">Đăng nhập</a></li>
+                </c:if>
+                <c:if test="${pageContext.request.userPrincipal.name != null}">
+                <li class="nav-item"><a href="<c:url value="/" />" class="nav-link">${pageContext.request.userPrincipal.name}</a></li>
+                <li class="nav-item"><a href="<c:url value="/logout" />" class="nav-link">Đăng xuất</a></li>
+                </c:if>
             </ul>
         </div>
     </div>
