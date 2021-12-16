@@ -66,6 +66,7 @@ CREATE TABLE `location` (
 
 LOCK TABLES `location` WRITE;
 /*!40000 ALTER TABLE `location` DISABLE KEYS */;
+INSERT INTO `location` VALUES ('KV1','Khu vực 1'),('KV10','Khu vực 10'),('KV11','Khu vực 11'),('KV12','Khu vực 12'),('KV2','Khu vực 2'),('KV3','Khu vực 3'),('KV4','Khu vực 4'),('KV5','Khu vực 5'),('KV6','Khu vực 6'),('KV7','Khu vực 7'),('KV8','Khu vực 8'),('KV9','Khu vực 9');
 /*!40000 ALTER TABLE `location` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -94,7 +95,7 @@ CREATE TABLE `passengercar` (
 
 LOCK TABLES `passengercar` WRITE;
 /*!40000 ALTER TABLE `passengercar` DISABLE KEYS */;
-INSERT INTO `passengercar` VALUES (1,'abcd1234',1,NULL),(2,'xyz2456',1,NULL);
+INSERT INTO `passengercar` VALUES (1,'abcd1234',1,2),(2,'xyz2456',1,3);
 /*!40000 ALTER TABLE `passengercar` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -115,7 +116,7 @@ CREATE TABLE `route` (
   KEY `finish_location_idx` (`finish`),
   CONSTRAINT `finish_location` FOREIGN KEY (`finish`) REFERENCES `location` (`id`),
   CONSTRAINT `start_location` FOREIGN KEY (`start`) REFERENCES `location` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -124,6 +125,7 @@ CREATE TABLE `route` (
 
 LOCK TABLES `route` WRITE;
 /*!40000 ALTER TABLE `route` DISABLE KEYS */;
+INSERT INTO `route` VALUES (1,'Khu vực 2 - Khu vực 1','KV2','KV1'),(2,'Khu vực 7 - Khu vực 11','KV7','KV11');
 /*!40000 ALTER TABLE `route` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -142,7 +144,7 @@ CREATE TABLE `seat` (
   PRIMARY KEY (`id`),
   KEY `car_seat_idx` (`carid`),
   CONSTRAINT `car_seat` FOREIGN KEY (`carid`) REFERENCES `passengercar` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -151,6 +153,7 @@ CREATE TABLE `seat` (
 
 LOCK TABLES `seat` WRITE;
 /*!40000 ALTER TABLE `seat` DISABLE KEYS */;
+INSERT INTO `seat` VALUES (1,'A1',1,1),(2,'A2',1,1),(3,'A3',1,1),(4,'A4',1,1),(5,'A5',1,1),(6,'A6',1,1),(7,'A7',1,1),(8,'A8',1,1),(9,'A9',1,1),(10,'A10',1,0),(11,'A11',1,1),(12,'A12',1,1),(13,'A13',1,1),(14,'A14',1,1),(15,'A15',1,1),(16,'A16',1,1),(17,'A17',1,1),(18,'A18',1,1),(19,'A19',1,1),(20,'A20',1,1);
 /*!40000 ALTER TABLE `seat` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -200,7 +203,7 @@ CREATE TABLE `ticket` (
   CONSTRAINT `cardetail_ticket` FOREIGN KEY (`idcardetail`) REFERENCES `seat` (`id`),
   CONSTRAINT `trip_ticket` FOREIGN KEY (`idtrip`) REFERENCES `trip` (`id`),
   CONSTRAINT `user_ticket` FOREIGN KEY (`iduser`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -209,6 +212,7 @@ CREATE TABLE `ticket` (
 
 LOCK TABLES `ticket` WRITE;
 /*!40000 ALTER TABLE `ticket` DISABLE KEYS */;
+INSERT INTO `ticket` VALUES (1,'f1iyr1triuyriu1',10,2,4);
 /*!40000 ALTER TABLE `ticket` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -227,7 +231,7 @@ CREATE TABLE `trip` (
   PRIMARY KEY (`id`),
   KEY `route_trip_idx` (`idroute`),
   CONSTRAINT `route_trip` FOREIGN KEY (`idroute`) REFERENCES `route` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -236,6 +240,7 @@ CREATE TABLE `trip` (
 
 LOCK TABLES `trip` WRITE;
 /*!40000 ALTER TABLE `trip` DISABLE KEYS */;
+INSERT INTO `trip` VALUES (1,'Chuyến số 1','2021-12-19 13:00:00',1),(2,'Chuyến số 2','2021-12-19 14:00:00',2),(3,'Chuyến số 3','2021-12-19 15:00:00',1);
 /*!40000 ALTER TABLE `trip` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -260,7 +265,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`),
   UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -269,7 +274,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'pminh','$2a$10$RL0rTJd2ThLmCzYHMhz9aOBBZfA8ybYpa3Ugl9ds.Pkb8AjtSHWua','Pham','Minh','pminh723@gmail.com',388514487,NULL,NULL,'ADMIN');
+INSERT INTO `user` VALUES (1,'pminh','$2a$10$RL0rTJd2ThLmCzYHMhz9aOBBZfA8ybYpa3Ugl9ds.Pkb8AjtSHWua','Pham','Minh','pminh723@gmail.com',388514487,1,NULL,'ADMIN'),(2,'taixe1','$2a$10$RL0rTJd2ThLmCzYHMhz9aOBBZfA8ybYpa3Ugl9ds.Pkb8AjtSHWua','Nguyen','A','taixe1@gmail.com',111111111,1,NULL,'DRIVER'),(3,'taixe2','$2a$10$RL0rTJd2ThLmCzYHMhz9aOBBZfA8ybYpa3Ugl9ds.Pkb8AjtSHWua','Nguyen','B','taixe2@gmail.com',222222222,1,NULL,'DRIVER'),(4,'khachhang1','$2a$10$RL0rTJd2ThLmCzYHMhz9aOBBZfA8ybYpa3Ugl9ds.Pkb8AjtSHWua','Nguyen','C','khachhang1@gmail.com',333333333,1,NULL,'USER');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -290,4 +295,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-15 19:16:45
+-- Dump completed on 2021-12-16 12:48:28
