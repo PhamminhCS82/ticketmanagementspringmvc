@@ -11,40 +11,33 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title><tiles:insertAttribute name="title" /></title>
-        <link rel="stylesheet" href="bootstrap.min.css" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"/>
         <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Arizonia&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="resources/css/animate.css">
-        <link rel="stylesheet" href="resources/css/owl.carousel.min.css">
-        <link rel="stylesheet" href="resources/css/owl.theme.default.min.css">
-        <link rel="stylesheet" href="resources/css/magnific-popup.css">
-        <link rel="stylesheet" href="resources/css/bootstrap-datepicker.css">
-        <link rel="stylesheet" href="resources/css/jquery.timepicker.css">
-        <link rel="stylesheet" href="resources/css/flaticon.css">
-        <link rel="stylesheet" href="resources/css/style.css">
+        <link rel="stylesheet" href="resources/css/adminstyle.css">
     </head>
     <body>
         <div>
-            <!--CONTENT-->
-            <tiles:insertAttribute name="content" />
+            <!--HEADER-->
+            <tiles:insertAttribute name="header" />
+            <div class="container-fluid">
+                <div class="row">
+                    <!--LEFT-BAR-->
+                    <tiles:insertAttribute name="left" />
+                    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+                        <!--CONTENT-->
+                        <tiles:insertAttribute name="content" />
+                    </main>
+                </div>
+            </div>
         </div>
-        
-        <script src="resources/js/jquery.min.js"></script>
-        <script src="resources/js/jquery-migrate-3.0.1.min.js"></script>
-        <script src="resources/js/popper.min.js"></script>
-        <script src="resources/js/bootstrap.min.js"></script>
-        <script src="resources/js/jquery.easing.1.3.js"></script>
-        <script src="resources/js/jquery.waypoints.min.js"></script>
-        <script src="resources/js/jquery.stellar.min.js"></script>
-        <script src="resources/js/owl.carousel.min.js"></script>
-        <script src="resources/js/jquery.magnific-popup.min.js"></script>
-        <script src="resources/js/jquery.animateNumber.min.js"></script>
-        <script src="resources/js/bootstrap-datepicker.js"></script>
-        <script src="resources/js/scrollax.min.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-        <script src="resources/js/google-map.js"></script>
-        <script src="resources/js/main.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"></script>
+        <script src="resources/js/adminscript.js"></script>
     </body>
 </html>

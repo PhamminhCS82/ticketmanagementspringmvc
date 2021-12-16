@@ -85,3 +85,27 @@
             </div>
         </div>
 </section>
+<section class="ftco-section">
+    <div class="container">
+        <div class="row justify-content-center pb-4">
+            <div class="col-md-12 heading-section text-center ftco-animate">
+                <span class="subheading">Danh sách</span>
+                <h2 class="mb-4">Các Tuyến</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 ftco-animate">
+                <div class="project-wrap">
+                    <a href="#" class="img" style="background-image: url('resources/images/destination-1.jpg');">
+                        <span class="price">$550/person</span>
+                    </a>
+                    <div class="text p-4">
+                        <span class="days">8 Days Tour</span>
+                        <h3><a href="#">Banaue Rice Terraces</a></h3>
+                        <p class="location"><span class="fa fa-map-marker"></span> Banaue, Ifugao, Philippines</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
