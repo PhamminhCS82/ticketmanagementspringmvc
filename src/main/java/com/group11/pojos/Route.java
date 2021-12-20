@@ -8,8 +8,10 @@ package com.group11.pojos;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -45,15 +47,13 @@ public class Route implements Serializable {
     @Size(max = 45)
     @Column(name = "name")
     private String name;
-    @JoinColumn(name = "start", referencedColumnName = "id")
-    @ManyToOne
-    private Location start;
-    @JoinColumn(name = "finish", referencedColumnName = "id")
-    @ManyToOne
-    private Location finish;
-    @OneToMany(mappedBy = "idroute")
-    private Collection<Trip> tripCollection;
-
+    @Column(name = "start")
+    private String start;
+    @Column(name = "finish")
+    private String finish;
+    
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "idroute")
+    private Collection<Trip> TripCollection;
     public Route() {
     }
 
@@ -77,30 +77,7 @@ public class Route implements Serializable {
         this.name = name;
     }
 
-    public Location getStart() {
-        return start;
-    }
-
-    public void setStart(Location start) {
-        this.start = start;
-    }
-
-    public Location getFinish() {
-        return finish;
-    }
-
-    public void setFinish(Location finish) {
-        this.finish = finish;
-    }
-
-    @XmlTransient
-    public Collection<Trip> getTripCollection() {
-        return tripCollection;
-    }
-
-    public void setTripCollection(Collection<Trip> tripCollection) {
-        this.tripCollection = tripCollection;
-    }
+   
 
     @Override
     public int hashCode() {
@@ -126,5 +103,48 @@ public class Route implements Serializable {
     public String toString() {
         return "com.group11.pojos.Route[ id=" + id + " ]";
     }
-    
+
+    /**
+     * @return the start
+     */
+    public String getStart() {
+        return start;
+    }
+
+    /**
+     * @param start the start to set
+     */
+    public void setStart(String start) {
+        this.start = start;
+    }
+
+    /**
+     * @return the finish
+     */
+    public String getFinish() {
+        return finish;
+    }
+
+    /**
+     * @param finish the finish to set
+     */
+    public void setFinish(String finish) {
+        this.finish = finish;
+    }
+
+    /**
+     * @return the TripCollection
+     */
+    public Collection<Trip> getTripCollection() {
+        return TripCollection;
+    }
+
+    /**
+     * @param TripCollection the TripCollection to set
+     */
+    public void setTripCollection(Collection<Trip> TripCollection) {
+        this.TripCollection = TripCollection;
+    }
+
+ 
 }

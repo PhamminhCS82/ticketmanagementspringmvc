@@ -21,6 +21,21 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content"
                        value="/WEB-INF/jsp/index.jsp" />
     </definition>
+    <definition name="route-trip" extends="baseLayout">
+        <put-attribute name="title" value="Tuyến" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/route.jsp" />
+    </definition>
+    <definition name="ticket-trip" extends="baseLayout">
+        <put-attribute name="title" value="Mua vé" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/ticket.jsp" />
+    </definition>
+     <definition name="orderticket" extends="baseLayout">
+        <put-attribute name="title" value="Mua vé" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/order-ticket.jsp" />
+    </definition>
     <definition name="signup" extends="baseLayout">
         <put-attribute name="title" value="Đăng ký" />
         <put-attribute name="content"

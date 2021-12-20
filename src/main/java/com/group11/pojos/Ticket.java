@@ -6,6 +6,7 @@
 package com.group11.pojos;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,6 +19,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -46,6 +49,7 @@ public class Ticket implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "number")
     private String number;
+ 
     @JoinColumn(name = "idcardetail", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Seat idcardetail;
@@ -55,7 +59,9 @@ public class Ticket implements Serializable {
     @JoinColumn(name = "iduser", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private User user;
-
+    @Column(name = "price")
+    private String price;
+    
     public Ticket() {
     }
 
@@ -132,5 +138,20 @@ public class Ticket implements Serializable {
     public String toString() {
         return "com.group11.pojos.Ticket[ id=" + id + " ]";
     }
+
+    /**
+     * @return the price
+     */
+    public String getPrice() {
+        return price;
+    }
+
+    /**
+     * @param price the price to set
+     */
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
     
 }

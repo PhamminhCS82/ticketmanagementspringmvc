@@ -10,8 +10,6 @@
     <class>com.group11.pojos.Chuyenxe</class>
     <class>com.group11.pojos.TaixeChuyenxe</class>
     <class>com.group11.pojos.Comment</class>
-    <class>com.group11.pojos.Station</class>
-    <class>com.group11.pojos.Location</class>
     <class>com.group11.pojos.Trip</class>
     <class>com.group11.pojos.Passengercar</class>
     <class>com.group11.pojos.Seat</class>

@@ -51,6 +51,8 @@ public class Trip implements Serializable {
     @Size(max = 45)
     @Column(name = "name")
     private String name;
+      @Column(name = "price")
+    private String price;
     @Basic(optional = false)
     @NotNull
     @Column(name = "datetime")
@@ -149,6 +151,20 @@ public class Trip implements Serializable {
     @Override
     public String toString() {
         return "com.group11.pojos.Trip[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the price
+     */
+    public String getPrice() {
+        return price;
+    }
+
+    /**
+     * @param price the price to set
+     */
+    public void setPrice(String price) {
+        this.price = price;
     }
     
 }
