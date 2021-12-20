@@ -18,9 +18,11 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -72,6 +74,8 @@ public class User implements Serializable {
     @Size(max = 255)
     @Column(name = "avatar")
     private String avatar;
+    @Transient
+    private MultipartFile file;
     @Size(max = 45)
     @Column(name = "userrole")
     private String userrole;
