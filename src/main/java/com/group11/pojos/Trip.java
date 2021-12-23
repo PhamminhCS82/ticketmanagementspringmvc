@@ -27,6 +27,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 /**
  *
@@ -56,8 +58,11 @@ public class Trip implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "datetime")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date datetime;
+     @Column(name = "time")
+    private String time;
     @JoinColumn(name = "idroute", referencedColumnName = "id")
     @ManyToOne
     private Route idroute;
@@ -94,13 +99,7 @@ public class Trip implements Serializable {
         this.name = name;
     }
 
-    public Date getDatetime() {
-        return datetime;
-    }
-
-    public void setDatetime(Date datetime) {
-        this.datetime = datetime;
-    }
+ 
 
     public Route getIdroute() {
         return idroute;
@@ -166,5 +165,35 @@ public class Trip implements Serializable {
     public void setPrice(String price) {
         this.price = price;
     }
+
+    /**
+     * @return the time
+     */
+    public String getTime() {
+        return time;
+    }
+
+    /**
+     * @param time the time to set
+     */
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    /**
+     * @return the datetime
+     */
+    public Date getDatetime() {
+        return datetime;
+    }
+
+    /**
+     * @param datetime the datetime to set
+     */
+    public void setDatetime(Date datetime) {
+        this.datetime = datetime;
+    }
+
+   
     
 }

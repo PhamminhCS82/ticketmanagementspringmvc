@@ -15,10 +15,28 @@ import java.util.List;
  * @author LocNe
  */
 public interface LocationService {
-      List<Route> getRoute();
-      List<Trip> getTrip(String kw,int page);
+
+    List<Route> getRoute();
+
+    List<Trip> getTrip(String kw, int page);
+
     Route getRouteId(int stationId);
+
     List<Object[]> listTour();
+
     Trip getTripId(int id);
-     long countTrip();
+
+    long countTrip();
+
+    boolean addRoute(Route p);
+
+    boolean updateRoute(Route p);
+
+    boolean deleteRoute(Route p);
+
+    boolean addTrip(Trip p);
+
+    boolean updateTrip(Trip p);
+
+    boolean deleteTrip(Trip p);
 }

@@ -224,5 +224,19 @@ public class User implements Serializable {
     public String toString() {
         return "com.group11.pojos.User[ id=" + id + " ]";
     }
+
+    /**
+     * @return the file
+     */
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    /**
+     * @param file the file to set
+     */
+    public void setFile(MultipartFile file) {
+        this.file = file;
+    }
     
 }

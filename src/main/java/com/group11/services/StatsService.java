@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.group11.repository;
+package com.group11.services;
 
 import com.group11.pojos.User;
 import java.util.List;
+
 /**
  *
- * @author pminh
+ * @author LocNe
  */
-public interface UserRepository {
-    boolean addUser(User user);
-    boolean updateUser(User user);
-    List<User> getUsers(String username);
-    User getUserId(int id);
+public interface StatsService {
+     List<Object[]> RouteStats();
+     List<Object[]> UserStats();
+     List<User> listUser( );
 }

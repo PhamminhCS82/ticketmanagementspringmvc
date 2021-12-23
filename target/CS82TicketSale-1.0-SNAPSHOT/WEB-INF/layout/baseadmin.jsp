@@ -16,6 +16,8 @@
         <link href="https://fonts.googleapis.com/css2?family=Arizonia&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="resources/css/adminstyle.css">
+        
+        <link rel="stylesheet" href="../css/adminstyle.css">
     </head>
     <body>
         <div>
@@ -39,5 +41,7 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"></script>
         <script src="resources/js/adminscript.js"></script>
+        <script src="resources/js/stats.js"></script>
+        <script src="../js/adminscript.js"></script>
     </body>
 </html>

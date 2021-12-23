@@ -14,16 +14,16 @@ import java.util.Locale;
  *
  * @author LocNe
  */
-public class RouteFormatter implements org.springframework.format.Formatter<Seat>{
+public class RouteFormatter implements org.springframework.format.Formatter<Route>{
 
     @Override
-    public String print(Seat t, Locale locale) {
+    public String print(Route t, Locale locale) {
         return String.valueOf(t.getId());
     }
 
     @Override
-    public Seat parse(String cateId, Locale locale) throws ParseException {
-         Seat c = new Seat();
+    public Route parse(String cateId, Locale locale) throws ParseException {
+         Route c = new Route();
         c.setId(Integer.parseInt(cateId));
         return c;
     }

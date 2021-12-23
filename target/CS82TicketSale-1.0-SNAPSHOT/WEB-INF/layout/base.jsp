@@ -25,6 +25,8 @@
         <link rel="stylesheet" href="resources/css/jquery.timepicker.css">
         <link rel="stylesheet" href="resources/css/flaticon.css">
         <link rel="stylesheet" href="resources/css/style.css">
+        
+        <link rel="stylesheet" href="../css/adminstyle.css">
     </head>
     <body>
         <div>
@@ -48,5 +50,7 @@
         <script src="resources/js/bootstrap-datepicker.js"></script>
         <script src="resources/js/scrollax.min.js"></script>
         <script src="resources/js/main.js"></script>
+        <script src="resources/js/stats.js"></script>
+        <script src="../js/adminscript.js"></script>
     </body>
 </html>

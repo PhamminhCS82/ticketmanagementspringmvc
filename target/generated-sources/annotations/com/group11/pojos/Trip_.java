@@ -9,7 +9,7 @@ import javax.persistence.metamodel.CollectionAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.7.7.v20200504-rNA", date="2021-12-20T23:48:18")
+@Generated(value="EclipseLink-2.7.7.v20200504-rNA", date="2021-12-24T00:54:01")
 @StaticMetamodel(Trip.class)
 public class Trip_ { 
 
@@ -20,5 +20,6 @@ public class Trip_ {
     public static volatile CollectionAttribute<Trip, Comment> commentCollection;
     public static volatile SingularAttribute<Trip, String> name;
     public static volatile SingularAttribute<Trip, Integer> id;
+    public static volatile SingularAttribute<Trip, String> time;
 
 }

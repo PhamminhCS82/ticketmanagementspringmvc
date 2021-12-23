@@ -1,6 +1,7 @@
 C:\Users\LocNe\Desktop\New folder (8)\ticketmanagementspringmvc\src\main\java\com\group11\controllers\UserController.java
 C:\Users\LocNe\Desktop\New folder (8)\ticketmanagementspringmvc\src\main\java\com\group11\services\TicketService.java
 C:\Users\LocNe\Desktop\New folder (8)\ticketmanagementspringmvc\src\main\java\com\group11\pojos\Order.java
+C:\Users\LocNe\Desktop\New folder (8)\ticketmanagementspringmvc\src\main\java\com\group11\services\StatsService.java
 C:\Users\LocNe\Desktop\New folder (8)\ticketmanagementspringmvc\src\main\java\com\group11\formatter\RouteFormatter.java
 C:\Users\LocNe\Desktop\New folder (8)\ticketmanagementspringmvc\src\main\java\com\group11\pojos\Seat.java
 C:\Users\LocNe\Desktop\New folder (8)\ticketmanagementspringmvc\src\main\java\com\group11\repository\UserRepository.java
@@ -9,6 +10,7 @@ C:\Users\LocNe\Desktop\New folder (8)\ticketmanagementspringmvc\src\main\java\co
 C:\Users\LocNe\Desktop\New folder (8)\ticketmanagementspringmvc\src\main\java\com\group11\configs\HibernateConfig.java
 C:\Users\LocNe\Desktop\New folder (8)\ticketmanagementspringmvc\src\main\java\com\group11\pojos\Route.java
 C:\Users\LocNe\Desktop\New folder (8)\ticketmanagementspringmvc\src\main\java\com\group11\services\implement\UserServiceImplement.java
+C:\Users\LocNe\Desktop\New folder (8)\ticketmanagementspringmvc\src\main\java\com\group11\services\implement\StatsServiceImpl.java
 C:\Users\LocNe\Desktop\New folder (8)\ticketmanagementspringmvc\src\main\java\com\group11\repository\implement\TicketRepositoryImpl.java
 C:\Users\LocNe\Desktop\New folder (8)\ticketmanagementspringmvc\src\main\java\com\group11\configs\DispatcherServletInitializer.java
 C:\Users\LocNe\Desktop\New folder (8)\ticketmanagementspringmvc\src\main\java\com\group11\services\implement\TicketServiceImpl.java
@@ -17,6 +19,7 @@ C:\Users\LocNe\Desktop\New folder (8)\ticketmanagementspringmvc\src\main\java\co
 C:\Users\LocNe\Desktop\New folder (8)\ticketmanagementspringmvc\src\main\java\com\group11\configs\SpringSecurityWebAppInitializer.java
 C:\Users\LocNe\Desktop\New folder (8)\ticketmanagementspringmvc\src\main\java\com\group11\repository\implement\LocationRepositoryImpl.java
 C:\Users\LocNe\Desktop\New folder (8)\ticketmanagementspringmvc\src\main\java\com\group11\configs\TilesConfig.java
+C:\Users\LocNe\Desktop\New folder (8)\ticketmanagementspringmvc\src\main\java\com\group11\repository\implement\StatsRepositoryIpml.java
 C:\Users\LocNe\Desktop\New folder (8)\ticketmanagementspringmvc\src\main\java\com\group11\pojos\Comment.java
 C:\Users\LocNe\Desktop\New folder (8)\ticketmanagementspringmvc\src\main\java\com\group11\configs\WebApplicationContextConfig.java
 C:\Users\LocNe\Desktop\New folder (8)\ticketmanagementspringmvc\src\main\java\com\group11\configs\SpringSecurityConfig.java
@@ -30,5 +33,7 @@ C:\Users\LocNe\Desktop\New folder (8)\ticketmanagementspringmvc\src\main\java\co
 C:\Users\LocNe\Desktop\New folder (8)\ticketmanagementspringmvc\src\main\java\com\group11\repository\OrderRepository.java
 C:\Users\LocNe\Desktop\New folder (8)\ticketmanagementspringmvc\src\main\java\com\group11\repository\implement\OrderRepositoryImlp.java
 C:\Users\LocNe\Desktop\New folder (8)\ticketmanagementspringmvc\src\main\java\com\group11\services\implement\OrderServiceImpl.java
+C:\Users\LocNe\Desktop\New folder (8)\ticketmanagementspringmvc\src\main\java\com\group11\repository\StatsRepository.java
 C:\Users\LocNe\Desktop\New folder (8)\ticketmanagementspringmvc\src\main\java\com\group11\services\UserService.java
+C:\Users\LocNe\Desktop\New folder (8)\ticketmanagementspringmvc\src\main\java\com\group11\controllers\TripController.java
 C:\Users\LocNe\Desktop\New folder (8)\ticketmanagementspringmvc\src\main\java\com\group11\pojos\Trip.java

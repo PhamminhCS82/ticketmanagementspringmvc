@@ -17,13 +17,14 @@
             <li class="nav-item">
               <a class="nav-link" href="#">
                 <span data-feather="file"></span>
-                Orders
+                Số lượng tuyến
               </a>
+                
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="/CS82TicketSale/admin/add-trips">
                 <span data-feather="shopping-cart"></span>
-                Products
+                Tuyến
               </a>
             </li>
             <li class="nav-item">

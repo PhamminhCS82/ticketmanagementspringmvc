@@ -49,5 +49,15 @@ public class UserServiceImplement implements UserService{
         
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), auth);
     }
+
+    @Override
+    public boolean updateUser(User user) {
+        return this.userRepository.updateUser(user);
+    }
+
+    @Override
+    public User getUserId(int i) {
+        return this.userRepository.getUserId(i);
+    }
     
 }

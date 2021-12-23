@@ -22,5 +22,11 @@ public interface LocationRepository {
     List<Object[]> listTour();
     Trip getTripId(int id);
      long countTrip();
+     boolean addRoute(Route p);
+     boolean updateRoute(Route p);
+     boolean deleteRoute(Route p);
+     boolean addTrip(Trip p);
+     boolean updateTrip(Trip p);
+     boolean deleteTrip(Trip p);
     
 }

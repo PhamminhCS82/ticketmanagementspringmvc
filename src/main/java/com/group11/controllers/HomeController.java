@@ -102,7 +102,6 @@ public class HomeController {
 
         model.addAttribute("trip", locationService.getTripId(ticketId));
       
-        
         return "ticket-trip";
     }
     @GetMapping(value = "/orderticket/{ticket_id}")

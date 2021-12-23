@@ -7,13 +7,13 @@ package com.group11.repository;
 
 import com.group11.pojos.User;
 import java.util.List;
+
 /**
  *
- * @author pminh
+ * @author LocNe
  */
-public interface UserRepository {
-    boolean addUser(User user);
-    boolean updateUser(User user);
-    List<User> getUsers(String username);
-    User getUserId(int id);
+public interface StatsRepository {
+    List<Object[]> RouteStats();
+     List<Object[]> UserStats();
+     List<User> listUser( );
 }

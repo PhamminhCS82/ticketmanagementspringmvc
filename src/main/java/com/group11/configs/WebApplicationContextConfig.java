@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
-
+import org.springframework.format.FormatterRegistry;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
@@ -49,15 +49,16 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
         configurer.enable();
     }
 
-     @Override
+    /**
+     *
+     * @param registry
+     */
+    @Override
     public void addFormatters(FormatterRegistry registry){
         registry.addFormatter(new RouteFormatter());
     
     }
     
-
-
-
     @Bean
     public InternalResourceViewResolver getInternalResourceViewResolver() {
         InternalResourceViewResolver internalResourceViewResolver = new InternalResourceViewResolver();
@@ -73,6 +74,8 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
     public Validator getValidator() {
         return validator();
     }
+   
+    
         @Bean
     public LocalValidatorFactoryBean validator() {
         LocalValidatorFactoryBean v = new LocalValidatorFactoryBean();
@@ -85,7 +88,7 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
         source.setBasename("messages");//chá»‰ Ä‘á»‹nh 1,, thÃªm s á»Ÿ setbasename Ä‘á»ƒ nhiá»�u
         return source;
     }
-
+    
     
 
 

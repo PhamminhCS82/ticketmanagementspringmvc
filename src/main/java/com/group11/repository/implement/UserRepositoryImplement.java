@@ -5,6 +5,7 @@
  */
 package com.group11.repository.implement;
 
+import com.group11.pojos.Route;
 import com.group11.pojos.User;
 import com.group11.repository.UserRepository;
 import java.util.List;
@@ -28,6 +29,7 @@ public class UserRepositoryImplement implements UserRepository{
     @Autowired
     private LocalSessionFactoryBean sessionFactoryBean;
     
+    
     @Override
     public boolean addUser(User user) {
         return false;
@@ -48,6 +50,28 @@ public class UserRepositoryImplement implements UserRepository{
         
         Query q = session.createQuery(query);
         return q.getResultList();
+    }
+
+    @Override
+    public boolean updateUser(User user) {
+          Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+        try {
+
+            session.update(user);
+
+            return true;
+        } catch (Exception ex) {
+            System.err.println("=== ADD TICKET ERRER ===" + ex.getMessage());
+            ex.printStackTrace();
+        }
+
+        return false;
+    }
+
+    @Override
+    public User getUserId(int i) {
+        Session s = sessionFactoryBean.getObject().getCurrentSession();
+        return s.get(User.class, i);
     }
     
 }
