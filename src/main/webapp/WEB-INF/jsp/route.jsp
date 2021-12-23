@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('resources/images/bg_1.jpg');">
     <div class="overlay"></div>
     <div class="container">
@@ -17,27 +17,30 @@
         </div>
     </div>
 </section>
-<div class="container">
+<section>
+    <div class="container">
         <div class="row">
             <div class="col-lg-12">
 
-   <div class="row">
-            <c:forEach var="p" items="${routeTrip}">
-                <div class="col-lg-12 col-md-4 col-sm-6 mix oranges fresh-meat">
-                    <div class="card-body">                                         
-                      
-                  
-                            <div class="featured__item__text">
-                                <h6>${p.name}</h6>
-                                <h5>${p.datetime} </h5>
-                                <h5>${p.idroute.start} </h5>
-                                <h5>${p.idroute.finish} </h5>
-                                <a href="<c:url value="/routes/${p.id}" />">Thông tin vé</a>
+                <div class="row">
+                    <c:forEach var="p" items="${routeTrip}">
+                        <div class="col-lg-12 col-md-4 col-sm-6">
+                            <div class="card-body">                                         
+
+
+                                <div >
+                                    <h6>${p.name}</h6>
+                                    <h5>${p.datetime} </h5>
+                                    <h5>${p.idroute.start} </h5>
+                                    <h5>${p.idroute.finish} </h5>
+                                    <a href="<c:url value="/trip/${p.id}" />">Thông tin vé</a>
+                                </div>
+
                             </div>
-                       
-                    </div>
+                        </div>
+                    </c:forEach>
                 </div>
-            </c:forEach>
+            </div>
         </div>
-                
-            </div></div></div>
+    </div>
+</section>

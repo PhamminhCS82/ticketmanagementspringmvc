@@ -5,9 +5,15 @@
  */
 package com.group11.controllers;
 
+import com.group11.pojos.User;
+import com.group11.services.UserService;
+import freemarker.ext.beans.MapModel;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  *
@@ -15,6 +21,25 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Controller
 public class UserController {
+    @Autowired
+    private UserService userDetailsService;
+    @GetMapping("/buyform")
+    public String buyFormView(Model model) {
+        model.addAttribute("user", new User());
+        return "buyform";
+    }
+    
+    @PostMapping("/buyform")
+    public String buyForm(Model model, @ModelAttribute(value = "user") User user) {
+        if (this.userDetailsService.addUser(user) == true) {
+                return "forward:/confirm";
+            }
+        return "buyform";
+    }
+    @GetMapping("/confirm")
+    public String confirmView(MapModel model){
+        return "buyconfirm";
+    }
     @GetMapping("/signup")
     public String signupView(Model model) {
         return "signup";

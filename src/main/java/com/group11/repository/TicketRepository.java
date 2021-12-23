@@ -14,9 +14,14 @@ import java.util.List;
  * @author LocNe
  */
 public interface TicketRepository {
+
     boolean addTicket(Ticket p);
-     List<Seat> getSeat();
+
+    List<Seat> getSeat();
+    List<Seat> getSeat(int id);
+
     Seat getSeatId(int id);
-     Ticket getTicketId(int id);
-     
+
+    Ticket getTicketId(int id);
+
 }

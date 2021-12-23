@@ -9,8 +9,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
-<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('resources/images/bg_1.jpg');">
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('../resources/images/bg_1.jpg');">
     <div class="overlay"></div>
     <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
@@ -31,19 +30,21 @@
                     <li><b>Điểm đến:</b> <span> ${trip.idroute.finish}</span></li>
                     <li><b>Ngày/ Giờ khởi hành:</b> <span> ${trip.datetime}</span></li>
                     <li><b>Gias ve</b> <span> ${trip.price}</span></li>
-                    
-<!--                        <label for="cate">Loại sản phẩm</label>
-                        <%--<form:select id="cate" path="idcardetail" class="form-control">--%>
-                            <%--<c:forEach items="${seats}" var="cat">--%>
-                                <%--<form:option value="${cat.id}">${cat.name}</form:option>--%>
-                            <%--</c:forEach>--%>
-                        <%--</form:select>--%>
-                     -->
 
-           
-                    <a href="<c:url value="/orderticket/${ticket.id}" />">Mua vé</a>
+                    <!--                        <label for="cate">Loại sản phẩm</label>
+                    <%--<form:select id="cate" path="idcardetail" class="form-control">--%>
+                    <%--<c:forEach items="${seats}" var="cat">--%>
+                    <%--<form:option value="${cat.id}">${cat.name}</form:option>--%>
+                    <%--</c:forEach>--%>
+                    <%--</form:select>--%>
+                    -->
+
+
+                    <a href="#">Mua vé</a>
                 </ul>
 
-            </div></div></div>
+            </div>
+        </div>
+    </div>
 </section>
 

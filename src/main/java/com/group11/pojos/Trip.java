@@ -12,6 +12,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -51,7 +52,7 @@ public class Trip implements Serializable {
     @Size(max = 45)
     @Column(name = "name")
     private String name;
-      @Column(name = "price")
+    @Column(name = "price")
     private String price;
     @Basic(optional = false)
     @NotNull
@@ -65,6 +66,8 @@ public class Trip implements Serializable {
     private Collection<Ticket> ticketCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idtrip")
     private Collection<Comment> commentCollection;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,mappedBy = "idtrip")
+    private Collection<Passengercar> passengercarCollection;
 
     public Trip() {
     }
@@ -166,5 +169,21 @@ public class Trip implements Serializable {
     public void setPrice(String price) {
         this.price = price;
     }
+
+    /**
+     * @return the passengerCollection
+     */
+    @XmlTransient
+    public Collection<Passengercar> getPassengercarCollection() {
+        return passengercarCollection;
+    }
+
+    /**
+     * @param passengerCollection the passengerCollection to set
+     */
     
+    public void setPassengercarCollection(Collection<Passengercar> passengerCollection) {
+        this.passengercarCollection = passengerCollection;
+    }
+
 }
