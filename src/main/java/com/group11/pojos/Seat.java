@@ -15,7 +15,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -37,7 +36,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Seat.findAll", query = "SELECT s FROM Seat s"),
     @NamedQuery(name = "Seat.findById", query = "SELECT s FROM Seat s WHERE s.id = :id"),
     @NamedQuery(name = "Seat.findByName", query = "SELECT s FROM Seat s WHERE s.name = :name"),
-    @NamedQuery(name = "Seat.findByEmpty", query = "SELECT s FROM Seat s WHERE s.empty = :empty")})
+    @NamedQuery(name = "Seat.findByEmp", query = "SELECT s FROM Seat s WHERE s.emp = :emp")})
 public class Seat implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -51,8 +50,8 @@ public class Seat implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "name")
     private String name;
-    @Column(name = "empty")
-    private Short empty;
+    @Column(name = "emp")
+    private Short emp;
     @JoinColumn(name = "carid", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Passengercar passengercar;
@@ -87,12 +86,12 @@ public class Seat implements Serializable {
         this.name = name;
     }
 
-    public Short getEmpty() {
-        return empty;
+    public Short getEmp() {
+        return emp;
     }
 
-    public void setEmpty(Short empty) {
-        this.empty = empty;
+    public void setEmp(Short empty) {
+        this.emp = empty;
     }
 
     public Passengercar getPassengercar() {

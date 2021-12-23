@@ -14,7 +14,7 @@ import java.util.Locale;
  *
  * @author LocNe
  */
-public class RouteFormatter implements org.springframework.format.Formatter<Seat>{
+public class RouteFormatter implements org.springframework.format.Formatter<Seat> {
 
     @Override
     public String print(Seat t, Locale locale) {
@@ -23,9 +23,9 @@ public class RouteFormatter implements org.springframework.format.Formatter<Seat
 
     @Override
     public Seat parse(String cateId, Locale locale) throws ParseException {
-         Seat c = new Seat();
+        Seat c = new Seat();
         c.setId(Integer.parseInt(cateId));
         return c;
     }
-    
+
 }

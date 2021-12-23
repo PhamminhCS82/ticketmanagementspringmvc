@@ -10,6 +10,9 @@ import com.group11.pojos.Ticket;
 import com.group11.repository.TicketRepository;
 import java.util.List;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -45,7 +48,8 @@ public class TicketRepositoryImpl implements TicketRepository{
     @Override
     public List<Seat> getSeat() {
         Session s = sessionFactory.getObject().getCurrentSession();
-        Query q = s.createQuery("From Seat");
+        Query q;
+        q = s.createQuery("From Seat");
         return q.getResultList();
     }
 
@@ -59,6 +63,17 @@ public class TicketRepositoryImpl implements TicketRepository{
     public Ticket getTicketId(int i) {
         Session s = sessionFactory.getObject().getCurrentSession();
        return s.get(Ticket.class,i);
+    }
+
+    @Override
+    public List<Seat> getSeat(int id) {
+        Session s = sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = s.getCriteriaBuilder();
+        CriteriaQuery<Seat> query = builder.createQuery(Seat.class);
+        Root root = query.from(Seat.class);
+        query.select(root).where(builder.gt(root.get("carid"), id));
+        Query q = s.createQuery(query);
+        return q.getResultList();
     }
     
 }

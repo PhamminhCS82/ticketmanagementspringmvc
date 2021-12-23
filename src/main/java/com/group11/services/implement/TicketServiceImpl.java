@@ -20,10 +20,11 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class TicketServiceImpl implements TicketService{
+public class TicketServiceImpl implements TicketService {
 
-      @Autowired
+    @Autowired
     private TicketRepository ticketRepository;
+
     @Override
     public boolean addTicket(Ticket p) {
         return this.ticketRepository.addTicket(p);
@@ -31,17 +32,22 @@ public class TicketServiceImpl implements TicketService{
 
     @Override
     public List<Seat> getSeat() {
-       return ticketRepository.getSeat();
+        return ticketRepository.getSeat();
     }
 
     @Override
     public Seat getSeatId(int i) {
-         return ticketRepository.getSeatId(i);
+        return ticketRepository.getSeatId(i);
     }
 
     @Override
     public Ticket getTicketId(int i) {
         return ticketRepository.getTicketId(i);
     }
-    
+
+    @Override
+    public List<Seat> getSeat(int i) {
+        return ticketRepository.getSeat(i);
+    }
+
 }

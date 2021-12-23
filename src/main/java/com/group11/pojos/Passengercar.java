@@ -11,11 +11,11 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -39,7 +39,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Passengercar.findByCarnumber", query = "SELECT p FROM Passengercar p WHERE p.carnumber = :carnumber"),
     @NamedQuery(name = "Passengercar.findByActive", query = "SELECT p FROM Passengercar p WHERE p.active = :active")})
 public class Passengercar implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,12 +52,16 @@ public class Passengercar implements Serializable {
     private String carnumber;
     @Column(name = "active")
     private Short active;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "passengercar")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "passengercar")
     private Collection<Seat> seatCollection;
-    
+
     @ManyToOne
     @JoinColumn(name = "iduser")
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "idtrip", referencedColumnName = "id")
+    private Trip idtrip;
 
     public Passengercar() {
     }
@@ -113,6 +116,14 @@ public class Passengercar implements Serializable {
         this.user = user;
     }
 
+    public Trip getIdTrip() {
+        return idtrip;
+    }
+
+    public void setIdTrip(Trip idtrip) {
+        this.idtrip = idtrip;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -137,5 +148,5 @@ public class Passengercar implements Serializable {
     public String toString() {
         return "com.group11.pojos.Passengercar[ id=" + id + " ]";
     }
-    
+
 }

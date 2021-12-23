@@ -20,6 +20,14 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="left"
                        value="/WEB-INF/layout/leftadmin.jsp" />
     </definition>
+    <definition name="baseLayout2"
+                template="/WEB-INF/layout/base2.jsp">
+        <put-attribute name="title" value="Welcome" />
+        <put-attribute name="header"
+                       value="/WEB-INF/layout/header2.jsp" />
+        <put-attribute name="footer"
+                       value="/WEB-INF/layout/footer2.jsp" />
+    </definition>
     <definition name="index" extends="baseLayout">
         <put-attribute name="title" value="Trang chủ" />
         <put-attribute name="content"
@@ -35,7 +43,7 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content"
                        value="/WEB-INF/jsp/ticket.jsp" />
     </definition>
-     <definition name="orderticket" extends="baseLayout">
+    <definition name="orderticket" extends="baseLayout">
         <put-attribute name="title" value="Mua vé" />
         <put-attribute name="content"
                        value="/WEB-INF/jsp/order-ticket.jsp" />
@@ -55,5 +63,19 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content"
                        value="/WEB-INF/jsp/admin.jsp" />
     </definition>
-    
+    <definition name="buyticket" extends="baseLayout2">
+        <put-attribute name="title" value="Đặt vé" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/buyticket.jsp" />
+    </definition>
+    <definition name="buyform" extends="baseLayout2">
+        <put-attribute name="title" value="Đặt vé" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/buyform.jsp" />
+    </definition>
+    <definition name="buyconfirm" extends="baseLayout2">
+        <put-attribute name="title" value="Xác nhận" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/buyconfirm.jsp" />
+    </definition>
 </tiles-definitions>

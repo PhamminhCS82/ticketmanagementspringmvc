@@ -64,11 +64,10 @@ public class LocationRepositoryImpl implements LocationRepository {
 //         User user = userRepository.getUserByUsername(username);
         List<Predicate> predicates = new ArrayList<>();
         predicates.add(builder.equal(rootR.get("id"), rootT.get("idroute")));
-//        predicates.add(builder.equal(rootT.get("id"), rootTicket.get("idticket")));
 
         query.multiselect(rootR.get("id"), rootR.get("name"), rootR.get("start"), rootR.get("finish"), rootT.get("name"), rootT.get("datetime"));
         query.where(predicates.toArray(new Predicate[]{}));
-//       query.groupBy(rootR.get("id"));
+
         org.hibernate.query.Query q = session.createQuery(query);
 
         return q.getResultList();
@@ -81,9 +80,9 @@ public class LocationRepositoryImpl implements LocationRepository {
     }
 
     @Override
-    public List<Trip> getTrip(String kw,int page) {
-        
-       Session session = this.sessionFactory.getObject().getCurrentSession();
+    public List<Trip> getTrip(String kw, int page) {
+
+        Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Trip> query = builder.createQuery(Trip.class);
         Root root = query.from(Trip.class);
@@ -105,7 +104,7 @@ public class LocationRepositoryImpl implements LocationRepository {
 
     @Override
     public long countTrip() {
-         Session session = this.sessionFactory.getObject().getCurrentSession();
+        Session session = this.sessionFactory.getObject().getCurrentSession();
         Query q = session.createQuery("select count(*) from Trip");
         return Long.parseLong(q.getSingleResult().toString());//
     }

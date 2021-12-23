@@ -45,6 +45,13 @@ import org.springframework.web.multipart.MultipartFile;
     @NamedQuery(name = "User.findByUserrole", query = "SELECT u FROM User u WHERE u.userrole = :userrole")})
 public class User implements Serializable {
 
+    public static enum Roles {
+        USER,
+        DRIVER,
+        EMPLOYEE,
+        GUEST,
+        ADMIN
+    }
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -92,7 +99,20 @@ public class User implements Serializable {
     public User(Integer id) {
         this.id = id;
     }
+    
+    public User(Integer id, String firstname, String surname, String email, Integer phone,String userRole) {
+        this.id = id;
+        this.firstname = firstname;
+        this.surname = surname;
+        this.email = email;
+        this.phone = phone;
+        this.userrole = userRole;
+    }
 
+    public User(Integer id, String firstName, String lastName, String email, String username, String password, String userRole) {
+        this.id = id;
+    }
+    
     public Integer getId() {
         return id;
     }
@@ -224,5 +244,5 @@ public class User implements Serializable {
     public String toString() {
         return "com.group11.pojos.User[ id=" + id + " ]";
     }
-    
+
 }
