@@ -18,6 +18,7 @@ import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -35,7 +36,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Ticket.findAll", query = "SELECT t FROM Ticket t"),
     @NamedQuery(name = "Ticket.findById", query = "SELECT t FROM Ticket t WHERE t.id = :id"),
-    @NamedQuery(name = "Ticket.findByNumber", query = "SELECT t FROM Ticket t WHERE t.number = :number")})
+    @NamedQuery(name = "Ticket.findByNumber", query = "SELECT t FROM Ticket t WHERE t.number = :number"),
+    @NamedQuery(name = "Ticket.findByPrice", query = "SELECT t FROM Ticket t WHERE t.price = :price"),
+    @NamedQuery(name = "Ticket.findByUsedDate", query = "SELECT t FROM Ticket t WHERE t.usedDate = :usedDate")})
 public class Ticket implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,18 +52,23 @@ public class Ticket implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "number")
     private String number;
-
-    @JoinColumn(name = "idcardetail", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Seat idcardetail;
-    @JoinColumn(name = "idtrip", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Trip idtrip;
-    @JoinColumn(name = "iduser", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private User user;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "price")
     private String price;
+    @Column(name = "used_date")
+    @Temporal(TemporalType.DATE)
+    private Date usedDate;
+    @JoinColumn(name = "idorder", referencedColumnName = "id")
+    @ManyToOne
+    private OrderTicket idorder;
+    @JoinColumn(name = "idcar", referencedColumnName = "id")
+    @OneToOne(optional = false)
+    private Passengercar passengercar;
+    @JoinColumn(name = "idseat", referencedColumnName = "id")
+    @ManyToOne
+    private Seat idseat;
 
     public Ticket() {
     }
@@ -69,9 +77,10 @@ public class Ticket implements Serializable {
         this.id = id;
     }
 
-    public Ticket(Integer id, String number) {
+    public Ticket(Integer id, String number, String price) {
         this.id = id;
         this.number = number;
+        this.price = price;
     }
 
     public Integer getId() {
@@ -90,28 +99,44 @@ public class Ticket implements Serializable {
         this.number = number;
     }
 
-    public Seat getIdcardetail() {
-        return idcardetail;
+    public String getPrice() {
+        return price;
     }
 
-    public void setIdcardetail(Seat idcardetail) {
-        this.idcardetail = idcardetail;
+    public void setPrice(String price) {
+        this.price = price;
     }
 
-    public Trip getIdtrip() {
-        return idtrip;
+    public Date getUsedDate() {
+        return usedDate;
     }
 
-    public void setIdtrip(Trip idtrip) {
-        this.idtrip = idtrip;
+    public void setUsedDate(Date usedDate) {
+        this.usedDate = usedDate;
     }
 
-    public User getUser() {
-        return user;
+    public OrderTicket getIdorder() {
+        return idorder;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setIdorder(OrderTicket idorder) {
+        this.idorder = idorder;
+    }
+
+    public Passengercar getPassengercar() {
+        return passengercar;
+    }
+
+    public void setPassengercar(Passengercar passengercar) {
+        this.passengercar = passengercar;
+    }
+
+    public Seat getIdseat() {
+        return idseat;
+    }
+
+    public void setIdseat(Seat idseat) {
+        this.idseat = idseat;
     }
 
     @Override
@@ -137,20 +162,6 @@ public class Ticket implements Serializable {
     @Override
     public String toString() {
         return "com.group11.pojos.Ticket[ id=" + id + " ]";
-    }
-
-    /**
-     * @return the price
-     */
-    public String getPrice() {
-        return price;
-    }
-
-    /**
-     * @param price the price to set
-     */
-    public void setPrice(String price) {
-        this.price = price;
     }
 
 }

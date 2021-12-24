@@ -8,15 +8,11 @@ package com.group11.pojos;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -35,7 +31,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Route.findAll", query = "SELECT r FROM Route r"),
     @NamedQuery(name = "Route.findById", query = "SELECT r FROM Route r WHERE r.id = :id"),
-    @NamedQuery(name = "Route.findByName", query = "SELECT r FROM Route r WHERE r.name = :name")})
+    @NamedQuery(name = "Route.findByName", query = "SELECT r FROM Route r WHERE r.name = :name"),
+    @NamedQuery(name = "Route.findByStart", query = "SELECT r FROM Route r WHERE r.start = :start"),
+    @NamedQuery(name = "Route.findByFinish", query = "SELECT r FROM Route r WHERE r.finish = :finish")})
 public class Route implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -47,13 +45,15 @@ public class Route implements Serializable {
     @Size(max = 45)
     @Column(name = "name")
     private String name;
+    @Size(max = 45)
     @Column(name = "start")
     private String start;
+    @Size(max = 45)
     @Column(name = "finish")
     private String finish;
-    
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "idroute")
-    private Collection<Trip> TripCollection;
+    @OneToMany(mappedBy = "idroute")
+    private Collection<Trip> tripCollection;
+
     public Route() {
     }
 
@@ -77,7 +77,30 @@ public class Route implements Serializable {
         this.name = name;
     }
 
-   
+    public String getStart() {
+        return start;
+    }
+
+    public void setStart(String start) {
+        this.start = start;
+    }
+
+    public String getFinish() {
+        return finish;
+    }
+
+    public void setFinish(String finish) {
+        this.finish = finish;
+    }
+
+    @XmlTransient
+    public Collection<Trip> getTripCollection() {
+        return tripCollection;
+    }
+
+    public void setTripCollection(Collection<Trip> tripCollection) {
+        this.tripCollection = tripCollection;
+    }
 
     @Override
     public int hashCode() {
@@ -103,48 +126,5 @@ public class Route implements Serializable {
     public String toString() {
         return "com.group11.pojos.Route[ id=" + id + " ]";
     }
-
-    /**
-     * @return the start
-     */
-    public String getStart() {
-        return start;
-    }
-
-    /**
-     * @param start the start to set
-     */
-    public void setStart(String start) {
-        this.start = start;
-    }
-
-    /**
-     * @return the finish
-     */
-    public String getFinish() {
-        return finish;
-    }
-
-    /**
-     * @param finish the finish to set
-     */
-    public void setFinish(String finish) {
-        this.finish = finish;
-    }
-
-    /**
-     * @return the TripCollection
-     */
-    public Collection<Trip> getTripCollection() {
-        return TripCollection;
-    }
-
-    /**
-     * @param TripCollection the TripCollection to set
-     */
-    public void setTripCollection(Collection<Trip> TripCollection) {
-        this.TripCollection = TripCollection;
-    }
-
- 
+    
 }

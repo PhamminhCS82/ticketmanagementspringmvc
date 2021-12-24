@@ -18,11 +18,9 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -52,6 +50,7 @@ public class User implements Serializable {
         GUEST,
         ADMIN
     }
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -81,13 +80,11 @@ public class User implements Serializable {
     @Size(max = 255)
     @Column(name = "avatar")
     private String avatar;
-    @Transient
-    private MultipartFile file;
     @Size(max = 45)
     @Column(name = "userrole")
     private String userrole;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private Collection<Ticket> ticketCollection;
+    private Collection<OrderTicket> orderTicketCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Collection<Comment> commentCollection;
     @OneToMany(mappedBy = "user")
@@ -96,10 +93,6 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(Integer id) {
-        this.id = id;
-    }
-    
     public User(Integer id, String firstname, String surname, String email, Integer phone,String userRole) {
         this.id = id;
         this.firstname = firstname;
@@ -113,6 +106,10 @@ public class User implements Serializable {
         this.id = id;
     }
     
+    public User(Integer id) {
+        this.id = id;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -194,12 +191,12 @@ public class User implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Ticket> getTicketCollection() {
-        return ticketCollection;
+    public Collection<OrderTicket> getOrderTicketCollection() {
+        return orderTicketCollection;
     }
 
-    public void setTicketCollection(Collection<Ticket> ticketCollection) {
-        this.ticketCollection = ticketCollection;
+    public void setOrderTicketCollection(Collection<OrderTicket> orderTicketCollection) {
+        this.orderTicketCollection = orderTicketCollection;
     }
 
     @XmlTransient
@@ -244,5 +241,5 @@ public class User implements Serializable {
     public String toString() {
         return "com.group11.pojos.User[ id=" + id + " ]";
     }
-
+    
 }
