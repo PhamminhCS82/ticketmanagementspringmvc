@@ -8,13 +8,13 @@ package com.group11.pojos;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -52,10 +52,11 @@ public class Seat implements Serializable {
     private String name;
     @Column(name = "emp")
     private Short emp;
+
     @JoinColumn(name = "carid", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Passengercar passengercar;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcardetail")
+    @OneToMany(mappedBy = "idseat")
     private Collection<Ticket> ticketCollection;
 
     public Seat() {
@@ -90,8 +91,8 @@ public class Seat implements Serializable {
         return emp;
     }
 
-    public void setEmp(Short empty) {
-        this.emp = empty;
+    public void setEmp(Short emp) {
+        this.emp = emp;
     }
 
     public Passengercar getPassengercar() {
@@ -135,5 +136,5 @@ public class Seat implements Serializable {
     public String toString() {
         return "com.group11.pojos.Seat[ id=" + id + " ]";
     }
-    
+
 }
