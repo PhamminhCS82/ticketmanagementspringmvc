@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.group11.services.PassengercarService;
 import freemarker.ext.beans.MapModel;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  *
@@ -25,14 +26,16 @@ import freemarker.ext.beans.MapModel;
 public class BuyTicketController {
 //    @Autowired
 //    private TicketService ticketService;
+
     @Autowired
     private PassengercarService passengerCarService;
 //    @ModelAttribute
 //    public void addAttributes(Model model){
 //        model.addAttribute("seats", this.ticketService.getSeat());
 //    }
-    @GetMapping("/buy")
-    public String chooseSeatView(Model model, @RequestParam(value="car_id") Integer carId) {
+
+    @PostMapping("/buy")
+    public String chooseSeatView(Model model, @RequestParam(value = "car_id") Integer carId) {
         Passengercar car = this.passengerCarService.getCarById(carId);
         model.addAttribute("seatofcar", car.getSeatCollection());
         model.addAttribute("carinfo", car);
@@ -41,5 +44,10 @@ public class BuyTicketController {
         System.out.println(car.getIdtrip().getName());
         return "buyticket";
     }
-    
+
+    @PostMapping("/confirm")
+    public String confirmView(MapModel model) {
+        return "buyconfirm";
+    }
+
 }

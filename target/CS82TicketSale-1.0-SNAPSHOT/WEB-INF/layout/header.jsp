@@ -16,7 +16,6 @@
         <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item "><a href="<c:url value="/" />" class="nav-link">Trang chủ</a></li>
-                <li class="nav-item"><a href="destination.html" class="nav-link">Các tuyến</a></li>
                 <c:if test="${pageContext.request.userPrincipal.name == null}">
                 <li class="nav-item"><a href="<c:url value="/signup" />" class="nav-link">Đăng ký</a></li>
                 <li class="nav-item"><a href="<c:url value="/signin" />" class="nav-link">Đăng nhập</a></li>

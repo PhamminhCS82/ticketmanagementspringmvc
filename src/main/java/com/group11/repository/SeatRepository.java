@@ -5,14 +5,12 @@
  */
 package com.group11.repository;
 
-import com.group11.pojos.User;
-import java.util.List;
+import com.group11.pojos.Seat;
+
 /**
  *
  * @author pminh
  */
-public interface UserRepository {
-    boolean addUser(User user);
-    List<User> getUsers(String username);
-    User getUserById(int id);
+public interface SeatRepository {
+    Seat getSeatById(int id);
 }

@@ -25,6 +25,14 @@
         <link type="text/css" rel="stylesheet" href="<c:url value="css/jquery.timepicker.css"/>"/>
         <link type="text/css" rel="stylesheet" href="<c:url value="css/flaticon.css"/>"/>
         <link type="text/css" rel="stylesheet" href="<c:url value="css/style.css"/>"/>
+        <link type="text/css" rel="stylesheet" href="<c:url value="../css/animate.css" />"/>
+        <link type="text/css" rel="stylesheet" href="<c:url value="../css/owl.carousel.min.css"/>"/>
+        <link type="text/css" rel="stylesheet" href="<c:url value="../css/owl.theme.default.min.css"/>"/>
+        <link type="text/css" rel="stylesheet" href="<c:url value="../css/magnific-popup.css"/>">
+        <link type="text/css" rel="stylesheet" href="<c:url value="../css/bootstrap-datepicker.css"/>"/>
+        <link type="text/css" rel="stylesheet" href="<c:url value="../css/jquery.timepicker.css"/>"/>
+        <link type="text/css" rel="stylesheet" href="<c:url value="../css/flaticon.css"/>"/>
+        <link type="text/css" rel="stylesheet" href="<c:url value="../css/style.css"/>"/>
     </head>
     <body>
         <div>
@@ -48,5 +56,18 @@
         <script src="<c:url value="js/bootstrap-datepicker.js"/>"></script>
         <script src="<c:url value="js/scrollax.min.js"/>"></script>
         <script src="<c:url value="js/main.js"/>"></script>
+        <script src="<c:url value="../js/jquery.min.js"/>"></script>
+        <script src="<c:url value="../js/jquery-migrate-3.0.1.min.js"/>"></script>
+        <script src="<c:url value="../js/popper.min.js"/>"></script>
+        <script src="<c:url value="../js/bootstrap.min.js"/>"></script>
+        <script src="<c:url value="../js/jquery.easing.1.3.js"/>"></script>
+        <script src="<c:url value="../js/jquery.waypoints.min.js"/>"></script>
+        <script src="<c:url value="../js/jquery.stellar.min.js"/>"></script>
+        <script src="<c:url value="../js/owl.carousel.min.js"/>"></script>
+        <script src="<c:url value="../js/jquery.magnific-popup.min.js"/>"></script>
+        <script src="<c:url value="../js/jquery.animateNumber.min.js"/>"></script>
+        <script src="<c:url value="../js/bootstrap-datepicker.js"/>"></script>
+        <script src="<c:url value="../js/scrollax.min.js"/>"></script>
+        <script src="<c:url value="../js/main.js"/>"></script>
     </body>
 </html>

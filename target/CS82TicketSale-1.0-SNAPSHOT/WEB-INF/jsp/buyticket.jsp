@@ -68,8 +68,9 @@
     <div class="col-3-sm-3 info">
         <h1>Thông tin cá nhân</h1>
         <ul>
-            <li><b>Họ và tên:</b> <span> </span></li>
-            <li><b>Số điện thoại:</b> <span> </span></li>
+            <li><b>Họ và tên:</b> <span>${user.surname} ${user.firstname} </span></li>
+            <li><b>Số điện thoại:</b> <span> ${user.phone}</span></li>
+            <li><b>Email:</b> <span> ${user.email}</span></li>
 
         </ul>
         <h1>Thông tin chuyến</h1>
@@ -77,10 +78,10 @@
             <li><b>Tên chuyến :</b> <span> ${tripinfo.name}</span></li>
             <li><b>Điểm đi:</b> <span> ${tripinfo.idroute.start}</span></li>
             <li><b>Điểm đến:</b> <span> ${tripinfo.idroute.finish}</span></li>
-            <li><b>Ngày/ Giờ khởi hành:</b> <span> ${tripinfo.datetime}</span></li>
+            <li><b>Ngày/ Giờ khởi hành:</b> <span> ${tripinfo.time}</span></li>
             <li><b>Số xe:</b> <span> ${carinfo.carnumber}</span></li>
             <li><b>Giá</b> <span> ${tripinfo.price}</span></li>
-            <button type="submit" class="btn btn-primary" name="submit" id="reserveButton" disabled>Đặt vé</button>
+            <button onclick="pay(${carinfo.id}, ${tripinfo.price}" type="submit" class="btn btn-primary" name="submit" id="reserveButton" disabled>Đặt vé</button>
         </ul>
     </div>
 </div>

@@ -24,19 +24,19 @@ import org.springframework.stereotype.Service;
  * @author pminh
  */
 @Service("userDetailsService")
-public class UserServiceImplement implements UserService{
+public class UserServiceImplement implements UserService {
+
     @Autowired
     private UserRepository userRepository;
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
-    
+
     @Override
     public boolean addUser(User user) {
         String role = User.Roles.USER.toString();
-        if(user.getUsername() == null && user.getPassword() == null) {
-            role = User.Roles.GUEST.toString();        
-        }
-        else {
+        if (user.getUsername() == null && user.getPassword() == null) {
+            role = User.Roles.GUEST.toString();
+        } else {
             user.setPassword(this.passwordEncoder.encode(user.getPassword()));
         }
         user.setUserrole(role);
@@ -51,14 +51,15 @@ public class UserServiceImplement implements UserService{
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         List<User> users = this.getUsers(username);
-        if(users.isEmpty()) {
+        if (users.isEmpty()) {
             throw new UsernameNotFoundException("Không tồn tại người dùng này");
         }
         User user = users.get(0);
         Set<GrantedAuthority> auth = new HashSet<>();
         auth.add(new SimpleGrantedAuthority(user.getUserrole()));
-        
+
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), auth);
     }
-    
+
+
 }

@@ -60,4 +60,10 @@ public class UserRepositoryImplement implements UserRepository {
         return q.getResultList();
     }
 
+    @Override
+    public User getUserById(int id) {
+        Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+        return session.get(User.class, id);
+    }
+
 }

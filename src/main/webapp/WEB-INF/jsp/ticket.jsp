@@ -28,7 +28,7 @@
                     <li><b>Chuyến số :</b> <span> ${trip.name}</span></li>
                     <li><b>Điểm đi:</b> <span> ${trip.idroute.start}</span></li>
                     <li><b>Điểm đến:</b> <span> ${trip.idroute.finish}</span></li>
-                    <li><b>Ngày/ Giờ khởi hành:</b> <span> ${trip.datetime}</span></li>
+                    <li><b>Ngày/ Giờ khởi hành:</b> <span> ${trip.time}</span></li>
                     <li><b>Gias ve</b> <span> ${trip.price}</span></li>
 
                     <!--                        <label for="cate">Loại sản phẩm</label>
