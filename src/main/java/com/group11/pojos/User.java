@@ -53,7 +53,7 @@ public class User implements Serializable {
     public User get(int i) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     public static enum Roles {
         USER,
         DRIVER,

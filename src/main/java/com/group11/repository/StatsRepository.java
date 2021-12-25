@@ -6,6 +6,7 @@
 package com.group11.repository;
 
 import com.group11.pojos.User;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,5 +20,7 @@ public interface StatsRepository {
      List<User> listEmplUser( );
      List<Object[]> CountTripStats();
      List<Object[]> PassStats();
+     
+     List<Object[]> totalbyMonth(String kw, Date fromDate, Date toDate);
      
 }

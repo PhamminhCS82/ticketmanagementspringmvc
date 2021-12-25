@@ -7,11 +7,13 @@ package com.group11.repository.implement;
 
 import com.group11.pojos.Route;
 import com.group11.pojos.Ticket;
+import com.group11.pojos.OrderTicket;
 import com.group11.pojos.Trip;
 import com.group11.pojos.User;
 import com.group11.pojos.Passengercar;
 import com.group11.repository.StatsRepository;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -147,6 +149,42 @@ public class StatsRepositoryIpml implements StatsRepository {
         
         org.hibernate.query.Query q = session.createQuery(query);
 
+        return q.getResultList();
+    }
+
+    @Override
+    public List<Object[]> totalbyMonth(String kw, Date fromDate, Date toDate) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> query = builder.createQuery(Object[].class);
+         Root rootT = query.from(Ticket.class);
+         Root rootO= query.from(OrderTicket.class);
+        Root rootC = query.from(Passengercar.class);
+        Root rootTrip = query.from(Trip.class);
+        
+        List<Predicate> pre= new ArrayList<>();
+        pre.add(builder.equal(rootT.get("passengercar"), rootC.get("id")));
+        pre.add(builder.equal(rootC.get("idtrip"), rootTrip.get("id")));
+        
+        query.multiselect( builder.function("MONTH", Integer.class, rootT.get("usedDate")),
+                builder.function("YEAR", Integer.class, rootT.get("usedDate")),rootT.get("price"));
+        
+        if(kw!= null && !kw.isEmpty()){
+            pre.add(builder.like(rootTrip.get("name").as(String.class), String.format("%%%s%%", kw)));
+        }
+        if(fromDate!= null){
+            pre.add(builder.greaterThanOrEqualTo(rootT.get("usedDate"), fromDate));
+        }
+        if(toDate!= null){
+            pre.add(builder.lessThanOrEqualTo(rootT.get("usedDate"), toDate));
+        }
+        query.where(pre.toArray(new Predicate[]{}));
+        query.groupBy(builder.function("MONTH", Integer.class, rootT.get("usedDate")),
+                builder.function("YEAR", Integer.class, rootT.get("usedDate")));
+        query = query.orderBy(builder.asc(rootT.get("usedDate")));
+        
+        Query q= session.createQuery(query);
+        
         return q.getResultList();
     }
 

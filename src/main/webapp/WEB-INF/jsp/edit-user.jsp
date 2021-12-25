@@ -60,7 +60,7 @@
 
         <br>
         <div class="form-group">
-            <input type="submit" value="Sửa chuyến" class="btn btn-success"/>
+            <input type="submit" value="Cập nhật thông tin" class="btn btn-success"/>
         </div>
 
     </form:form>
