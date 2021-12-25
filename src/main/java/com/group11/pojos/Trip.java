@@ -8,7 +8,6 @@ package com.group11.pojos;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -23,9 +22,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -56,20 +52,24 @@ public class Trip implements Serializable {
     @Size(max = 45)
     @Column(name = "name")
     private String name;
- 
-     @Column(name = "time")
+    @Size(max = 45)
+    @Column(name = "time")
     private String time;
     @Size(max = 45)
     @Column(name = "price")
     private String price;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idtrip")
+    private Collection<ActivateTrip> activateTripCollection;
     @JoinColumn(name = "idroute", referencedColumnName = "id")
     @ManyToOne
     private Route idroute;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idtrip")
     @JsonIgnore
     private Collection<Comment> commentCollection;
     @OneToOne(mappedBy = "idtrip")
     private Passengercar passengercar;
+
 
     public Trip() {
     }
@@ -95,7 +95,14 @@ public class Trip implements Serializable {
         this.name = name;
     }
 
- 
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
 
     public String getPrice() {
         return price;
@@ -105,29 +112,21 @@ public class Trip implements Serializable {
         this.price = price;
     }
 
+    @XmlTransient
+    public Collection<ActivateTrip> getActivateTripCollection() {
+        return activateTripCollection;
+    }
+
+    public void setActivateTripCollection(Collection<ActivateTrip> activateTripCollection) {
+        this.activateTripCollection = activateTripCollection;
+    }
+
     public Route getIdroute() {
         return idroute;
     }
 
     public void setIdroute(Route idroute) {
         this.idroute = idroute;
-    }
-
-    @XmlTransient
-    public Collection<Comment> getCommentCollection() {
-        return commentCollection;
-    }
-
-    public void setCommentCollection(Collection<Comment> commentCollection) {
-        this.commentCollection = commentCollection;
-    }
-
-    public Passengercar getPassengercar() {
-        return passengercar;
-    }
-
-    public void setPassengercar(Passengercar passengercar) {
-        this.passengercar = passengercar;
     }
 
     @Override
@@ -156,20 +155,7 @@ public class Trip implements Serializable {
     }
 
     
-    /**
 
-     * @return the time
-     */
-    public String getTime() {
-        return time;
-    }
-
-    /**
-     * @param time the time to set
-     */
-    public void setTime(String time) {
-        this.time = time;
-    }
 
 
    

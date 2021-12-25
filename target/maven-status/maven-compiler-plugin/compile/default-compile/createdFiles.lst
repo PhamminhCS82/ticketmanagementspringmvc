@@ -1,7 +1,13 @@
 com\group11\pojos\OrderTicket.class
+com\group11\pojos\Tickets.class
 com\group11\configs\HibernateConfig.class
 com\group11\services\implement\LocationServiceImpl.class
+com\group11\repository\OrderRepository.class
 com\group11\services\implement\CommentServiceImpl.class
+com\group11\services\implement\SeatServiceImplement.class
+com\group11\repository\implement\SeatRepositoryImplement.class
+com\group11\services\implement\OrderServiceImplement.class
+com\group11\repository\implement\OrderRepositoryImplement.class
 com\group11\pojos\User.class
 com\group11\controllers\ApiBuyTicketController.class
 com\group11\services\CommentService.class
@@ -12,6 +18,7 @@ com\group11\pojos\Route_.class
 com\group11\repository\implement\CommentRepositoryImpl.class
 com\group11\configs\SpringSecurityConfig.class
 com\group11\pojos\Comment.class
+com\group11\pojos\ActivateTrip.class
 com\group11\repository\LocationRepository.class
 com\group11\services\implement\TicketServiceImpl.class
 com\configs\handlers\LogoutHandler.class
@@ -19,6 +26,7 @@ com\group11\configs\DispatcherServletInitializer.class
 com\group11\pojos\Ticket.class
 com\configs\handlers\MyAccessDeniedHandler.class
 com\group11\controllers\TripController.class
+com\group11\repository\SeatRepository.class
 com\group11\pojos\OrderTicket_.class
 com\group11\pojos\Trip.class
 com\group11\repository\CommentRepository.class
@@ -42,6 +50,7 @@ com\group11\controllers\HomeController.class
 com\group11\pojos\Comment_.class
 com\configs\handlers\LoginSuccessHandler.class
 com\group11\services\implement\PassengercarServiceImplement.class
+com\group11\services\OrderService.class
 com\group11\repository\implement\UserRepositoryImplement.class
 com\group11\services\implement\StatsServiceImpl.class
 com\group11\services\LocationService.class
@@ -49,6 +58,7 @@ com\group11\pojos\User$Roles.class
 com\group11\repository\implement\LocationRepositoryImpl.class
 com\group11\pojos\Passengercar.class
 com\group11\pojos\Ticket_.class
+com\group11\services\SeatService.class
 com\group11\pojos\Passengercar_.class
 com\group11\repository\PassengercarRepository.class
 com\group11\repository\StatsRepository.class
@@ -58,3 +68,4 @@ com\group11\services\StatsService.class
 com\group11\pojos\Trip_.class
 com\group11\services\TicketService.class
 com\group11\pojos\User_.class
+com\group11\pojos\ActivateTrip_.class

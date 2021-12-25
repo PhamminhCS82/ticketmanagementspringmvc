@@ -53,6 +53,7 @@ public class Route implements Serializable {
     @Size(max = 45)
     @Column(name = "finish")
     private String finish;
+
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "idroute")
     private Collection<Trip> tripCollection;
 

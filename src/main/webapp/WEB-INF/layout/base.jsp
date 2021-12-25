@@ -27,6 +27,8 @@
         <link type="text/css" rel="stylesheet" href="<c:url value="css/flaticon.css"/>"/>
         <link type="text/css" rel="stylesheet" href="<c:url value="css/style.css"/>"/>
 
+
+
     </head>
     <body>
         <div>
@@ -51,7 +53,13 @@
         <script src="<c:url value="js/bootstrap-datepicker.js"/>"></script>
         <script src="<c:url value="js/scrollax.min.js"/>"></script>
         <script src="<c:url value="js/main.js"/>"></script>
-        <script src="<c:url value="resources/js/stats.js"/>"></script>
+
+        <script src="<c:url value="js/stats.js"/>"></script>
+        <script src="<c:url value="js/admin.js"/>"></script>
+
+
+
+  
 
     </body>
 </html>

@@ -47,6 +47,7 @@
 
         <script src="../js/adminscript.js"></script>
         <script src="js/adminscript.js"></script>
+        <script src="js/admin.js"></script>
 
     </body>
 </html>

@@ -1,5 +1,4 @@
 
-
 function addComment(idtrip) {
 
     fetch("/CS82TicketSale/api/add-comment/", {
@@ -35,6 +34,9 @@ function show_alert(){
             text: 'Bạn chưa đăng nhập tài khoản!'
         })
 }
+
+
+
 function generateColor(){
     let r =parseInt(Math.random()*255);
     let g =parseInt(Math.random()*255);
@@ -80,7 +82,6 @@ const data = {
  let c = document.getElementById(id).getContext("2d")
     new Chart(c, config)
 }
-
 
 
 (function($) {
@@ -354,5 +355,5 @@ const data = {
 
 
 
-})
+})(jQuery);
 
