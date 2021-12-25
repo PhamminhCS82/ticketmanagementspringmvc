@@ -6,6 +6,7 @@
 package com.group11.repository;
 
 import com.group11.pojos.Passengercar;
+import java.util.List;
 /**
  *
  * @author pminh
@@ -13,4 +14,7 @@ import com.group11.pojos.Passengercar;
 
 public interface PassengercarRepository {
     Passengercar getCarById(int id);
+    boolean updatePass(Passengercar p);
+    boolean addPass(Passengercar p);
+    
 }

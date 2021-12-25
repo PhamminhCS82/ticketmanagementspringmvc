@@ -19,7 +19,7 @@ public interface LocationService {
     List<Route> getRoute();
 
     List<Trip> getTrip(String kw, int page);
-
+    List<Trip> getTripName();
     Route getRouteId(int stationId);
 
     List<Object[]> listTour();
@@ -27,4 +27,16 @@ public interface LocationService {
     Trip getTripId(int id);
 
     long countTrip();
+
+    boolean addRoute(Route p);
+
+    boolean updateRoute(Route p);
+
+    boolean deleteRoute(Route p);
+
+    boolean addTrip(Trip p);
+
+    boolean updateTrip(Trip p);
+
+    boolean deleteTrip(Trip p);
 }

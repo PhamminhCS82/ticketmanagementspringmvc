@@ -65,7 +65,7 @@ public class LocationRepositoryImpl implements LocationRepository {
         List<Predicate> predicates = new ArrayList<>();
         predicates.add(builder.equal(rootR.get("id"), rootT.get("idroute")));
 
-        query.multiselect(rootR.get("id"), rootR.get("name"), rootR.get("start"), rootR.get("finish"), rootT.get("name"), rootT.get("datetime"));
+        query.multiselect(rootT.get("id"), rootT.get("name"), rootT.get("price"), rootT.get("time"), rootT.get("time"), rootT.get("name"));
         query.where(predicates.toArray(new Predicate[]{}));
 
         org.hibernate.query.Query q = session.createQuery(query);
@@ -107,6 +107,104 @@ public class LocationRepositoryImpl implements LocationRepository {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         Query q = session.createQuery("select count(*) from Trip");
         return Long.parseLong(q.getSingleResult().toString());//
+    }
+
+    @Override
+    public boolean addRoute(Route p) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+
+            session.save(p);
+
+            return true;
+        } catch (Exception ex) {
+            System.err.println("=== ADD TICKET ERRER ===" + ex.getMessage());
+            ex.printStackTrace();
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean addTrip(Trip trip) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+
+            session.save(trip);
+
+            return true;
+        } catch (Exception ex) {
+            System.err.println("=== ADD TICKET ERRER ===" + ex.getMessage());
+            ex.printStackTrace();
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean updateRoute(Route route) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+
+            session.update(route);
+
+            return true;
+        } catch (Exception ex) {
+            System.err.println("=== ADD TICKET ERRER ===" + ex.getMessage());
+            ex.printStackTrace();
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean updateTrip(Trip trip) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+
+            session.update(trip);
+
+            return true;
+        } catch (Exception ex) {
+            System.err.println("=== ADD TICKET ERRER ===" + ex.getMessage());
+            ex.printStackTrace();
+        }
+
+        return false;
+    }
+
+
+    @Override
+    public boolean deleteRoute(Route route) {
+        Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+           
+            session.delete(route);
+            return true;
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean deleteTrip(Trip trip) {
+         Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+           
+            session.delete(trip);
+            return true;
+        } catch (Exception e) {
+            e.getMessage();
+        }
+        return false;
+    }
+
+    @Override
+    public List<Trip> getTripName(String string) {
+        Session s = sessionFactory.getObject().getCurrentSession();
+        Query q = s.createQuery("From Trip");
+        return q.getResultList();
     }
 
 }

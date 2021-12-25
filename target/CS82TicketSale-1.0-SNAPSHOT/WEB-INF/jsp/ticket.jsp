@@ -9,6 +9,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<c:url value="/trip/${trip.id}" var="action"/>
 <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('../resources/images/bg_1.jpg');">
     <div class="overlay"></div>
     <div class="container">
@@ -97,3 +98,4 @@
 
         </script>
              <script src="../resources/js/main.js"></script>
+

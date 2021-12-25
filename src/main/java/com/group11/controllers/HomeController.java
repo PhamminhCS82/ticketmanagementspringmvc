@@ -8,8 +8,11 @@ package com.group11.controllers;
 import com.group11.pojos.Route;
 import com.group11.pojos.Seat;
 import com.group11.pojos.Ticket;
+import com.group11.pojos.Trip;
+import com.group11.services.CommentService;
 import com.group11.services.LocationService;
 import com.group11.services.TicketService;
+import com.group11.services.UserService;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -38,11 +41,22 @@ public class HomeController {
     @Autowired
     private TicketService ticketService;
 
+//    @Autowired
+//    private OrderService orderService;
+    @Autowired
+    private UserService userService;
+     @Autowired
+    private CommentService commentService;
+
+
     @ModelAttribute
     public void common(Model model, HttpSession session, @RequestParam(value = "kw", required = false, defaultValue = "") String kw) {
         model.addAttribute("locations", this.locationService.getRoute());
         model.addAttribute("seats", this.ticketService.getSeat());
-
+        model.addAttribute("getDriver", this.userService.getRole());
+        model.addAttribute("getTripName", this.locationService.getTripName());
+        
+         model.addAttribute("currentUser",session.getAttribute("currentUser"));
     }
 
     @GetMapping("/")
@@ -84,6 +98,7 @@ public class HomeController {
         if (cateId == null) {
             model.addAttribute("routeTrip", this.locationService.getTrip(kw, page));
             model.addAttribute("counter", this.locationService.countTrip());
+           
 
         } else {
             Route c = this.locationService.getRouteId(Integer.parseInt(cateId));
@@ -98,8 +113,6 @@ public class HomeController {
                 .getPassengerCar());
         model.addAttribute("trip", this.locationService.getTripId(ticketId));
 
-        return "ticket-trip";
-    }
 
 //    @GetMapping(value = "/orderticket/{ticket_id}")
 //    public String ticket(Model model, @PathVariable(value = "ticket_id") int ticketId) {

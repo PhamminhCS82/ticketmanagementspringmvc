@@ -18,9 +18,16 @@ import java.util.List;
 public interface LocationRepository {
     List<Route> getRoute(String kw);
     List<Trip> getTrip(String kw,int page);
+    List<Trip> getTripName(String kw);
     Route getRouteId(int routeId);
     List<Object[]> listTour();
     Trip getTripId(int id);
      long countTrip();
+     boolean addRoute(Route p);
+     boolean updateRoute(Route p);
+     boolean deleteRoute(Route p);
+     boolean addTrip(Trip p);
+     boolean updateTrip(Trip p);
+     boolean deleteTrip(Trip p);
     
 }

@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author pminh
  */
 @Entity
-@Table(name = "passengercar")
+@Table(name = "`passengercar`")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Passengercar.findAll", query = "SELECT p FROM Passengercar p"),
@@ -47,7 +47,7 @@ public class Passengercar implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "`id`")
     private Integer id;
     @Size(max = 45)
     @Column(name = "name")
@@ -55,9 +55,9 @@ public class Passengercar implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "carnumber")
+    @Column(name = "`carnumber`")
     private String carnumber;
-    @Column(name = "active")
+    @Column(name = "`active`")
     private Short active;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,mappedBy = "passengercar")
     private Collection<Seat> seatCollection;
@@ -69,7 +69,7 @@ public class Passengercar implements Serializable {
     @JoinColumn(name = "iduser", referencedColumnName = "id")
     @ManyToOne
     private User user;
-
+    
     public Passengercar() {
     }
 
@@ -132,6 +132,7 @@ public class Passengercar implements Serializable {
         this.ticketCollection = ticketCollection;
     }
 
+
     public Trip getIdtrip() {
         return idtrip;
     }
@@ -172,5 +173,5 @@ public class Passengercar implements Serializable {
     public String toString() {
         return "com.group11.pojos.Passengercar[ id=" + id + " ]";
     }
-    
+
 }

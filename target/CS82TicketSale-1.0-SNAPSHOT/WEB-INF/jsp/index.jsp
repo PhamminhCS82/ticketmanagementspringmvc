@@ -108,30 +108,7 @@
                 <li class="page-item"><a class="page-link" href="<c:url value="/route"/>?page=${i}">${i}</a></li>
                 </c:forEach>
         </ul></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
 
-                <div class="row">
-                    <c:forEach var="p" items="${routeTrip}">
-                        <div class="col-lg-12 col-md-4 col-sm-6 mix oranges fresh-meat">
-                            <div class="card-body">                                         
-
-
-                                <div class="featured__item__text">
-                                    <h6>${p.name}</h6>
-                                    <h5>${p.time} </h5>
-                                    <h5>${p.idroute.start} </h5>
-                                    <h5>${p.idroute.finish} </h5>
-                                    <a href="<c:url value="/routes/${p.id}" />">Thông tin vé</a>
-                                </div>
-
-                            </div>
-                        </div>
-                    </c:forEach>
-                </div>
-
-            </div></div></div>
 </section>
 
 

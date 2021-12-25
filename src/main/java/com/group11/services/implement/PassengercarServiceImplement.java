@@ -27,5 +27,15 @@ public class PassengercarServiceImplement implements PassengercarService{
     public Passengercar getCarById(int id) {
         return this.passengerCarRepository.getCarById(id);
     }
+
+    @Override
+    public boolean updatePass(Passengercar p) {
+         return this.passengerCarRepository.updatePass(p);
+    }
+
+    @Override
+    public boolean addPass(Passengercar p) {
+       return this.passengerCarRepository.addPass(p);
+    }
     
 }

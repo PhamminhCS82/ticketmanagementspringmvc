@@ -10,6 +10,8 @@ import org.springframework.context.MessageSource;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.group11.formatter.TripFormatter;
+import com.group11.formatter.UserFormatter;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -20,7 +22,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
-
+import org.springframework.format.FormatterRegistry;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
@@ -49,11 +51,19 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
         configurer.enable();
     }
 
+    /**
+     *
+     * @param registry
+     */
     @Override
-    public void addFormatters(FormatterRegistry registry) {
+    public void addFormatters(FormatterRegistry registry){
         registry.addFormatter(new RouteFormatter());
-
+        registry.addFormatter(new TripFormatter());
+        registry.addFormatter(new UserFormatter());
+    
     }
+    
+
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -62,6 +72,7 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/images/**").addResourceLocations("/resources/images/");
         registry.addResourceHandler("/fonts/**").addResourceLocations("/resources/fonts/");
     }
+
 
     @Bean
     public InternalResourceViewResolver getInternalResourceViewResolver() {
@@ -79,7 +90,11 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
         return validator();
     }
 
+   
+    
+
     @Bean
+
     public LocalValidatorFactoryBean validator() {
         LocalValidatorFactoryBean v = new LocalValidatorFactoryBean();
         v.setValidationMessageSource(messageSource());
@@ -92,6 +107,7 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
         source.setBasename("messages");//chá»‰ Ä‘á»‹nh 1,, thÃªm s á»Ÿ setbasename Ä‘á»ƒ nhiá»�u
         return source;
     }
+
 
     @Bean
     public CommonsMultipartResolver multipartResolver() {

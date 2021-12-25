@@ -62,4 +62,25 @@ public class UserServiceImplement implements UserService {
     }
 
 
+    @Override
+    public boolean updateUser(User user) {
+        return this.userRepository.updateUser(user);
+    }
+
+    @Override
+    public User getUserId(int i) {
+        return this.userRepository.getUserId(i);
+    }
+
+    @Override
+    public User getUserByname(String string) {
+        return userRepository.getUsers(string).get(0);
+    }
+
+    @Override
+    public List<User> getRole() {
+       return this.userRepository.getRole();
+    }
+    
+
 }

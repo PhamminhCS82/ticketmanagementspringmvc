@@ -34,5 +34,37 @@ public class PassengercarImplement implements PassengercarRepository {
         return session.get(Passengercar.class, id);
     }
 
+    @Override
+    public boolean updatePass(Passengercar p) {
+         Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+
+            session.update(p);
+
+            return true;
+        } catch (Exception ex) {
+            System.err.println("=== ADD TICKET ERRER ===" + ex.getMessage());
+            ex.printStackTrace();
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean addPass(Passengercar p) {
+         Session session = this.sessionFactory.getObject().getCurrentSession();
+        try {
+
+            session.save(p);
+
+            return true;
+        } catch (Exception ex) {
+            System.err.println("=== ADD TICKET ERRER ===" + ex.getMessage());
+            ex.printStackTrace();
+        }
+
+        return false;
+    }
+
 
 }

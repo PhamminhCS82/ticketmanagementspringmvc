@@ -10,11 +10,20 @@ import com.group11.pojos.User;
 import com.group11.services.UserService;
 import javax.servlet.http.HttpSession;
 
+import javax.validation.Valid;
+
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+
+import org.springframework.web.bind.annotation.PathVariable;
+
+
 
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -51,5 +60,24 @@ public class UserController {
     @GetMapping("/signin")
     public String signinView() {
         return "signin";
+    }
+    @GetMapping("/user/edit-users/{user_id}")
+    public String editUser(Model model, @PathVariable(value = "user_id") String user) {
+
+        User u = this.userDetailsService.getUserByname(user);
+        model.addAttribute("user", u);
+        return "edit-profile";
+    }
+
+    @PostMapping("/user/edit-users/{user_id}")
+    public String editUsers(Model model, @ModelAttribute(value = "user_id") @Valid User user, BindingResult result) {
+        if (!result.hasErrors()) {
+            this.userDetailsService.updateUser(user);
+
+            return "redirect:/";
+        } else {
+            model.addAttribute("errMsg", "Có lỗi rồi!!!");
+        }
+        return "edit-profile";
     }
 }

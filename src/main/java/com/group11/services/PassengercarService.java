@@ -13,4 +13,6 @@ import com.group11.pojos.Passengercar;
  */
 public interface PassengercarService {
     Passengercar getCarById(int id);
+     boolean updatePass(Passengercar p);
+     boolean addPass(Passengercar p);
 }

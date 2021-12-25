@@ -19,18 +19,22 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
  * @author pminh
  */
 @Entity
-@Table(name = "user")
+@Table(name = "`user`")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
@@ -46,6 +50,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "User.findByUserrole", query = "SELECT u FROM User u WHERE u.userrole = :userrole")})
 public class User implements Serializable {
 
+    public User get(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public static enum Roles {
         USER,
         DRIVER,
@@ -58,7 +66,7 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "`id`")
     private Integer id;
     @Size(max = 45)
     @Column(name = "username")
@@ -91,10 +99,12 @@ public class User implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Collection<OrderTicket> orderTicketCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonIgnore
     private Collection<Comment> commentCollection;
     @OneToMany(mappedBy = "user")
     private Collection<Passengercar> passengercarCollection;
-
+    @Transient //xem như là 1 thuộc tính để xử lí ko lk với csld
+    private MultipartFile file;
     public User() {
     }
 
@@ -253,5 +263,22 @@ public class User implements Serializable {
     public String toString() {
         return "com.group11.pojos.User[ id=" + id + " ]";
     }
+
+
+    /**
+     * @return the file
+     */
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    /**
+     * @param file the file to set
+     */
+    public void setFile(MultipartFile file) {
+        this.file = file;
+    }
     
+
+
 }

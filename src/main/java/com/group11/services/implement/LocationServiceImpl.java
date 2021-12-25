@@ -56,4 +56,39 @@ public class LocationServiceImpl implements LocationService {
     public long countTrip() {
         return this.locationRepository.countTrip();
     }
+
+    @Override
+    public boolean addRoute(Route p) {
+        return this.locationRepository.addRoute(p);
+    }
+
+    @Override
+    public boolean addTrip(Trip trip) {
+        return this.locationRepository.addTrip(trip);
+    }
+
+    @Override
+    public boolean updateRoute(Route route) {
+        return this.locationRepository.updateRoute(route);
+    }
+
+    @Override
+    public boolean updateTrip(Trip trip) {
+       return this.locationRepository.updateTrip(trip);
+    }
+
+    @Override
+    public boolean deleteRoute(Route route) {
+        return this.locationRepository.deleteRoute(route);
+    }
+
+    @Override
+    public boolean deleteTrip(Trip trip) {
+        return this.locationRepository.deleteTrip(trip);
+    }
+
+    @Override
+    public List<Trip> getTripName() {
+        return this.locationRepository.getTripName("");
+    }
 }

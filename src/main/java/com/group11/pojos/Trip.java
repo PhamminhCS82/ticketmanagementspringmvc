@@ -5,6 +5,7 @@
  */
 package com.group11.pojos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -24,13 +25,15 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 /**
  *
  * @author pminh
  */
 @Entity
-@Table(name = "trip")
+@Table(name = "`trip`")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Trip.findAll", query = "SELECT t FROM Trip t"),
@@ -44,7 +47,7 @@ public class Trip implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "`id`")
     private Integer id;
     @Size(max = 45)
     @Column(name = "name")
@@ -63,12 +66,20 @@ public class Trip implements Serializable {
     @OneToOne(mappedBy = "idtrip")
     private Passengercar passengerCar;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idtrip")
+    @JsonIgnore
+    private Collection<Comment> commentCollection;
+    @OneToOne(mappedBy = "idtrip")
+    private Passengercar passengercar;
+
+
     public Trip() {
     }
 
     public Trip(Integer id) {
         this.id = id;
     }
+
 
     public Integer getId() {
         return id;
@@ -93,6 +104,7 @@ public class Trip implements Serializable {
     public void setTime(String time) {
         this.time = time;
     }
+
 
     public Double getPrice() {
         return price;
@@ -157,5 +169,6 @@ public class Trip implements Serializable {
     public void setPassengerCar(Passengercar passengerCar) {
         this.passengerCar = passengerCar;
     }
+
     
 }

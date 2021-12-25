@@ -5,6 +5,7 @@
  */
 package com.group11.repository.implement;
 
+import com.group11.pojos.Route;
 import com.group11.pojos.User;
 import com.group11.repository.UserRepository;
 import java.util.List;
@@ -61,9 +62,53 @@ public class UserRepositoryImplement implements UserRepository {
     }
 
     @Override
+    public boolean updateUser(User user) {
+        Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+        try {
+
+            session.update(user);
+
+            return true;
+        } catch (Exception ex) {
+            System.err.println("=== ADD TICKET ERRER ===" + ex.getMessage());
+            ex.printStackTrace();
+        }
+
+        return false;
+    }
+
+    @Override
+    public User getUserId(int i) {
+        Session s = sessionFactoryBean.getObject().getCurrentSession();
+        return s.get(User.class, i);
+    }
+
+    @Override
+    public User getUserByname(String id) {
+        Session s = this.sessionFactoryBean.getObject().getCurrentSession();
+        return s.get(User.class, id);
+    }
+
+    @Override
+    public List<User> getRole() {
+        Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<User> query = builder.createQuery(User.class);
+        Root root = query.from(User.class);
+        query = query.select(root);
+
+        Predicate p = builder.equal(root.get("userrole").as(String.class), "DRIVER");
+        query.where(p);
+
+        Query q = session.createQuery(query);
+        return q.getResultList();
+
+   
+
+}
+     @Override
     public User getUserById(int id) {
         Session session = this.sessionFactoryBean.getObject().getCurrentSession();
         return session.get(User.class, id);
-    }
 
-}
+    }}

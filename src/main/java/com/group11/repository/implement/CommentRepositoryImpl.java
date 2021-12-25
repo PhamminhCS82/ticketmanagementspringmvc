@@ -27,12 +27,14 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
+
 public class CommentRepositoryImpl implements CommentRepository {
 
     @Autowired
     private LocalSessionFactoryBean sessionFactory;
     @Autowired
     private LocationRepository locationRepository;
+
 
     @Override
     public Comment addComment(Comment c) {
@@ -57,17 +59,16 @@ public class CommentRepositoryImpl implements CommentRepository {
     @Override
     public List<Comment> getCmt(int id) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
-
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Comment> query = builder.createQuery(Comment.class);
         Root root = query.from(Comment.class);
         query = query.select(root);/// cac buoc tao truyvan       
+
         Predicate p = builder.equal(root.get("idtrip"), locationRepository.getTripId(id).getId());
         query = query.where(p);
 
         query = query.orderBy(builder.desc(root.get("createddate")));
         Query q = session.createQuery(query);
         return q.getResultList();
-
     }
 }

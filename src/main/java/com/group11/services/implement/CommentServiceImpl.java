@@ -26,7 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class CommentServiceImpl implements CommentService{
     @Autowired
     private CommentRepository commentRepository;
-        @Autowired
+    @Autowired
     private LocationRepository locationRepository;
 
     @Override

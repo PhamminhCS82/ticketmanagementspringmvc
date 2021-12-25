@@ -14,5 +14,9 @@ import java.util.List;
  */
 public interface UserService extends UserDetailsService {
     boolean addUser(User user);
+     boolean updateUser(User user);
     List<User> getUsers(String username);
+    User getUserId(int id);
+    User getUserByname(String id);
+    List<User> getRole();
 }

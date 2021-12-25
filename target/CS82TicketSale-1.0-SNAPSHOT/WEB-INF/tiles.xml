@@ -38,6 +38,11 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content"
                        value="/WEB-INF/jsp/route.jsp" />
     </definition>
+        <definition name="edit-profile" extends="baseLayout">
+        <put-attribute name="title" value="Thông tin cá nhân" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/edit-profile.jsp" />
+    </definition>
     <definition name="ticket-trip" extends="baseLayout">
         <put-attribute name="title" value="Mua vé" />
         <put-attribute name="content"
@@ -63,6 +68,61 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content"
                        value="/WEB-INF/jsp/admin.jsp" />
     </definition>
+    <definition name="stats-trip" extends="baseAdminLayout">
+        <put-attribute name="title" value="Quản lý" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/stats-Trip.jsp" />
+    </definition>
+        <definition name="add-route" extends="baseAdminLayout">
+        <put-attribute name="title" value="Thêm chuyến" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/add-route.jsp" />
+    </definition>
+         <definition name="pass-stats" extends="baseAdminLayout">
+        <put-attribute name="title" value="Thêm chuyến" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/passengercarStats.jsp" />
+    </definition>
+        <definition name="add-trip" extends="baseAdminLayout">
+        <put-attribute name="title" value="Thêm tuyến" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/add-trip.jsp" />
+    </definition>
+      <definition name="trips-state" extends="baseAdminLayout">
+        <put-attribute name="title" value="Toàn bộ chuyến" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/statsTrips.jsp" />
+    </definition>
+        <definition name="edit-routes" extends="baseAdminLayout">
+        <put-attribute name="title" value="Sửa chuyến" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/edit-route.jsp" />
+    </definition>
+      <definition name="edit-trips" extends="baseAdminLayout">
+        <put-attribute name="title" value="Sửa chuyến" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/edit-trip.jsp" />
+    </definition>
+    <definition name="user" extends="baseAdminLayout">
+        <put-attribute name="title" value="Quản lý người dùng" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/stats-user.jsp" />
+    </definition>
+        <definition name="edit-user" extends="baseAdminLayout">
+        <put-attribute name="title" value="Sửa thông tin người dùng" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/edit-user.jsp" />
+        </definition> 
+         <definition name="add-pass" extends="baseAdminLayout">
+        <put-attribute name="title" value="Thêm tài xế cho chuyến" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/add-pass.jsp" />
+        </definition>  
+          <definition name="edit-pass" extends="baseAdminLayout">
+        <put-attribute name="title" value="Sửa thông tin người dùng" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/edit-pass.jsp" />
+        </definition>                
     <definition name="buyticket" extends="baseLayout2">
         <put-attribute name="title" value="Đặt vé" />
         <put-attribute name="content"
@@ -77,5 +137,6 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="title" value="Xác nhận" />
         <put-attribute name="content"
                        value="/WEB-INF/jsp/buyconfirm.jsp" />
+
     </definition>
 </tiles-definitions>
