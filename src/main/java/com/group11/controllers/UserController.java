@@ -12,8 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import javax.validation.Valid;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,8 +20,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import org.springframework.web.bind.annotation.PathVariable;
-
-
 
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -45,22 +41,40 @@ public class UserController {
 
     @PostMapping("/buyform")
     public String buyForm(Model model, @ModelAttribute(value = "user") User user, HttpSession session) {
-        Passengercar car = (Passengercar)session.getAttribute("choosedcar");
+        Passengercar car = (Passengercar) session.getAttribute("choosedcar");
         if (this.userDetailsService.addUser(user) == true && car != null) {
             return String.format("forward:/buy?car_id=%d", car.getId());
         }
         return "buyform";
     }
 
-    @GetMapping("/signup")
-    public String signupView(Model model) {
+    @PostMapping("/signup")
+    public String signupView(Model model, @ModelAttribute(value = "user") User user) {
+        if (user.getPassword().isEmpty() 
+                || !user.getPassword().equals(user.getConfirmPassword())) 
+            model.addAttribute("errMsg", "Mat khau KHONG khop!!!");
+        else {
+            if (this.userDetailsService.addUser(user) == true) {
+                return "redirect:/signin";
+            }
+            
+            model.addAttribute("errMsg", "Co loi xay ra, vui long quay lai sau!!!");
+        }
+        
         return "signup";
     }
 
+    @GetMapping("/signup")
+    public String registerView(Model model) {
+        model.addAttribute("user", new User());
+        return "signup";
+    }
+    
     @GetMapping("/signin")
     public String signinView() {
         return "signin";
     }
+
     @GetMapping("/user/edit-users/{user_id}")
     public String editUser(Model model, @PathVariable(value = "user_id") String user) {
 

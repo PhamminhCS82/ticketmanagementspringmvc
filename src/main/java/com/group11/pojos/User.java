@@ -105,6 +105,9 @@ public class User implements Serializable {
     private Collection<Passengercar> passengercarCollection;
     @Transient //xem như là 1 thuộc tính để xử lí ko lk với csld
     private MultipartFile file;
+    @Transient
+    @JsonIgnore
+    private String confirmPassword;
     public User() {
     }
 
@@ -239,6 +242,20 @@ public class User implements Serializable {
         this.passengercarCollection = passengercarCollection;
     }
 
+    /**
+     * @return the confirmPassword
+     */
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    /**
+     * @param confirmPassword the confirmPassword to set
+     */
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;

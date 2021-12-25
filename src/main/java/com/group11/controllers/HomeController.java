@@ -112,7 +112,8 @@ public class HomeController {
         session.setAttribute("choosedcar", this.locationService.getTripId(ticketId)
                 .getPassengerCar());
         model.addAttribute("trip", this.locationService.getTripId(ticketId));
-
+        return "ticket";
+    }
 
 //    @GetMapping(value = "/orderticket/{ticket_id}")
 //    public String ticket(Model model, @PathVariable(value = "ticket_id") int ticketId) {
@@ -151,5 +152,4 @@ public class HomeController {
         }
         return "ticket";
     }
-
 }

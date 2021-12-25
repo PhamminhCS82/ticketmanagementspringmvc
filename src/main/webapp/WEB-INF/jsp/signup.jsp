@@ -6,6 +6,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('resources/images/bg_1.jpg');">
     <div class="overlay"></div>
     <div class="container">
@@ -21,23 +23,38 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6 order-md-last d-flex">
-                <form action="#" class="bg-light p-5 contact-form">
+                <c:if test="${errMsg != null}">
+                    <div class="alert alert-danger">
+                        ${errMsg}
+                    </div>
+                </c:if>
+                <c:url value="/signin" var="action"/>
+                <form:form method="post" action="${action}" modelAttribute="user" class="bg-light p-5 contact-form">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Your Name">
+                        <form:input type="text" id="firstname" path="firstname" class="form-control" placeholder="Tên"/>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Your Email">
+                        <form:input type="text" id="lastname" path="surname" class="form-control" placeholder="Họ"/>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Subject">
+                        <form:input type="text" id="email" path="email" class="form-control" placeholder="Email"/>
                     </div>
                     <div class="form-group">
-                        <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
+                        <form:input type="phone" id="phonenum" path="phone" class="form-control" placeholder="Số điện thoại"/>
+                    </div>
+                    <div class="form-group">
+                        <form:input type="text" id="username" path="username" class="form-control" placeholder="Tài khoản"/>
+                    </div>
+                    <div class="form-group">
+                        <form:input type="password" id="password" path="password" class="form-control" placeholder="Mật khẩu"/>
+                    </div>
+                    <div class="form-group">
+                        <form:input type="password" id="confirmPassword" path="confirmPassword" class="form-control" placeholder="Nhập lại mật khẩu"/>
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Đăng ký" class="btn btn-primary py-3 px-5">
                     </div>
-                </form>
+                </form:form>
 
             </div>
         </div>
