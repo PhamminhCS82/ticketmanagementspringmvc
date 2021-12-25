@@ -19,6 +19,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -53,12 +54,14 @@ public class Trip implements Serializable {
     private String time;
     @Size(max = 45)
     @Column(name = "price")
-    private String price;
+    private Double price;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idtrip")
     private Collection<ActivateTrip> activateTripCollection;
     @JoinColumn(name = "idroute", referencedColumnName = "id")
     @ManyToOne
     private Route idroute;
+    @OneToOne(mappedBy = "idtrip")
+    private Passengercar passengerCar;
 
     public Trip() {
     }
@@ -91,11 +94,11 @@ public class Trip implements Serializable {
         this.time = time;
     }
 
-    public String getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -139,6 +142,20 @@ public class Trip implements Serializable {
     @Override
     public String toString() {
         return "com.group11.pojos.Trip[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the passengerCar
+     */
+    public Passengercar getPassengerCar() {
+        return passengerCar;
+    }
+
+    /**
+     * @param passengerCar the passengerCar to set
+     */
+    public void setPassengerCar(Passengercar passengerCar) {
+        this.passengerCar = passengerCar;
     }
     
 }

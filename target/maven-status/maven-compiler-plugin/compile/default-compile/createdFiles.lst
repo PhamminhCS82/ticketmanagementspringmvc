@@ -3,14 +3,17 @@ com\group11\pojos\Tickets.class
 com\group11\configs\HibernateConfig.class
 com\group11\services\implement\LocationServiceImpl.class
 com\group11\repository\OrderRepository.class
+com\group11\services\implement\CommentServiceImpl.class
 com\group11\services\implement\SeatServiceImplement.class
 com\group11\repository\implement\SeatRepositoryImplement.class
 com\group11\services\implement\OrderServiceImplement.class
 com\group11\repository\implement\OrderRepositoryImplement.class
 com\group11\pojos\User.class
 com\group11\controllers\ApiBuyTicketController.class
+com\group11\services\CommentService.class
 com\group11\configs\SpringSecurityWebAppInitializer.class
 com\group11\pojos\Route_.class
+com\group11\repository\implement\CommentRepositoryImpl.class
 com\group11\configs\SpringSecurityConfig.class
 com\group11\pojos\Comment.class
 com\group11\pojos\ActivateTrip.class
@@ -21,6 +24,7 @@ com\group11\pojos\Ticket.class
 com\group11\repository\SeatRepository.class
 com\group11\pojos\OrderTicket_.class
 com\group11\pojos\Trip.class
+com\group11\repository\CommentRepository.class
 com\group11\services\implement\UserServiceImplement.class
 com\group11\repository\TicketRepository.class
 com\group11\controllers\UserController.class

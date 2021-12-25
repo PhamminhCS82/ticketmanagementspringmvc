@@ -41,11 +41,11 @@ public class OrderRepositoryImplement implements OrderRepository {
 
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
-    public boolean addOrder(int userId, Tickets tickets) {
+    public boolean addOrder(Tickets tickets) {
         try {
             Session session = this.sessionFactoryBean.getObject().getCurrentSession();
             OrderTicket order = new OrderTicket();
-            order.setUser(this.userRepository.getUserById(userId));
+            order.setUser(this.userRepository.getUserById(tickets.getUserId()));
             order.setCreatedDate(new Date());
             order.setIsPaid(false);
             session.save(order);

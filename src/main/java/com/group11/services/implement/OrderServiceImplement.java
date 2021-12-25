@@ -20,8 +20,8 @@ public class OrderServiceImplement implements OrderService{
     @Autowired
     private OrderRepository orderRepository;
     @Override
-    public boolean addOrder(int userId, Tickets tickets) {
-        return this.orderRepository.addOrder(userId, tickets);
+    public boolean addOrder(Tickets tickets) {
+        return this.orderRepository.addOrder(tickets);
     }
     
 }
