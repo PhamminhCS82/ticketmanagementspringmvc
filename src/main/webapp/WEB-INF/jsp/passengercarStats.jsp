@@ -7,7 +7,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <c:url value="/admin/pass-stats" var="action" />
-<h1>Quản lý người dùng </h1>   
+<h1>Quản lý xe </h1>   
 <br>
             <div >
                 <canvas id="myCateStatsChart"></canvas>
@@ -29,7 +29,7 @@
                                     <th>Ngày đi </th>   
                                     <th>Giờ đi</th>
                                     <th>Số hiệu xe</th>
-                                    <th></th>
+                                    <th><a href="<c:url value="/admin/add-passs"/>"><i class="fa fa-plus">Thêm chuyến cho xe</i></a></th>
                                 </tr>
                             </thead>
                             <tbody>

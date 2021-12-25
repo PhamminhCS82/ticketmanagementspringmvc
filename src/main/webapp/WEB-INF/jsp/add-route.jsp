@@ -8,7 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<h1 class="text-center text-danger">THÊM CHUYẾN</h1>
+<h1 class="text-center text-danger">THÊM TUYẾN</h1>
 <c:url value="/admin/add-routes" var="action"/>
 
 <c:if test="${errMsg!=null}">

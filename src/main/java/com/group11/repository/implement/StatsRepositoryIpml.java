@@ -138,7 +138,7 @@ public class StatsRepositoryIpml implements StatsRepository {
         predicates.add(builder.equal(rootP.get("idtrip"), rootT.get("id")));
 //        predicates.add(builder.equal(rootU.get("firstname"),rootP.get("user")));
         
-        query.multiselect( rootP.get("id"),rootU.get("firstname"),rootT.get("name"),rootT.get("datetime"),rootT.get("time"),rootP.get("carnumber"));
+        query.multiselect( rootP.get("id"),rootU.get("firstname"),rootT.get("name"),rootT.get("time"),rootT.get("time"),rootP.get("carnumber"));
          query.where(predicates.toArray(new Predicate[]{}));
 //          Predicate p = builder.equal(rootU.get("firstname"),rootP.get("user"));
 //            query = query.where(p);

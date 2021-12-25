@@ -65,7 +65,7 @@ public class LocationRepositoryImpl implements LocationRepository {
         List<Predicate> predicates = new ArrayList<>();
         predicates.add(builder.equal(rootR.get("id"), rootT.get("idroute")));
 
-        query.multiselect(rootT.get("id"), rootT.get("name"), rootT.get("price"), rootT.get("datetime"), rootT.get("time"), rootT.get("name"));
+        query.multiselect(rootT.get("id"), rootT.get("name"), rootT.get("price"), rootT.get("time"), rootT.get("time"), rootT.get("name"));
         query.where(predicates.toArray(new Predicate[]{}));
 
         org.hibernate.query.Query q = session.createQuery(query);

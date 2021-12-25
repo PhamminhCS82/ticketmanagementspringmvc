@@ -46,7 +46,7 @@
                     </c:if>
                     <c:if test="${seat.emp == 0}">
 
-                        <!--<div id="${seat.id}" data-value="${seat.name}" class="seat occupied">${seat.name}</div>-->
+                        <div id="${seat.id}" data-value="${seat.name}" class="seat occupied">${seat.name}</div>
                     </c:if>
 
 

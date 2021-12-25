@@ -68,7 +68,11 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content"
                        value="/WEB-INF/jsp/admin.jsp" />
     </definition>
-
+    <definition name="stats-trip" extends="baseAdminLayout">
+        <put-attribute name="title" value="Quản lý" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/stats-Trip.jsp" />
+    </definition>
         <definition name="add-route" extends="baseAdminLayout">
         <put-attribute name="title" value="Thêm chuyến" />
         <put-attribute name="content"

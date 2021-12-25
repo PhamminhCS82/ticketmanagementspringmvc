@@ -5,6 +5,9 @@
  */
 package com.group11.configs;
 
+import com.configs.handlers.LoginSuccessHandler;
+import com.configs.handlers.LogoutHandler;
+import com.configs.handlers.MyAccessDeniedHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -15,6 +18,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
@@ -31,7 +36,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
     @Autowired
     private UserDetailsService userDetailsService;
-    
+     @Autowired
+    private AuthenticationSuccessHandler loginSuccessHandler;
+    @Autowired
+    private LogoutSuccessHandler logoutHandler;
+    @Autowired
+    private MyAccessDeniedHandler accessDenied;
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -41,18 +51,32 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
+     @Bean
+    public AuthenticationSuccessHandler loginSuccessHandler() {
+        return new LoginSuccessHandler();
+    }
+    
+    @Bean
+    public LogoutSuccessHandler logoutHandler() {
+        return new LogoutHandler();
+    }
+    
+    @Bean
+    public MyAccessDeniedHandler accessDenied() {
+        return new MyAccessDeniedHandler();
+    }
+    
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin().loginPage("/signin")
                 .usernameParameter("username")
                 .passwordParameter("password");
-        http.formLogin().defaultSuccessUrl("/").failureUrl("/signin?error");
+         http.formLogin().defaultSuccessUrl("/").failureUrl("/signin?error");
         
         http.logout().logoutSuccessUrl("/signin");
         
         http.csrf().disable();
-    }
     
     
-}
+}}

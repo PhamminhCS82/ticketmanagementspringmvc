@@ -36,8 +36,9 @@ public class BuyTicketController {
         Passengercar car = this.passengerCarService.getCarById(carId);
         model.addAttribute("seatofcar", car.getSeatCollection());
         model.addAttribute("carinfo", car);
-        model.addAttribute("tripinfo", car.getIdTrip());
-        System.out.println(car.getIdTrip().getName());
+        model.addAttribute("tripinfo", car.getIdtrip());
+//        model.addAttribute("tickets", car.getTicketCollection());
+        System.out.println(car.getIdtrip().getName());
         return "buyticket";
     }
     

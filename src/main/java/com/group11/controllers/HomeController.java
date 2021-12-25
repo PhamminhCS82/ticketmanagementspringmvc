@@ -5,12 +5,12 @@
  */
 package com.group11.controllers;
 
-import com.group11.pojos.Order;
 import com.group11.pojos.Route;
 import com.group11.pojos.Seat;
 import com.group11.pojos.Ticket;
+import com.group11.pojos.Trip;
+import com.group11.services.CommentService;
 import com.group11.services.LocationService;
-import com.group11.services.OrderService;
 import com.group11.services.TicketService;
 import com.group11.services.UserService;
 import java.util.Map;
@@ -40,10 +40,14 @@ public class HomeController {
     private LocationService locationService;
     @Autowired
     private TicketService ticketService;
-    @Autowired
-    private OrderService orderService;
+
+//    @Autowired
+//    private OrderService orderService;
     @Autowired
     private UserService userService;
+     @Autowired
+    private CommentService commentService;
+
 
     @ModelAttribute
     public void common(Model model, HttpSession session, @RequestParam(value = "kw", required = false, defaultValue = "") String kw) {
@@ -51,7 +55,8 @@ public class HomeController {
         model.addAttribute("seats", this.ticketService.getSeat());
         model.addAttribute("getDriver", this.userService.getRole());
         model.addAttribute("getTripName", this.locationService.getTripName());
-
+        
+         model.addAttribute("currentUser",session.getAttribute("currentUser"));
     }
 
     @GetMapping("/")
@@ -93,6 +98,7 @@ public class HomeController {
         if (cateId == null) {
             model.addAttribute("routeTrip", this.locationService.getTrip(kw, page));
             model.addAttribute("counter", this.locationService.countTrip());
+           
 
         } else {
             Route c = this.locationService.getRouteId(Integer.parseInt(cateId));
@@ -106,30 +112,30 @@ public class HomeController {
 
 
         model.addAttribute("trip", locationService.getTripId(ticketId));
-      
-
+        model.addAttribute("comments", this.commentService.getCmt(ticketId));
+        
         return "ticket-trip";
     }
 
-    @GetMapping(value = "/orderticket/{ticket_id}")
-    public String ticket(Model model, @PathVariable(value = "ticket_id") int ticketId) {
-        model.addAttribute("order", new Order());
-        model.addAttribute("trip", locationService.getTripId(ticketId));
-
-        return "orderticket";
-    }
-
-    @PostMapping("/orderticket/{ticket_id}")
-    public String edit(Model model, @ModelAttribute(value = "ticket_id") @Valid Order order, BindingResult result, @PathVariable(value = "roomId") int roomId) {
-        if (!result.hasErrors()) {
-            this.orderService.addOrUpdate(order);
-//        model.addAttribute("product",product);
-            return "redirect:/";
-        } else {
-            model.addAttribute("errMsg", "Có lỗi rồi!!!");
-        }
-        return "orderticket";
-    }
+//    @GetMapping(value = "/orderticket/{ticket_id}")
+//    public String ticket(Model model, @PathVariable(value = "ticket_id") int ticketId) {
+//        model.addAttribute("order", new Order());
+//        model.addAttribute("trip", locationService.getTripId(ticketId));
+//
+//        return "orderticket";
+//    }
+//
+//    @PostMapping("/orderticket/{ticket_id}")
+//    public String edit(Model model, @ModelAttribute(value = "ticket_id") @Valid Order order, BindingResult result, @PathVariable(value = "roomId") int roomId) {
+//        if (!result.hasErrors()) {
+//            this.orderService.addOrUpdate(order);
+////        model.addAttribute("product",product);
+//            return "redirect:/";
+//        } else {
+//            model.addAttribute("errMsg", "Có lỗi rồi!!!");
+//        }
+//        return "orderticket";
+//    }
 
     @GetMapping(value = "/ticket/{ticket_id}")
     public String editProduct(Model model, @PathVariable(value = "ticket_id") int productId) {

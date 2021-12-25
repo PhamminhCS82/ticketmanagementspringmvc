@@ -24,41 +24,20 @@
         </div>
         <div class="form-group">
             <label style="color: white"
-                   for="datetime">Check-in:</label>
+                   for="time">Check-in:</label>
             <div class="form-field">
 
-                <form:input type="date" path="datetime"
+                <form:input type="datetime-local" path="time"
                             class="form-control datetimepicker-input"
                             placeholder="Check-in date"
                             style="border: 1px solid black; color:black"
                             data-target="#reservationdate" value="${trip.datetime}"/>
-                <form:errors path="datetime"
+                <form:errors path="time"
                              cssClass="alert alert-danger"
                              element="div" />
             </div>
         </div>
-           <div class="form-group">
-                                        <label for="guests">Guest</label>
-                                        <div class="form-field">
-                                            <i class="icon icon-arrow-down3"></i>
-                                            <form:select name="people" id="time" path="time" class="form-control" value="${trip.time}">
-                                                <option value="0:00">0:00 </option>
-                                                <option value="1:00">1:00 </option>
-                                                <option value="2:00">2:00 </option>
-                                                <option value="3:00">3:00 </option>
-                                                <option value="4:00">4:00 </option>
-                                                <option value="5:00">5:00 </option>
-                                                <option value="6:00 ">6:00 </option>
-                                                <option value="7:00">7:00 </option>
-                                                <option value="8:00">8:00 </option>
-                                                <option value="9:00">9:00 </option>
-                                                <option value="10:00">10:00 </option>
-                                                <option value="11:00">11:00 </option>
-                                                <option value="12:00">12:00 </option>
-                                                
-                                            </form:select>
-                                        </div>
-                                    </div>
+          
                 <div class="form-group">
         <label for="cate">Loại sản phẩm</label>
         <form:select id="cate" path="idroute" class="form-control" value="${route.name}" >

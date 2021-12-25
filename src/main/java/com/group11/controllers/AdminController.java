@@ -52,7 +52,7 @@ public class AdminController {
 
         model.addAttribute("tripStats", this.statsService.RouteStats());
         model.addAttribute("routeStats", this.locationService.listTour());
-        model.addAttribute("counttripStats", this.statsService.CountTripStats());
+        
         return "trips-state";
     }
     
@@ -160,12 +160,17 @@ public class AdminController {
 //        model.addAttribute("product",product);
         return "admin";
     }
-    
-    @GetMapping("/admin/add-passs")
+      @GetMapping("/admin/add-passs")
     public String list(Model model) {
         
         model.addAttribute("passengercar", new Passengercar());
         return "add-pass";
+    }
+    @GetMapping("/admin/state-trip")
+    public String listStatsTrip(Model model) {
+        
+       model.addAttribute("counttripStats", this.statsService.CountTripStats());
+        return "stats-trip";
     }
     @PostMapping("/admin/add-passs")
     public String addRoute(Model model, @ModelAttribute(value = "passengercar")
