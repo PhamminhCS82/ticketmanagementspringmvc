@@ -7,7 +7,6 @@ package com.group11.pojos;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,11 +19,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -40,7 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Trip.findAll", query = "SELECT t FROM Trip t"),
     @NamedQuery(name = "Trip.findById", query = "SELECT t FROM Trip t WHERE t.id = :id"),
     @NamedQuery(name = "Trip.findByName", query = "SELECT t FROM Trip t WHERE t.name = :name"),
-    @NamedQuery(name = "Trip.findByDatetime", query = "SELECT t FROM Trip t WHERE t.datetime = :datetime"),
+    @NamedQuery(name = "Trip.findByTime", query = "SELECT t FROM Trip t WHERE t.time = :time"),
     @NamedQuery(name = "Trip.findByPrice", query = "SELECT t FROM Trip t WHERE t.price = :price")})
 public class Trip implements Serializable {
 
@@ -53,32 +48,23 @@ public class Trip implements Serializable {
     @Size(max = 45)
     @Column(name = "name")
     private String name;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "datetime")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date datetime;
+    @Size(max = 45)
+    @Column(name = "time")
+    private String time;
     @Size(max = 45)
     @Column(name = "price")
     private String price;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idtrip")
+    private Collection<ActivateTrip> activateTripCollection;
     @JoinColumn(name = "idroute", referencedColumnName = "id")
     @ManyToOne
     private Route idroute;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idtrip")
-    private Collection<Comment> commentCollection;
-    @OneToOne(mappedBy = "idtrip")
-    private Passengercar passengercar;
 
     public Trip() {
     }
 
     public Trip(Integer id) {
         this.id = id;
-    }
-
-    public Trip(Integer id, Date datetime) {
-        this.id = id;
-        this.datetime = datetime;
     }
 
     public Integer getId() {
@@ -97,12 +83,12 @@ public class Trip implements Serializable {
         this.name = name;
     }
 
-    public Date getDatetime() {
-        return datetime;
+    public String getTime() {
+        return time;
     }
 
-    public void setDatetime(Date datetime) {
-        this.datetime = datetime;
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public String getPrice() {
@@ -113,29 +99,21 @@ public class Trip implements Serializable {
         this.price = price;
     }
 
+    @XmlTransient
+    public Collection<ActivateTrip> getActivateTripCollection() {
+        return activateTripCollection;
+    }
+
+    public void setActivateTripCollection(Collection<ActivateTrip> activateTripCollection) {
+        this.activateTripCollection = activateTripCollection;
+    }
+
     public Route getIdroute() {
         return idroute;
     }
 
     public void setIdroute(Route idroute) {
         this.idroute = idroute;
-    }
-
-    @XmlTransient
-    public Collection<Comment> getCommentCollection() {
-        return commentCollection;
-    }
-
-    public void setCommentCollection(Collection<Comment> commentCollection) {
-        this.commentCollection = commentCollection;
-    }
-
-    public Passengercar getPassengercar() {
-        return passengercar;
-    }
-
-    public void setPassengercar(Passengercar passengercar) {
-        this.passengercar = passengercar;
     }
 
     @Override

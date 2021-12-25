@@ -5,6 +5,7 @@
  */
 package com.group11.pojos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -18,6 +19,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -59,6 +62,7 @@ public class User implements Serializable {
     private Integer id;
     @Size(max = 45)
     @Column(name = "username")
+    @JsonIgnore
     private String username;
     @Size(max = 255)
     @Column(name = "password")
@@ -69,14 +73,15 @@ public class User implements Serializable {
     @Size(max = 45)
     @Column(name = "firstname")
     private String firstname;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
+    @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Size(max = 45)
     @Column(name = "email")
     private String email;
     @Column(name = "phone")
     private Integer phone;
     @Column(name = "active")
-    private Short active;
+    @NotNull
+    private Short active = 1;
     @Size(max = 255)
     @Column(name = "avatar")
     private String avatar;
@@ -95,6 +100,13 @@ public class User implements Serializable {
 
     public User(Integer id, String firstname, String surname, String email, Integer phone,String userRole) {
         this.id = id;
+        this.firstname = firstname;
+        this.surname = surname;
+        this.email = email;
+        this.phone = phone;
+        this.userrole = userRole;
+    }
+    public User(String firstname, String surname, String email, Integer phone,String userRole) {
         this.firstname = firstname;
         this.surname = surname;
         this.email = email;

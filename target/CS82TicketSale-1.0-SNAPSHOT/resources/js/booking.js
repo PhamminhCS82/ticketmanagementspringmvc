@@ -17,14 +17,14 @@ const hiddenTotalElem = document.getElementById("hidden-total");
 const hiddenSeatElem = document.getElementById("hidden-seats");
 const seatsElem = document.getElementById("selected-seats");
 let ticketPrice = +movieSelect.value;
-
+const results = [];
 // Save selected movie index and price
 function setMovieData(movieIndex, moviePrice) {
     localStorage.setItem('selectedMovieIndex', movieIndex);
     localStorage.setItem('selectedMoviePrice', moviePrice);
 }
 
-// update total and count
+//update total and count
 function updateSelectedCount() {
     const selectedSeats = document.querySelectorAll('.row .seat.selected');
     const seatsIndex = [...selectedSeats].map((seat) => [...seats].indexOf(seat));
@@ -38,7 +38,6 @@ function updateSelectedCount() {
     const selectedSeatsCount = selectedSeats.length - 1;
 
     count.innerText = selectedSeatsCount;
-    total.innerText = selectedSeatsCount * ticketPrice;
 }
 
 // Movie select event
@@ -71,18 +70,37 @@ container.addEventListener('click', (e) => {
 
         console.log(e.target.id);
         const result = [];
-        let total = 0;
-
+        
         for (const key in selections) {
             result.push(selections[key].value);
         }
-
+        
+        console.log(results);
         result.length ? reserveButton.disabled = false : reserveButton.disabled = true;
         seatsElem.innerHTML = result.join(",");
         updateSelectedCount();
     }
 });
 
+function pay(id, price) {
+    fetch("http://localhost:8080/CS82TicketSale/api/pay", {
+        method: 'post',
+        body: JSON.stringify({
+            "seats": results,
+            "carId": id,
+            "price": price
+        }),
+        headers: {
+            "Content-type": "application/json"
+        }
+    }).then(function (res) {
+        return res.json();
+    }).then(function (code) {
+        console.info(code);
+        window.location="http://localhost:8080/CS82TicketSale/";
+    });
+
+}
 
 // intial count and total
 updateSelectedCount();

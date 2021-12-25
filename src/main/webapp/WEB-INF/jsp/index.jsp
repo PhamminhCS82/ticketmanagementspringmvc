@@ -120,7 +120,7 @@
 
                                 <div class="featured__item__text">
                                     <h6>${p.name}</h6>
-                                    <h5>${p.datetime} </h5>
+                                    <h5>${p.time} </h5>
                                     <h5>${p.idroute.start} </h5>
                                     <h5>${p.idroute.finish} </h5>
                                     <a href="<c:url value="/routes/${p.id}" />">Thông tin vé</a>

@@ -18,6 +18,9 @@
     <class>com.group11.pojos.Route</class>
     <class>com.group11.pojos.Driverdetail</class>
     <class>com.group11.pojos.OrderTicket</class>
+    <class>com.group11.pojos.DeactivateTrip</class>
+    <class>com.group11.pojos.Trip_1</class>
+    <class>com.group11.pojos.ActivateTrip</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/qlbanvexe?zeroDateTimeBehavior=CONVERT_TO_NULL"/>

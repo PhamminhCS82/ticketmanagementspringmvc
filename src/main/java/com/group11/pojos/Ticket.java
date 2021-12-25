@@ -54,9 +54,8 @@ public class Ticket implements Serializable {
     private String number;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
     @Column(name = "price")
-    private String price;
+    private Double price;
     @Column(name = "used_date")
     @Temporal(TemporalType.DATE)
     private Date usedDate;
@@ -77,7 +76,7 @@ public class Ticket implements Serializable {
         this.id = id;
     }
 
-    public Ticket(Integer id, String number, String price) {
+    public Ticket(Integer id, String number, Double price) {
         this.id = id;
         this.number = number;
         this.price = price;
@@ -99,11 +98,11 @@ public class Ticket implements Serializable {
         this.number = number;
     }
 
-    public String getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

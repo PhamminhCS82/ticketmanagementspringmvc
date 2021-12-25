@@ -10,6 +10,7 @@ import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -51,7 +52,7 @@ public class Route implements Serializable {
     @Size(max = 45)
     @Column(name = "finish")
     private String finish;
-    @OneToMany(mappedBy = "idroute")
+    @OneToMany(mappedBy = "idroute", fetch = FetchType.EAGER)
     private Collection<Trip> tripCollection;
 
     public Route() {
