@@ -22,10 +22,11 @@ import org.springframework.transaction.annotation.Transactional;
  * @author LocNe
  */
 @Service
+@Transactional
 public class CommentServiceImpl implements CommentService{
     @Autowired
     private CommentRepository commentRepository;
-        @Autowired
+    @Autowired
     private LocationRepository locationRepository;
 
     @Override

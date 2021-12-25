@@ -13,10 +13,10 @@
         <div class="movie-container">
             <label>Số ghế:</label>
             <select id="movie">
-                <option value="1">1 vé</option>
-                <option value="2">2 vé</option>
-                <option value="3">3 vé</option>
-                <option value="4">4 vé</option>
+                <option value=${tripinfo.price}>1 ghế</option>
+                <option value=${tripinfo.price}>2 ghế</option>
+                <option value=${tripinfo.price}>3 ghế</option>
+                <option value=${tripinfo.price}>4 ghế</option>
             </select>
         </div>
 
@@ -55,7 +55,7 @@
         </div>
 
         <p class="text">
-            Đang chọn <span id="count">0</span> ghế, tổng tiền hiện tại $<span id="total">0</span>
+            Đang chọn <span id="count">0</span> ghế
         </p>
         <p id="demo">
             Số ghế đã chọn
@@ -81,7 +81,7 @@
             <li><b>Ngày/ Giờ khởi hành:</b> <span> ${tripinfo.time}</span></li>
             <li><b>Số xe:</b> <span> ${carinfo.carnumber}</span></li>
             <li><b>Giá</b> <span> ${tripinfo.price}</span></li>
-            <button onclick="pay(${carinfo.id}, ${tripinfo.price}" type="submit" class="btn btn-primary" name="submit" id="reserveButton" disabled>Đặt vé</button>
+            <button onclick="pay(${user.id},${carinfo.id}, ${tripinfo.price})" type="submit" class="btn btn-primary" name="submit" id="reserveButton" disabled>Đặt vé</button>
         </ul>
     </div>
 </div>

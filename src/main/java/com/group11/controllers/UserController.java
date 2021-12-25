@@ -5,8 +5,10 @@
  */
 package com.group11.controllers;
 
+import com.group11.pojos.Passengercar;
 import com.group11.pojos.User;
 import com.group11.services.UserService;
+import javax.servlet.http.HttpSession;
 
 import javax.validation.Valid;
 
@@ -42,9 +44,10 @@ public class UserController {
     }
 
     @PostMapping("/buyform")
-    public String buyForm(Model model, @ModelAttribute(value = "user") User user) {
-        if (this.userDetailsService.addUser(user) == true) {
-            return String.format("forward:/buy?car_id=%d", 1);
+    public String buyForm(Model model, @ModelAttribute(value = "user") User user, HttpSession session) {
+        Passengercar car = (Passengercar)session.getAttribute("choosedcar");
+        if (this.userDetailsService.addUser(user) == true && car != null) {
+            return String.format("forward:/buy?car_id=%d", car.getId());
         }
         return "buyform";
     }

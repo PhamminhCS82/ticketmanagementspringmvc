@@ -40,7 +40,6 @@ public class BuyTicketController {
         model.addAttribute("seatofcar", car.getSeatCollection());
         model.addAttribute("carinfo", car);
         model.addAttribute("tripinfo", car.getIdtrip());
-//        model.addAttribute("tickets", car.getTicketCollection());
         System.out.println(car.getIdtrip().getName());
         return "buyticket";
     }

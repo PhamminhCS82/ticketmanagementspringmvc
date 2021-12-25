@@ -41,7 +41,7 @@
                     -->
 
 
-                    <a href="#">Mua vé</a>
+                    <a href="<c:url value="/buyform" />">Mua vé</a>
                 </ul>
 
             </div>
@@ -98,4 +98,4 @@
 
         </script>
              <script src="../resources/js/main.js"></script>
-             
+

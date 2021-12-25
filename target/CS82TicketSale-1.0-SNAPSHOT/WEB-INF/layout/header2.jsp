@@ -8,8 +8,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="topnav" id="myTopnav">
     <a href="<c:url value="/"/>" class="active">Trang chủ</a>
-    <a href="#contact">Contact</a>
-    <a href="#about">About</a>
     <c:if test="${pageContext.request.userPrincipal.name == null}">
     <a href="<c:url value="/signin"/>">Đăng nhập</a>
     </c:if>

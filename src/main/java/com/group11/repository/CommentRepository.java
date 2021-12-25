@@ -14,8 +14,12 @@ import java.util.List;
  * @author LocNe
  */
 public interface CommentRepository {
-     Comment addComment(Comment c);
+
+    Comment addComment(Comment c);
+
     long countCmt(int postId);
+
     List<Comment> getCmt(int kw);
-    
+
+
 }

@@ -12,6 +12,20 @@ package com.group11.pojos;
 public class Tickets {
 
     /**
+     * @return the userId
+     */
+    public int getUserId() {
+        return userId;
+    }
+
+    /**
+     * @param userId the userId to set
+     */
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    /**
      * @return the seats
      */
     public Integer[] getSeats() {
@@ -53,6 +67,7 @@ public class Tickets {
         this.price = price;
     }
 
+    private int userId;
     private Integer[] seats;
     private int carId;
     private Double price;

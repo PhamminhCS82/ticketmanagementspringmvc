@@ -7,22 +7,15 @@
 
 const container = document.querySelector('.container');
 const seats = document.querySelectorAll('.row .seat:not(.occupied');
-
 const count = document.getElementById('count');
-const movieSelect = document.getElementById('movie');
 const selections = {};
 const reserveButton = document.getElementById('reserveButton');
 const totalElem = document.getElementById("total-container");
 const hiddenTotalElem = document.getElementById("hidden-total");
 const hiddenSeatElem = document.getElementById("hidden-seats");
 const seatsElem = document.getElementById("selected-seats");
-let ticketPrice = +movieSelect.value;
 const results = [];
-// Save selected movie index and price
-function setMovieData(movieIndex, moviePrice) {
-    localStorage.setItem('selectedMovieIndex', movieIndex);
-    localStorage.setItem('selectedMoviePrice', moviePrice);
-}
+
 
 //update total and count
 function updateSelectedCount() {
@@ -40,52 +33,48 @@ function updateSelectedCount() {
     count.innerText = selectedSeatsCount;
 }
 
-// Movie select event
-movieSelect.addEventListener('change', (e) => {
-    ticketPrice = +e.target.value;
-    setMovieData(e.target.selectedIndex, e.target.value);
 
-    updateSelectedCount();
-});
+
 
 // Seat click event
 container.addEventListener('click', (e) => {
     if (e.target.classList.contains('seat') && !e.target.classList.contains('occupied')) {
         let elem = e.target.classList.toString();
-        if (elem !== "seat selected" && Object.keys(selections).length < 6) {
+        if (elem !== "seat selected" && Object.keys(selections).length < 5) {
             e.target.classList.toggle('selected');
             selections[e.target.id] = {
                 id: e.target.id,
                 value: e.target.getAttribute('data-value')
             };
+            results.push(e.target.id);
         } else if (elem === "seat selected") {
             e.target.classList.toggle('selected');
             delete selections[e.target.id];
+            const index = results.indexOf(e.target.id);
+            if(index > -1) {
+                results.splice(index, 1);
+            }
         } else {
             e.preventDefault();
-            alert('You can only reserve 6 seats at time');
+            alert('Chỉ tối đa 5 vé');
             return;
         }
-
-
         console.log(e.target.id);
         const result = [];
-        
         for (const key in selections) {
             result.push(selections[key].value);
         }
-        
-        console.log(results);
         result.length ? reserveButton.disabled = false : reserveButton.disabled = true;
         seatsElem.innerHTML = result.join(",");
         updateSelectedCount();
     }
 });
 
-function pay(id, price) {
+function pay(userId,id, price) {
     fetch("http://localhost:8080/CS82TicketSale/api/pay", {
         method: 'post',
         body: JSON.stringify({
+            "userId": userId,
             "seats": results,
             "carId": id,
             "price": price
@@ -97,7 +86,7 @@ function pay(id, price) {
         return res.json();
     }).then(function (code) {
         console.info(code);
-        window.location="http://localhost:8080/CS82TicketSale/";
+        //window.location="http://localhost:8080/CS82TicketSale/";
     });
 
 }

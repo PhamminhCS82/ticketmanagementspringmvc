@@ -356,4 +356,3 @@ const data = {
 
 
 })(jQuery);
-
