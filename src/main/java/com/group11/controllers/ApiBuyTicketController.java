@@ -29,10 +29,9 @@ public class ApiBuyTicketController {
     @PostMapping("/api/pay")
     public HttpStatus pay(@RequestBody Tickets params, HttpSession session) {
         try {
-//            User u = (User) session.getAttribute("currentUser");
-            if(this.orderService.addOrder(6, params))
+            if(this.orderService.addOrder(params))
                 return HttpStatus.OK;
-        } catch (Exception ex) {
+        } catch (NullPointerException ex) {
             ex.printStackTrace();
         }
         return HttpStatus.BAD_REQUEST;

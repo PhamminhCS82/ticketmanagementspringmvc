@@ -57,12 +57,14 @@ public class Trip implements Serializable {
     private String time;
     @Size(max = 45)
     @Column(name = "price")
-    private String price;
+    private Double price;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idtrip")
     private Collection<ActivateTrip> activateTripCollection;
     @JoinColumn(name = "idroute", referencedColumnName = "id")
     @ManyToOne
     private Route idroute;
+    @OneToOne(mappedBy = "idtrip")
+    private Passengercar passengerCar;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idtrip")
     @JsonIgnore
@@ -104,11 +106,11 @@ public class Trip implements Serializable {
     }
 
 
-    public String getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -154,12 +156,19 @@ public class Trip implements Serializable {
         return "com.group11.pojos.Trip[ id=" + id + " ]";
     }
 
-    
+    /**
+     * @return the passengerCar
+     */
+    public Passengercar getPassengerCar() {
+        return passengerCar;
+    }
 
-
-
-   
-
+    /**
+     * @param passengerCar the passengerCar to set
+     */
+    public void setPassengerCar(Passengercar passengerCar) {
+        this.passengerCar = passengerCar;
+    }
 
     
 }

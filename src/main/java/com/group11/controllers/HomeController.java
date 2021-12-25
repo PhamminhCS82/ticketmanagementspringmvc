@@ -107,15 +107,12 @@ public class HomeController {
         return "route-trip";
     }
 
-    @GetMapping("/trip/{routeId}")
-    public String detail(Model model, @PathVariable(value = "routeId") int ticketId) {
-
-
-        model.addAttribute("trip", locationService.getTripId(ticketId));
-        model.addAttribute("comments", this.commentService.getCmt(ticketId));
-        
-        return "ticket-trip";
-    }
+//    @GetMapping("/trip/{routeId}")
+//    public String detail(Model model, @PathVariable(value = "routeId") int ticketId, HttpSession session) {
+//        session.setAttribute("choosedcar", this.locationService.getTripId(ticketId)
+//                .getPassengerCar());
+//        model.addAttribute("trip", this.locationService.getTripId(ticketId));
+//    }
 
 //    @GetMapping(value = "/orderticket/{ticket_id}")
 //    public String ticket(Model model, @PathVariable(value = "ticket_id") int ticketId) {
@@ -136,7 +133,6 @@ public class HomeController {
 //        }
 //        return "orderticket";
 //    }
-
     @GetMapping(value = "/ticket/{ticket_id}")
     public String editProduct(Model model, @PathVariable(value = "ticket_id") int productId) {
         Ticket u = this.ticketService.getTicketId(productId);

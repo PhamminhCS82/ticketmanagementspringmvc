@@ -12,5 +12,5 @@ import com.group11.pojos.Tickets;
  * @author pminh
  */
 public interface OrderService {
-    boolean addOrder(int userId, Tickets ticket);
+    boolean addOrder(Tickets ticket);
 }
