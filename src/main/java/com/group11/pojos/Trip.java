@@ -12,6 +12,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,7 +36,7 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
  * @author pminh
  */
 @Entity
-@Table(name = "trip")
+@Table(name = "`trip`")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Trip.findAll", query = "SELECT t FROM Trip t"),
@@ -48,12 +49,12 @@ public class Trip implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "`id`")
     private Integer id;
     @Size(max = 45)
     @Column(name = "name")
     private String name;
-      @Column(name = "price")
+    @Column(name = "price")
     private String price;
     @Basic(optional = false)
     @NotNull
@@ -70,6 +71,8 @@ public class Trip implements Serializable {
     private Collection<Ticket> ticketCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idtrip")
     private Collection<Comment> commentCollection;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,mappedBy = "idtrip")
+    private Collection<Passengercar> passengercarCollection;
 
     public Trip() {
     }
@@ -167,6 +170,7 @@ public class Trip implements Serializable {
     }
 
     /**
+
      * @return the time
      */
     public String getTime() {
@@ -195,5 +199,21 @@ public class Trip implements Serializable {
     }
 
    
+    /**
+     * @return the passengerCollection
+     */
+    @XmlTransient
+    public Collection<Passengercar> getPassengercarCollection() {
+        return passengercarCollection;
+    }
+
+    /**
+     * @param passengerCollection the passengerCollection to set
+     */
+
     
+    public void setPassengercarCollection(Collection<Passengercar> passengerCollection) {
+        this.passengercarCollection = passengerCollection;
+    }
+
 }

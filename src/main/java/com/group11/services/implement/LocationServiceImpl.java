@@ -86,4 +86,9 @@ public class LocationServiceImpl implements LocationService {
     public boolean deleteTrip(Trip trip) {
         return this.locationRepository.deleteTrip(trip);
     }
+
+    @Override
+    public List<Trip> getTripName() {
+        return this.locationRepository.getTripName("");
+    }
 }

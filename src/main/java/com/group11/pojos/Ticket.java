@@ -49,7 +49,7 @@ public class Ticket implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "number")
     private String number;
- 
+
     @JoinColumn(name = "idcardetail", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Seat idcardetail;
@@ -61,7 +61,7 @@ public class Ticket implements Serializable {
     private User user;
     @Column(name = "price")
     private String price;
-    
+
     public Ticket() {
     }
 
@@ -153,5 +153,4 @@ public class Ticket implements Serializable {
         this.price = price;
     }
 
-    
 }

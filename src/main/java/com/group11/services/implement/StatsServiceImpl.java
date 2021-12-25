@@ -37,5 +37,20 @@ public class StatsServiceImpl implements StatsService{
     public List<User> listUser() {
         return this.statsReposotory.listUser();
     }
+
+    @Override
+    public List<Object[]> CountTripStats() {
+       return this.statsReposotory.CountTripStats();
+    }
+
+    @Override
+    public List<User> listEmplUser() {
+       return this.statsReposotory.listEmplUser();
+    }
+
+    @Override
+    public List<Object[]> PassStats() {
+        return this.statsReposotory.PassStats();
+    }
     
 }

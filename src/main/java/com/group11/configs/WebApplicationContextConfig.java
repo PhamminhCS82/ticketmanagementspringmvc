@@ -5,12 +5,13 @@
  */
 package com.group11.configs;
 
-
 import com.group11.formatter.RouteFormatter;
 import org.springframework.context.MessageSource;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+import com.group11.formatter.TripFormatter;
+import com.group11.formatter.UserFormatter;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -26,6 +27,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
@@ -56,9 +58,22 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
     @Override
     public void addFormatters(FormatterRegistry registry){
         registry.addFormatter(new RouteFormatter());
+        registry.addFormatter(new TripFormatter());
+        registry.addFormatter(new UserFormatter());
     
     }
     
+
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/css/**").addResourceLocations("/resources/css/");
+        registry.addResourceHandler("/js/**").addResourceLocations("/resources/js/");
+        registry.addResourceHandler("/images/**").addResourceLocations("/resources/images/");
+        registry.addResourceHandler("/fonts/**").addResourceLocations("/resources/fonts/");
+    }
+
+
     @Bean
     public InternalResourceViewResolver getInternalResourceViewResolver() {
         InternalResourceViewResolver internalResourceViewResolver = new InternalResourceViewResolver();
@@ -70,26 +85,28 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
         return internalResourceViewResolver;
     }
 
-  @Override
+    @Override
     public Validator getValidator() {
         return validator();
     }
+
    
     
-        @Bean
+
+    @Bean
+
     public LocalValidatorFactoryBean validator() {
         LocalValidatorFactoryBean v = new LocalValidatorFactoryBean();
         v.setValidationMessageSource(messageSource());
         return v;
     }
-        @Bean
+
+    @Bean
     public MessageSource messageSource() {
         ResourceBundleMessageSource source = new ResourceBundleMessageSource();
         source.setBasename("messages");//chá»‰ Ä‘á»‹nh 1,, thÃªm s á»Ÿ setbasename Ä‘á»ƒ nhiá»�u
         return source;
     }
-    
-    
 
 
     @Bean
@@ -106,7 +123,7 @@ public class WebApplicationContextConfig implements WebMvcConfigurer {
                 "api_key", "427291167159726",
                 "api_secret", "MLpTCy8jFQaNqlD4oTnb2IEWDF4",
                 "secure", true));
-        
+
         return cloudinary;
     }
 

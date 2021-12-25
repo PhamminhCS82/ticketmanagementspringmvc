@@ -26,7 +26,7 @@
         </div>
         <div class="form-group">
             <label style="color: white"
-                   for="datetime">Check-in:</label>
+                   for="datetime">Ngày</label>
             <div class="form-field">
 
                 <form:input type="date" path="datetime"
@@ -40,7 +40,7 @@
             </div>
         </div>
            <div class="form-group">
-                                        <label for="guests">Guest</label>
+                                        <label for="guests">Chọn giờ</label>
                                         <div class="form-field">
                                             <i class="icon icon-arrow-down3"></i>
                                             <form:select name="people" id="time" path="time" class="form-control">
@@ -62,7 +62,7 @@
                                         </div>
                                     </div>
                 <div class="form-group">
-        <label for="cate">Loại sản phẩm</label>
+        <label for="cate">Tuyến</label>
         <form:select id="cate" path="idroute" class="form-control">
             <c:forEach items="${locations}" var="cat">
                 <option value="${cat.id}">${cat.name}</option>

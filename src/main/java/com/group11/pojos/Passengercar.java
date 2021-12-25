@@ -11,11 +11,11 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author pminh
  */
 @Entity
-@Table(name = "passengercar")
+@Table(name = "`passengercar`")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Passengercar.findAll", query = "SELECT p FROM Passengercar p"),
@@ -39,26 +39,29 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Passengercar.findByCarnumber", query = "SELECT p FROM Passengercar p WHERE p.carnumber = :carnumber"),
     @NamedQuery(name = "Passengercar.findByActive", query = "SELECT p FROM Passengercar p WHERE p.active = :active")})
 public class Passengercar implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "`id`")
     private Integer id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "carnumber")
+    @Column(name = "`carnumber`")
     private String carnumber;
-    @Column(name = "active")
+    @Column(name = "`active`")
     private Short active;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "passengercar")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "passengercar")
     private Collection<Seat> seatCollection;
-    
+
     @ManyToOne
-    @JoinColumn(name = "iduser")
+    @JoinColumn(name = "`iduser`")
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "`idtrip`", referencedColumnName = "`id`")
+    private Trip idtrip;
 
     public Passengercar() {
     }
@@ -113,6 +116,14 @@ public class Passengercar implements Serializable {
         this.user = user;
     }
 
+    public Trip getIdTrip() {
+        return getIdtrip();
+    }
+
+    public void setIdTrip(Trip idtrip) {
+        this.setIdtrip(idtrip);
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -137,5 +148,19 @@ public class Passengercar implements Serializable {
     public String toString() {
         return "com.group11.pojos.Passengercar[ id=" + id + " ]";
     }
-    
+
+    /**
+     * @return the idtrip
+     */
+    public Trip getIdtrip() {
+        return idtrip;
+    }
+
+    /**
+     * @param idtrip the idtrip to set
+     */
+    public void setIdtrip(Trip idtrip) {
+        this.idtrip = idtrip;
+    }
+
 }

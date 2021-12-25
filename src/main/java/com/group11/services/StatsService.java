@@ -16,4 +16,7 @@ public interface StatsService {
      List<Object[]> RouteStats();
      List<Object[]> UserStats();
      List<User> listUser( );
+     List<User> listEmplUser( );
+     List<Object[]> CountTripStats();
+     List<Object[]> PassStats();
 }

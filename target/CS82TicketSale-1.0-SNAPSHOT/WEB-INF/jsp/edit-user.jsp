@@ -9,7 +9,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <h1 class="text-center text-danger">SỬA THÔNG TIN</h1>
-<c:url value="/edit-users/${user.id}" var="action"/>
+<c:url value="/admin/edit-users/${user.id}" var="action"/>
 
 
 <section class="hero">
@@ -18,6 +18,7 @@
         <form:input type="hidden" id="id" path="id" value="${user.id}"/>
         <form:input type="hidden" id="username" path="username" value="${user.username}"/>
         <form:input type="hidden" id="avatar" path="avatar" value="${user.avatar}"/>
+        <form:input type="hidden"  path="userrole" id="userrole" value="${user.userrole}" />
 
         <div class="form-group">
             <label for="surname">Họ</label>
@@ -40,13 +41,7 @@
             <form:errors path="phone" cssClass="text-danger" element="div"/>
 
         </div>
-            <div class="form-group">
-            <label for="userrole">Phone</label>
-            <form:input type="text" class="form-control" path="userrole" id="userrole" value="${user.userrole}" />
-            <form:errors path="userrole" cssClass="text-danger" element="div"/>
-
-        </div>
-             <div class="form-group">                      
+                         <div class="form-group">                      
                             
                                 <label for="password">Password</label>
                                 <form:input type="password" class="form-control" path="password" id="password" placeholder="password" value="${user.password}"/>

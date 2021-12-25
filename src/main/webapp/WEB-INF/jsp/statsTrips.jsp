@@ -6,10 +6,10 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<c:url value="/admin/trip-stats" var="action" />
 <h1>Số lượng sản phẩm theo loại sản phẩm </h1>   
 <br>
-            <div >
+            <div class="col-md-6 px-2">
                 <canvas id="myCateStatsChart"></canvas>
             </div>       
 <div class="card panel">
@@ -34,13 +34,11 @@
                                   
                                 <c:forEach items="${tripStats}" var="c">
                                     <tr>         
-                                        <td>                                         
-                                            ${c[1]}                                    
-                                        </td>
+                                        <td>${c[1]}</td>
                                         <td>${c[2]}</td>
                                         <td>${c[3]}</td>   
-                                        <td><div class="w3-xlarge"><a href="<c:url value="/edit-routes/${c[0]}"/>?edit=${c[0]}"><i class="fa fa-pencil-square-o"></i></a></div>
-                                         <div class="w3-xlarge"><a href="<c:url value="/route-delete/${c[0]}"/>"><i class="fa fa-trash"></i></a></div></td>  
+                                        <td><div class="w3-xlarge"><a href="<c:url value="/admin/edit-routes/${c[0]}"/>?edit=${c[0]}"><i class="fa fa-pencil-square-o"></i></a></div>
+                                         <div class="w3-xlarge"><a href="<c:url value="/admin/route-delete/${c[0]}"/>"><i class="fa fa-trash"></i></a></div></td>  
                                     </tr>
                                 </c:forEach>                            
                             </tbody>
@@ -75,17 +73,56 @@
                             </thead>
                             <tbody>
                                   
-                                <c:forEach items="${routeStats}" var="c">
+                                <c:forEach items="${routeStats}" var="r">
                                     <tr>  
-                                        <td>${c[5]}</td>
+                                        <td>${r[5]}</td>
                                         <td>                                         
-                                            ${c[1]}                                    
+                                            ${r[1]}                                    
                                         </td>
-                                        <td>${c[3]}</td>
-                                        <td>${c[4]}</td>
-                                        <td>${c[2]}</td>
-                                        <td><div class="w3-xlarge"><a href="<c:url value="/edit-trips/${c[0]}"/>?edit=${c[0]}"><i class="fa fa-pencil-square-o"></i></a></div>
-                                         <div class="w3-xlarge"><a href="<c:url value="/trip-delete/${c[0]}"/>"><i class="fa fa-trash"></i></a></div></td>  
+                                        <td>${r[3]}</td>
+                                        <td>${r[4]}</td>
+                                        <td>${r[2]}</td>
+                                        <td><div class="w3-xlarge"><a href="<c:url value="/admin/edit-trips/${r[0]}"/>?edit=${r[0]}"><i class="fa fa-pencil-square-o"></i></a></div>
+                                         <div class="w3-xlarge"><a href="<c:url value="/admin/trip-delete/${r[0]}"/>"><i class="fa fa-trash"></i></a></div></td>  
+                                    </tr>
+                                </c:forEach>                            
+                            </tbody>
+                        </table>
+                    </div> 
+                </section>
+            </div>          
+        </div>
+        <!-- End of carousel -->
+    </div>
+</div>
+<div class="card panel">
+    <div class="row ">
+        <div class="col-md-12 px-2">
+            <div >
+                <section class="panel">
+                    <header class="panel-heading no-border"><h4>
+                        Tất cả các chuyến</h4>
+                    </header>
+                    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                        <table class="table table-bordered table-striped mb-0">
+                            <thead>
+                                <tr>
+                                     <th>Tên</th>
+                                    <th>Tổng tuyến</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                  
+                                <c:forEach items="${counttripStats}" var="t">
+                                    <tr>  
+                                 
+                                        <td>                                         
+                                            ${t[1]}                                    
+                                        </td>
+                                 
+                                        <td>${t[2]}</td>
+                                        
                                     </tr>
                                 </c:forEach>                            
                             </tbody>
@@ -99,12 +136,13 @@
 </div>
 <script>
     let productLables = [], productInfo = [];
-    <c:forEach items="${tripStats}" var="c">
-    productLables.push('${c[0]}')
-    productInfo.push('${c[1]}')
+    <c:forEach items="${counttripStats}" var="t">
+    productLables.push('${t[1]}')
+    productInfo.push('${t[2]}')
     </c:forEach>
    
     window.onload = function () {
         cateChart("myCateStatsChart", productLables, productInfo)
     }
 </script>
+ <script src="../resources/js/stats.js"></script>

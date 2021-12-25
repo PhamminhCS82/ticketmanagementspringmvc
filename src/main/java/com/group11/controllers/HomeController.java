@@ -12,6 +12,7 @@ import com.group11.pojos.Ticket;
 import com.group11.services.LocationService;
 import com.group11.services.OrderService;
 import com.group11.services.TicketService;
+import com.group11.services.UserService;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -39,27 +40,31 @@ public class HomeController {
     private LocationService locationService;
     @Autowired
     private TicketService ticketService;
-     @Autowired
+    @Autowired
     private OrderService orderService;
+    @Autowired
+    private UserService userService;
 
     @ModelAttribute
     public void common(Model model, HttpSession session, @RequestParam(value = "kw", required = false, defaultValue = "") String kw) {
         model.addAttribute("locations", this.locationService.getRoute());
         model.addAttribute("seats", this.ticketService.getSeat());
+        model.addAttribute("getDriver", this.userService.getRole());
+        model.addAttribute("getTripName", this.locationService.getTripName());
 
     }
 
     @GetMapping("/")
-    public String index(Model model,@RequestParam(required = false) Map<String, String> params) {
-         String kw = params.getOrDefault("kw", null);
-         int page = Integer.parseInt(params.getOrDefault("page", "1"));
-         String cateId = params.get("CateId");
+    public String index(Model model, @RequestParam(required = false) Map<String, String> params) {
+        String kw = params.getOrDefault("kw", null);
+        int page = Integer.parseInt(params.getOrDefault("page", "1"));
+        String cateId = params.get("CateId");
         if (cateId == null) {
             model.addAttribute("routeTrip", this.locationService.getTrip(kw, page));
             model.addAttribute("counter", this.locationService.countTrip());
 
         } else {
-            Route c =this.locationService.getRouteId(Integer.parseInt(cateId));
+            Route c = this.locationService.getRouteId(Integer.parseInt(cateId));
             model.addAttribute("products", c.getTripCollection());
         }
         return "index";
@@ -81,39 +86,41 @@ public class HomeController {
 //    }
 
     @GetMapping("/route")
-    public String saleState(Model model,@RequestParam(required = false) Map<String, String> params) {
-          String kw = params.getOrDefault("kw", null);
-         int page = Integer.parseInt(params.getOrDefault("page", "1"));
-         String cateId = params.get("CateId");
+    public String saleState(Model model, @RequestParam(required = false) Map<String, String> params) {
+        String kw = params.getOrDefault("kw", null);
+        int page = Integer.parseInt(params.getOrDefault("page", "1"));
+        String cateId = params.get("CateId");
         if (cateId == null) {
             model.addAttribute("routeTrip", this.locationService.getTrip(kw, page));
             model.addAttribute("counter", this.locationService.countTrip());
 
         } else {
-            Route c =this.locationService.getRouteId(Integer.parseInt(cateId));
+            Route c = this.locationService.getRouteId(Integer.parseInt(cateId));
             model.addAttribute("routeTrip", c.getTripCollection());
         }
         return "route-trip";
     }
-    
 
-    @GetMapping(value = "/routes/{routeId}")
+    @GetMapping("/trip/{routeId}")
     public String detail(Model model, @PathVariable(value = "routeId") int ticketId) {
+
 
         model.addAttribute("trip", locationService.getTripId(ticketId));
       
+
         return "ticket-trip";
     }
+
     @GetMapping(value = "/orderticket/{ticket_id}")
     public String ticket(Model model, @PathVariable(value = "ticket_id") int ticketId) {
-          model.addAttribute("order", new Order());
+        model.addAttribute("order", new Order());
         model.addAttribute("trip", locationService.getTripId(ticketId));
-       
-        
+
         return "orderticket";
     }
-   @PostMapping("/orderticket/{ticket_id}")
-    public String edit(Model model, @ModelAttribute(value = "ticket_id") @Valid Order order, BindingResult result,@PathVariable(value = "roomId") int roomId) {
+
+    @PostMapping("/orderticket/{ticket_id}")
+    public String edit(Model model, @ModelAttribute(value = "ticket_id") @Valid Order order, BindingResult result, @PathVariable(value = "roomId") int roomId) {
         if (!result.hasErrors()) {
             this.orderService.addOrUpdate(order);
 //        model.addAttribute("product",product);
@@ -123,11 +130,12 @@ public class HomeController {
         }
         return "orderticket";
     }
+
     @GetMapping(value = "/ticket/{ticket_id}")
-    public String editProduct(Model model, @PathVariable(value = "ticket_id") int productId) {  
-            Ticket u = this.ticketService.getTicketId(productId);
-            model.addAttribute("ticket", u);
-            return "ticket";   
+    public String editProduct(Model model, @PathVariable(value = "ticket_id") int productId) {
+        Ticket u = this.ticketService.getTicketId(productId);
+        model.addAttribute("ticket", u);
+        return "ticket";
     }
 
     @PostMapping("/ticket/{ticket_id}")

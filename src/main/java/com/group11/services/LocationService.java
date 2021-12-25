@@ -19,7 +19,7 @@ public interface LocationService {
     List<Route> getRoute();
 
     List<Trip> getTrip(String kw, int page);
-
+    List<Trip> getTripName();
     Route getRouteId(int stationId);
 
     List<Object[]> listTour();

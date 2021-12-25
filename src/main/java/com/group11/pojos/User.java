@@ -29,7 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @author pminh
  */
 @Entity
-@Table(name = "user")
+@Table(name = "`user`")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
@@ -45,11 +45,22 @@ import org.springframework.web.multipart.MultipartFile;
     @NamedQuery(name = "User.findByUserrole", query = "SELECT u FROM User u WHERE u.userrole = :userrole")})
 public class User implements Serializable {
 
+    public User get(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public static enum Roles {
+        USER,
+        DRIVER,
+        EMPLOYEE,
+        GUEST,
+        ADMIN
+    }
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "`id`")
     private Integer id;
     @Size(max = 45)
     @Column(name = "username")
@@ -92,7 +103,20 @@ public class User implements Serializable {
     public User(Integer id) {
         this.id = id;
     }
+    
+    public User(Integer id, String firstname, String surname, String email, Integer phone,String userRole) {
+        this.id = id;
+        this.firstname = firstname;
+        this.surname = surname;
+        this.email = email;
+        this.phone = phone;
+        this.userrole = userRole;
+    }
 
+    public User(Integer id, String firstName, String lastName, String email, String username, String password, String userRole) {
+        this.id = id;
+    }
+    
     public Integer getId() {
         return id;
     }
@@ -225,6 +249,7 @@ public class User implements Serializable {
         return "com.group11.pojos.User[ id=" + id + " ]";
     }
 
+
     /**
      * @return the file
      */
@@ -239,4 +264,5 @@ public class User implements Serializable {
         this.file = file;
     }
     
+
 }

@@ -18,13 +18,13 @@ function cateChart(id,cateLabels=[], cateinfo =[]){
 const data = {
   labels: cateLabels,
   datasets: [{
-    label: 'My First Dataset',
+    label: 'Tổng số chuyến của tuyến',
     data: cateinfo,
     backgroundColor: colors,
   }]
 };
     const config = {
-  type: 'line',
+  type: 'bar',
   data: data,
  
 };

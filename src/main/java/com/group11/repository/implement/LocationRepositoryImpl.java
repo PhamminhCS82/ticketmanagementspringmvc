@@ -64,11 +64,10 @@ public class LocationRepositoryImpl implements LocationRepository {
 //         User user = userRepository.getUserByUsername(username);
         List<Predicate> predicates = new ArrayList<>();
         predicates.add(builder.equal(rootR.get("id"), rootT.get("idroute")));
-//        predicates.add(builder.equal(rootT.get("id"), rootTicket.get("idticket")));
 
         query.multiselect(rootT.get("id"), rootT.get("name"), rootT.get("price"), rootT.get("datetime"), rootT.get("time"), rootT.get("name"));
         query.where(predicates.toArray(new Predicate[]{}));
-//       query.groupBy(rootR.get("id"));
+
         org.hibernate.query.Query q = session.createQuery(query);
 
         return q.getResultList();
@@ -199,6 +198,13 @@ public class LocationRepositoryImpl implements LocationRepository {
             e.getMessage();
         }
         return false;
+    }
+
+    @Override
+    public List<Trip> getTripName(String string) {
+        Session s = sessionFactory.getObject().getCurrentSession();
+        Query q = s.createQuery("From Trip");
+        return q.getResultList();
     }
 
 }
