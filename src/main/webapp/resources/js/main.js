@@ -25,7 +25,9 @@ function addComment(idtrip) {
                                 </div>
                                 <div class="comment-text-sm"><span>${data.detail}</span></div>                  
                             </div>` + area.innerHTML;
+    
     });
+     location.reload()
 }
 function show_alert(){
     Swal.fire({

@@ -8,6 +8,7 @@ package com.group11.services.implement;
 import com.group11.pojos.User;
 import com.group11.repository.StatsRepository;
 import com.group11.services.StatsService;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,6 +52,11 @@ public class StatsServiceImpl implements StatsService{
     @Override
     public List<Object[]> PassStats() {
         return this.statsReposotory.PassStats();
+    }
+
+    @Override
+    public List<Object[]> totalbyMonth(String kw, Date fromDate, Date toDate) {
+       return this.statsReposotory.totalbyMonth(kw, fromDate,toDate);
     }
     
 }

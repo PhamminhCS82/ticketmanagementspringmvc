@@ -13,6 +13,9 @@ import com.group11.services.LocationService;
 import com.group11.services.PassengercarService;
 import com.group11.services.StatsService;
 import com.group11.services.UserService;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +46,26 @@ public class AdminController {
     private PassengercarService passengercarService;
 
     @RequestMapping("/admin")
-    public String admin(Model model) {
+    public String admin(Model model, @RequestParam(required = false) Map<String, String> params) {
+             String kw = params.getOrDefault("kw", null);
+        SimpleDateFormat d = new SimpleDateFormat("yyyy-MM-dd");
+
+        Date fromDate = null;
+        Date toDate = null;
+        try{
+            String f = params.getOrDefault("fromDate", null);
+        if (f != null) {
+            fromDate = d.parse(f);
+        }
+
+        String to = params.getOrDefault("toDate", null);
+        if (to != null) {
+            toDate = d.parse(to);
+        }
+        }catch(ParseException ex){
+            ex.printStackTrace();
+        }
+        model.addAttribute("totalbyMonth", this.statsService.totalbyMonth(kw, fromDate, toDate)); 
         return "admin";
     }
 
@@ -168,8 +190,8 @@ public class AdminController {
     }
     @GetMapping("/admin/state-trip")
     public String listStatsTrip(Model model) {
-        
-       model.addAttribute("counttripStats", this.statsService.CountTripStats());
+   
+        model.addAttribute("counttripStats", this.statsService.CountTripStats());
         return "stats-trip";
     }
     @PostMapping("/admin/add-passs")
@@ -186,4 +208,5 @@ public class AdminController {
         }
         return "add-pass"; // sai vè product
     }
+    
 }
