@@ -65,7 +65,7 @@ public class LocationRepositoryImpl implements LocationRepository {
         List<Predicate> predicates = new ArrayList<>();
         predicates.add(builder.equal(rootR.get("id"), rootT.get("idroute")));
 
-        query.multiselect(rootT.get("id"), rootT.get("name"), rootT.get("price"), rootT.get("time"), rootT.get("time"), rootT.get("name"));
+        query.multiselect(rootT.get("id"), rootT.get("name"), rootT.get("price"), rootT.get("dateTime"), rootR.get("name"));
         query.where(predicates.toArray(new Predicate[]{}));
         query.groupBy(rootT.get("id"));
         org.hibernate.query.Query q = session.createQuery(query);
@@ -175,7 +175,7 @@ public class LocationRepositoryImpl implements LocationRepository {
 
 
     @Override
-    public boolean deleteRoute(Route route) {
+    public boolean deleteRoute(int route) {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         try {
            

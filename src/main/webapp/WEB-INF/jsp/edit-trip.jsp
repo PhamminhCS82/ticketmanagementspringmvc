@@ -27,12 +27,12 @@
                    for="time">Check-in:</label>
             <div class="form-field">
 
-                <form:input type="datetime-local" path="time"
+                <form:input type="datetime-local" path="dateTime"
                             class="form-control datetimepicker-input"
                             placeholder="Check-in date"
                             style="border: 1px solid black; color:black"
-                            data-target="#reservationdate" value="${trip.datetime}"/>
-                <form:errors path="time"
+                            data-target="#reservationdate" value="${trip.dateTime}"/>
+                <form:errors path="dateTime"
                              cssClass="alert alert-danger"
                              element="div" />
             </div>

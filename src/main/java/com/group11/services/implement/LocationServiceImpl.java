@@ -78,7 +78,7 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
-    public boolean deleteRoute(Route route) {
+    public boolean deleteRoute(int route) {
         return this.locationRepository.deleteRoute(route);
     }
 

@@ -10,6 +10,7 @@ import com.group11.pojos.Ticket;
 import com.group11.services.LocationService;
 import com.group11.services.TicketService;
 import com.group11.services.UserService;
+import com.group11.services.CommentService;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -41,6 +42,8 @@ public class HomeController {
 //    private OrderService orderService;
     @Autowired
     private UserService userService;
+     @Autowired
+    private CommentService commentService;
 
     @ModelAttribute
     public void common(Model model, HttpSession session, @RequestParam(value = "kw", required = false, defaultValue = "") String kw) {
@@ -78,7 +81,7 @@ public class HomeController {
         } else {
             Route c = this.locationService.getRouteId(Integer.parseInt(cateId));
             model.addAttribute("routeTrip", c.getTripCollection());
-            model.addAttribute("selected-route", c);
+            model.addAttribute("route", this.locationService.getRouteId(Integer.parseInt(cateId)));
         }
         return "route-trip";
     }
@@ -87,6 +90,7 @@ public class HomeController {
     public String detail(Model model, @PathVariable(value = "routeId") int ticketId, HttpSession session) {
         session.setAttribute("choosedTrip", this.locationService.getTripId(ticketId));
         model.addAttribute("trip", this.locationService.getTripId(ticketId));
+        model.addAttribute("comments", this.commentService.getCmt(ticketId));
         return "ticket-trip";
     }
 
@@ -112,6 +116,7 @@ public class HomeController {
     @GetMapping(value = "/ticket/{ticket_id}")
     public String editProduct(Model model, @PathVariable(value = "ticket_id") int productId) {
         Ticket u = this.ticketService.getTicketId(productId);
+        
         model.addAttribute("ticket", u);
         return "ticket";
     }

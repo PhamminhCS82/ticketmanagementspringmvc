@@ -24,11 +24,10 @@
                         <table class="table table-bordered table-striped mb-0">
                             <thead>
                                 <tr>                  
-                                    <th>Tên</th>
-                                    <th>Chuyến</th>
-                                    <th>Ngày đi </th>   
-                                    <th>Giờ đi</th>
+                                    <th>Tên Người Lái</th>
+                                    
                                     <th>Số hiệu xe</th>
+                                    <th>Chuyến</th>
                                     <th><a href="<c:url value="/admin/add-passs"/>"><i class="fa fa-plus">Thêm chuyến cho xe</i></a></th>
                                 </tr>
                             </thead>
@@ -39,8 +38,8 @@
                                         <td>${c[1]}</td>
                                         <td>${c[2]}</td>
                                         <td>${c[3]}</td>
-                                        <td>${c[4]}</td> 
-                                        <td>${c[5]}</td> 
+                                   
+                                        
                                         <td><div class="w3-xlarge"><a href="<c:url value="/admin/pass-stats/${c[0]}"/>?edit=${c[0]}"><i class="fa fa-pencil-square-o"></i></a></div></td>  
                                     </tr>
                                 </c:forEach>                            

@@ -22,5 +22,6 @@ public interface StatsRepository {
      List<Object[]> PassStats();
      
      List<Object[]> totalbyMonth(String kw, Date fromDate, Date toDate);
+      List<Object[]> totalbyYear(String kw, Date fromDate, Date toDate);
      
 }

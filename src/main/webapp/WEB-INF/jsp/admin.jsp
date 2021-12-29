@@ -24,8 +24,8 @@
                         <table class="table table-bordered table-striped mb-0">
                             <thead>
                                 <tr>
-                                    <th>Time</th>
-                                    <th>Tổng tuyến</th>
+                                    <th>Tháng/Năm</th>
+                                    <th>Tổng tiền</th>
 
                                 </tr>
                             </thead>
@@ -51,10 +51,50 @@
         <!-- End of carousel -->
     </div>
 </div>
+
+<div class="card panel">
+    <div class="row ">
+        <div class="col-md-12 px-2">
+            <div >
+                <section class="panel">
+                    <header class="panel-heading no-border"><h4>
+                            Tất cả các chuyến</h4>
+                    </header>
+                    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                        <table class="table table-bordered table-striped mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Tháng/Năm</th>
+                                    <th>Tổng tiền</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            <c:forEach items="${totalbyYear}" var="t">
+                                <tr>  
+
+                                    <td>                                         
+                                        ${t[0]}                                 
+                                    </td>
+
+                                    <td>${t[1]}</td>
+
+                                </tr>
+                            </c:forEach>                            
+                            </tbody>
+                        </table>
+                    </div> 
+                </section>
+            </div>          
+        </div>
+        <!-- End of carousel -->
+    </div>
+</div>
 <script>
     let monthLabels = [], totalInfo = [];
     <c:forEach var="t" items="${totalbyMonth}">
-        monthLabels.push('${t[1]}')
+        monthLabels.push('${t[0]}')
             totalInfo.push(${t[2]})
         </c:forEach>
     window.onload = function () {

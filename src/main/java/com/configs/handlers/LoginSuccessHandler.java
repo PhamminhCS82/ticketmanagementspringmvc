@@ -15,10 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
-/**
- *
- * @author QUYENNGUYEN
- */
+
 public class LoginSuccessHandler implements AuthenticationSuccessHandler {
     @Autowired
     private UserService userDetailsService;

@@ -34,7 +34,7 @@ public interface LocationRepository {
 
     boolean updateRoute(Route p);
 
-    boolean deleteRoute(Route p);
+    boolean deleteRoute(int p);
 
     boolean addTrip(Trip p);
 
