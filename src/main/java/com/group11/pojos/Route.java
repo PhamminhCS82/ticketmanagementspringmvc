@@ -8,7 +8,6 @@ package com.group11.pojos;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -53,8 +52,7 @@ public class Route implements Serializable {
     @Size(max = 45)
     @Column(name = "finish")
     private String finish;
-
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "idroute")
+    @OneToMany(mappedBy = "idroute", fetch = FetchType.EAGER)
     private Collection<Trip> tripCollection;
 
     public Route() {

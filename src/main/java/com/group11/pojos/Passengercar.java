@@ -8,10 +8,8 @@ package com.group11.pojos;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,7 +19,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -33,21 +30,22 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author pminh
  */
 @Entity
-@Table(name = "`passengercar`")
+@Table(name = "passengercar")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Passengercar.findAll", query = "SELECT p FROM Passengercar p"),
     @NamedQuery(name = "Passengercar.findById", query = "SELECT p FROM Passengercar p WHERE p.id = :id"),
     @NamedQuery(name = "Passengercar.findByName", query = "SELECT p FROM Passengercar p WHERE p.name = :name"),
     @NamedQuery(name = "Passengercar.findByCarnumber", query = "SELECT p FROM Passengercar p WHERE p.carnumber = :carnumber"),
-    @NamedQuery(name = "Passengercar.findByActive", query = "SELECT p FROM Passengercar p WHERE p.active = :active")})
+    @NamedQuery(name = "Passengercar.findByActive", query = "SELECT p FROM Passengercar p WHERE p.active = :active"),
+    @NamedQuery(name = "Passengercar.findByNumOfSeats", query = "SELECT p FROM Passengercar p WHERE p.numOfSeats = :numOfSeats")})
 public class Passengercar implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "`id`")
+    @Column(name = "id")
     private Integer id;
     @Size(max = 45)
     @Column(name = "name")
@@ -55,21 +53,19 @@ public class Passengercar implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "`carnumber`")
+    @Column(name = "carnumber")
     private String carnumber;
-    @Column(name = "`active`")
+    @Column(name = "active")
     private Short active;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,mappedBy = "passengercar")
-    private Collection<Seat> seatCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "passengercar")
-    private Collection<Ticket> ticketCollection;
-    @JoinColumn(name = "idtrip", referencedColumnName = "id")
-    @OneToOne
-    private Trip idtrip;
+    @Column(name = "num_of_seats")
+    private Integer numOfSeats;
+    @OneToMany(mappedBy = "passengercar")
+    private Collection<Trip> tripCollection;
+
     @JoinColumn(name = "iduser", referencedColumnName = "id")
     @ManyToOne
     private User user;
-    
+
     public Passengercar() {
     }
 
@@ -114,31 +110,21 @@ public class Passengercar implements Serializable {
         this.active = active;
     }
 
+    public Integer getNumOfSeats() {
+        return numOfSeats;
+    }
+
+    public void setNumOfSeats(Integer numOfSeats) {
+        this.numOfSeats = numOfSeats;
+    }
+
     @XmlTransient
-    public Collection<Seat> getSeatCollection() {
-        return seatCollection;
+    public Collection<Trip> getTripCollection() {
+        return tripCollection;
     }
 
-    public void setSeatCollection(Collection<Seat> seatCollection) {
-        this.seatCollection = seatCollection;
-    }
-
-    @XmlTransient
-    public Collection<Ticket> getTicketCollection() {
-        return ticketCollection;
-    }
-
-    public void setTicketCollection(Collection<Ticket> ticketCollection) {
-        this.ticketCollection = ticketCollection;
-    }
-
-
-    public Trip getIdtrip() {
-        return idtrip;
-    }
-
-    public void setIdtrip(Trip idtrip) {
-        this.idtrip = idtrip;
+    public void setTripCollection(Collection<Trip> tripCollection) {
+        this.tripCollection = tripCollection;
     }
 
     public User getUser() {

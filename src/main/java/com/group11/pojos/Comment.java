@@ -48,7 +48,7 @@ public class Comment implements Serializable {
     @Column(name = "rating")
     private Integer rating;
     @Column(name = "createddate")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createddate;
     @Lob
     @Size(max = 2147483647)

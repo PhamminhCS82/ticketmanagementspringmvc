@@ -6,7 +6,7 @@
 package com.group11.pojos;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.math.BigDecimal;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,14 +14,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -38,7 +34,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Ticket.findById", query = "SELECT t FROM Ticket t WHERE t.id = :id"),
     @NamedQuery(name = "Ticket.findByNumber", query = "SELECT t FROM Ticket t WHERE t.number = :number"),
     @NamedQuery(name = "Ticket.findByPrice", query = "SELECT t FROM Ticket t WHERE t.price = :price"),
-    @NamedQuery(name = "Ticket.findByUsedDate", query = "SELECT t FROM Ticket t WHERE t.usedDate = :usedDate")})
+    @NamedQuery(name = "Ticket.findBySeatName", query = "SELECT t FROM Ticket t WHERE t.seatName = :seatName")})
 public class Ticket implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -55,19 +51,15 @@ public class Ticket implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "price")
-    private Double price;
-    @Column(name = "used_date")
-    @Temporal(TemporalType.DATE)
-    private Date usedDate;
+    private BigDecimal price;
+    @Column(name = "seat_name")
+    private Integer seatName;
     @JoinColumn(name = "idorder", referencedColumnName = "id")
     @ManyToOne
     private OrderTicket idorder;
-    @JoinColumn(name = "idcar", referencedColumnName = "id")
-    @OneToOne(optional = false)
-    private Passengercar passengercar;
-    @JoinColumn(name = "idseat", referencedColumnName = "id")
+    @JoinColumn(name = "trip_id", referencedColumnName = "id")
     @ManyToOne
-    private Seat idseat;
+    private Trip tripId;
 
     public Ticket() {
     }
@@ -76,7 +68,7 @@ public class Ticket implements Serializable {
         this.id = id;
     }
 
-    public Ticket(Integer id, String number, Double price) {
+    public Ticket(Integer id, String number, BigDecimal price) {
         this.id = id;
         this.number = number;
         this.price = price;
@@ -98,20 +90,20 @@ public class Ticket implements Serializable {
         this.number = number;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
-    public Date getUsedDate() {
-        return usedDate;
+    public Integer getSeatName() {
+        return seatName;
     }
 
-    public void setUsedDate(Date usedDate) {
-        this.usedDate = usedDate;
+    public void setSeatName(Integer seatName) {
+        this.seatName = seatName;
     }
 
     public OrderTicket getIdorder() {
@@ -122,20 +114,12 @@ public class Ticket implements Serializable {
         this.idorder = idorder;
     }
 
-    public Passengercar getPassengercar() {
-        return passengercar;
+    public Trip getTripId() {
+        return tripId;
     }
 
-    public void setPassengercar(Passengercar passengercar) {
-        this.passengercar = passengercar;
-    }
-
-    public Seat getIdseat() {
-        return idseat;
-    }
-
-    public void setIdseat(Seat idseat) {
-        this.idseat = idseat;
+    public void setTripId(Trip tripId) {
+        this.tripId = tripId;
     }
 
     @Override
@@ -162,5 +146,5 @@ public class Ticket implements Serializable {
     public String toString() {
         return "com.group11.pojos.Ticket[ id=" + id + " ]";
     }
-
+    
 }

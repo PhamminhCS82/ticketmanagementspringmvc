@@ -8,6 +8,7 @@ package com.group11.services.implement;
 import com.group11.pojos.User;
 import com.group11.repository.UserRepository;
 import com.group11.services.UserService;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -32,15 +33,12 @@ public class UserServiceImplement implements UserService {
     private BCryptPasswordEncoder passwordEncoder;
 
     @Override
-    public boolean addUser(User user) {
-        String role = User.Roles.USER.toString();
-        if (user.getUsername() == null && user.getPassword() == null) {
-            role = User.Roles.GUEST.toString();
-        } else {
+    public boolean addUser(User user, String userRole) {
+        if(user.getPassword() != null)
             user.setPassword(this.passwordEncoder.encode(user.getPassword()));
-        }
-        user.setUserrole(role);
-        return this.userRepository.addUser(user);
+        user.setUserrole(userRole);
+        user.setAvatar("https://res.cloudinary.com/dawairuhe/image/upload/v1640719995/defaultavatar_hst4oo.jpg");
+        return this.userRepository.addUser(user, userRole);
     }
 
     @Override
@@ -61,7 +59,6 @@ public class UserServiceImplement implements UserService {
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), auth);
     }
 
-
     @Override
     public boolean updateUser(User user) {
         return this.userRepository.updateUser(user);
@@ -79,8 +76,7 @@ public class UserServiceImplement implements UserService {
 
     @Override
     public List<User> getRole() {
-       return this.userRepository.getRole();
+        return this.userRepository.getRole();
     }
-    
 
 }

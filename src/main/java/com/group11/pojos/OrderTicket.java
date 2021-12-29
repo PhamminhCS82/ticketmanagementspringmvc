@@ -54,6 +54,7 @@ public class OrderTicket implements Serializable {
     @NotNull
     @Column(name = "is_paid")
     private boolean isPaid;
+
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private User user;
@@ -137,5 +138,5 @@ public class OrderTicket implements Serializable {
     public String toString() {
         return "com.group11.pojos.OrderTicket[ id=" + id + " ]";
     }
-    
+
 }

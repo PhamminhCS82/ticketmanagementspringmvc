@@ -43,17 +43,12 @@ container.addEventListener('click', (e) => {
         if (elem !== "seat selected" && Object.keys(selections).length < 5) {
             e.target.classList.toggle('selected');
             selections[e.target.id] = {
-                id: e.target.id,
-                value: e.target.getAttribute('data-value')
+                id: e.target.id
             };
             results.push(e.target.id);
         } else if (elem === "seat selected") {
             e.target.classList.toggle('selected');
             delete selections[e.target.id];
-            const index = results.indexOf(e.target.id);
-            if(index > -1) {
-                results.splice(index, 1);
-            }
         } else {
             e.preventDefault();
             alert('Chỉ tối đa 5 vé');
@@ -62,7 +57,7 @@ container.addEventListener('click', (e) => {
         console.log(e.target.id);
         const result = [];
         for (const key in selections) {
-            result.push(selections[key].value);
+            result.push(selections[key].id);
         }
         result.length ? reserveButton.disabled = false : reserveButton.disabled = true;
         seatsElem.innerHTML = result.join(",");
@@ -70,14 +65,14 @@ container.addEventListener('click', (e) => {
     }
 });
 
-function pay(userId,id, price) {
+function pay(userId, id, price) {
     fetch("http://localhost:8080/CS82TicketSale/api/pay", {
         method: 'post',
         body: JSON.stringify({
             "userId": userId,
             "seats": results,
-            "carId": id,
-            "price": price
+            "tripId": id,
+            "price": parseInt(price)
         }),
         headers: {
             "Content-type": "application/json"

@@ -6,12 +6,11 @@
 package com.group11.repository.implement;
 
 import com.group11.pojos.OrderTicket;
-import com.group11.pojos.Passengercar;
 import com.group11.pojos.Ticket;
 import com.group11.pojos.Tickets;
+import com.group11.pojos.Trip;
 import com.group11.repository.OrderRepository;
-import com.group11.repository.PassengercarRepository;
-import com.group11.repository.SeatRepository;
+import com.group11.repository.LocationRepository;
 import com.group11.repository.UserRepository;
 import java.util.Date;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -35,9 +34,7 @@ public class OrderRepositoryImplement implements OrderRepository {
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    private SeatRepository seatRepository;
-    @Autowired
-    private PassengercarRepository passengercarRepository;
+    private LocationRepository locationRepository;
 
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
@@ -49,17 +46,19 @@ public class OrderRepositoryImplement implements OrderRepository {
             order.setCreatedDate(new Date());
             order.setIsPaid(false);
             session.save(order);
-            Passengercar car = this.passengercarRepository.getCarById(tickets.getCarId());
+            Trip trip = locationRepository.getTripId(tickets.getTripId());
             Integer[] seats = tickets.getSeats();
             for (int seat: seats) {
                 Ticket ticket = new Ticket();
                 ticket.setIdorder(order);
-                ticket.setIdseat(this.seatRepository.getSeatById(seat));
-                ticket.setPassengercar(car);
+                ticket.setSeatName(seat);
+                ticket.setTripId(trip);
                 ticket.setNumber(RandomStringUtils.randomAlphanumeric(10));
                 ticket.setPrice(tickets.getPrice());
                 session.save(ticket);
             }
+            trip.setNumOfSeats(trip.getNumOfSeats() - tickets.getSeats().length);
+            locationRepository.updateTrip(trip);
             return true;
         } catch (HibernateException ex) {
             ex.printStackTrace();

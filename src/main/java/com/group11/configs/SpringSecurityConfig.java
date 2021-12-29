@@ -33,15 +33,17 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
     "com.group11.repository",
     "com.group11.services"
 })
-public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
+public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
+
     @Autowired
     private UserDetailsService userDetailsService;
-     @Autowired
+    @Autowired
     private AuthenticationSuccessHandler loginSuccessHandler;
     @Autowired
     private LogoutSuccessHandler logoutHandler;
     @Autowired
     private MyAccessDeniedHandler accessDenied;
+
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -51,16 +53,17 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
-     @Bean
+
+    @Bean
     public AuthenticationSuccessHandler loginSuccessHandler() {
         return new LoginSuccessHandler();
     }
-    
+
     @Bean
     public LogoutSuccessHandler logoutHandler() {
         return new LogoutHandler();
     }
-    
+
     @Bean
     public MyAccessDeniedHandler accessDenied() {
         return new MyAccessDeniedHandler();
@@ -72,11 +75,14 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
         http.formLogin().loginPage("/signin")
                 .usernameParameter("username")
                 .passwordParameter("password");
-         http.formLogin().defaultSuccessUrl("/").failureUrl("/signin?error");
-        
-        http.logout().logoutSuccessUrl("/signin");
+        http.formLogin().defaultSuccessUrl("/").failureUrl("/signin?error");
+        http.formLogin().successHandler(this.loginSuccessHandler);
+        http.logout().logoutSuccessHandler(this.logoutHandler);
+        http.exceptionHandling().accessDeniedPage("/login?accessDenied");
+        http.authorizeRequests().antMatchers("/").permitAll()
+                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')");
         
         http.csrf().disable();
-    
-    
-}}
+
+    }
+}

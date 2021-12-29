@@ -5,11 +5,18 @@
  */
 package com.group11.pojos;
 
+import java.math.BigDecimal;
+
 /**
  *
  * @author pminh
  */
 public class Tickets {
+
+    private int userId;
+    private Integer[] seats;
+    private int tripId;
+    private BigDecimal price;
 
     /**
      * @return the userId
@@ -40,35 +47,31 @@ public class Tickets {
     }
 
     /**
-     * @return the carId
+     * @return the tripId
      */
-    public int getCarId() {
-        return carId;
+    public int getTripId() {
+        return tripId;
     }
 
     /**
-     * @param carId the carId to set
+     * @param tripId the carId to set
      */
-    public void setCarId(int carId) {
-        this.carId = carId;
+    public void setTripId(int tripId) {
+        this.tripId = tripId;
     }
 
     /**
      * @return the price
      */
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
     /**
      * @param price the price to set
      */
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
-    private int userId;
-    private Integer[] seats;
-    private int carId;
-    private Double price;
 }

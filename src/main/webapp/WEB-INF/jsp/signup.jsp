@@ -21,15 +21,17 @@
 </section>
 <section class="ftco-section ftco-no-pb contact-section mb-4">
     <div class="container">
+        <c:if test="${errMsg != null}">
+            <div class="alert alert-danger">
+                ${errMsg}
+            </div>
+        </c:if>
         <div class="row justify-content-center">
+
             <div class="col-md-6 order-md-last d-flex">
-                <c:if test="${errMsg != null}">
-                    <div class="alert alert-danger">
-                        ${errMsg}
-                    </div>
-                </c:if>
-                <c:url value="/signin" var="action"/>
-                <form:form method="post" action="${action}" modelAttribute="user" class="bg-light p-5 contact-form">
+
+                <c:url value="/signup" var="action"/>
+                <form:form method="post" action="${action}" modelAttribute="user" class="bg-light p-5 contact-form" enctype="multipart/form-data">
                     <div class="form-group">
                         <form:input type="text" id="firstname" path="firstname" class="form-control" placeholder="Tên"/>
                     </div>

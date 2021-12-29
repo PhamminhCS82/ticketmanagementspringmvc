@@ -12,6 +12,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,10 +21,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -34,7 +31,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @author pminh
  */
 @Entity
-@Table(name = "`user`")
+@Table(name = "user")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
@@ -49,11 +46,8 @@ import org.springframework.web.multipart.MultipartFile;
     @NamedQuery(name = "User.findByAvatar", query = "SELECT u FROM User u WHERE u.avatar = :avatar"),
     @NamedQuery(name = "User.findByUserrole", query = "SELECT u FROM User u WHERE u.userrole = :userrole")})
 public class User implements Serializable {
-
-    public User get(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
+
     public static enum Roles {
         USER,
         DRIVER,
@@ -61,16 +55,14 @@ public class User implements Serializable {
         GUEST,
         ADMIN
     }
-    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "`id`")
+    @Column(name = "id")
     private Integer id;
     @Size(max = 45)
     @Column(name = "username")
-    @JsonIgnore
     private String username;
     @Size(max = 255)
     @Column(name = "password")
@@ -81,15 +73,14 @@ public class User implements Serializable {
     @Size(max = 45)
     @Column(name = "firstname")
     private String firstname;
-    @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
+    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Size(max = 45)
     @Column(name = "email")
     private String email;
     @Column(name = "phone")
     private Integer phone;
     @Column(name = "active")
-    @NotNull
-    private Short active = 1;
+    private Short active;
     @Size(max = 255)
     @Column(name = "avatar")
     private String avatar;
@@ -98,39 +89,49 @@ public class User implements Serializable {
     private String userrole;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Collection<OrderTicket> orderTicketCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
     private Collection<Comment> commentCollection;
     @OneToMany(mappedBy = "user")
     private Collection<Passengercar> passengercarCollection;
     @Transient //xem như là 1 thuộc tính để xử lí ko lk với csld
     private MultipartFile file;
     @Transient
-    @JsonIgnore
     private String confirmPassword;
+
     public User() {
+        
     }
 
-    public User(Integer id, String firstname, String surname, String email, Integer phone,String userRole) {
+    public User(Integer id, String firstname, String surname, String email, Integer phone, String userRole) {
         this.id = id;
         this.firstname = firstname;
         this.surname = surname;
         this.email = email;
         this.phone = phone;
         this.userrole = userRole;
+        this.active = 1;
     }
-    public User(String firstname, String surname, String email, Integer phone,String userRole) {
+
+    public User(String firstname, String surname, String email, Integer phone, String userRole) {
         this.firstname = firstname;
         this.surname = surname;
         this.email = email;
         this.phone = phone;
         this.userrole = userRole;
+        this.active = 1;
     }
 
     public User(Integer id, String firstName, String lastName, String email, String username, String password, String userRole) {
         this.id = id;
+        this.firstname = firstName;
+        this.surname = lastName;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.userrole = userRole;
+        this.active = 1;
     }
-    
+
     public User(Integer id) {
         this.id = id;
     }
@@ -241,21 +242,9 @@ public class User implements Serializable {
     public void setPassengercarCollection(Collection<Passengercar> passengercarCollection) {
         this.passengercarCollection = passengercarCollection;
     }
-
-    /**
-     * @return the confirmPassword
-     */
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    /**
-     * @param confirmPassword the confirmPassword to set
-     */
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
-    }
     
+    
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -281,7 +270,6 @@ public class User implements Serializable {
         return "com.group11.pojos.User[ id=" + id + " ]";
     }
 
-
     /**
      * @return the file
      */
@@ -295,7 +283,19 @@ public class User implements Serializable {
     public void setFile(MultipartFile file) {
         this.file = file;
     }
-    
 
+    /**
+     * @return the confirmPassword
+     */
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    /**
+     * @param confirmPassword the confirmPassword to set
+     */
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
 
 }

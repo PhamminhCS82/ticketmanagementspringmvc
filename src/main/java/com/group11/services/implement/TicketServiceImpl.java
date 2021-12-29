@@ -5,11 +5,9 @@
  */
 package com.group11.services.implement;
 
-import com.group11.pojos.Seat;
 import com.group11.pojos.Ticket;
 import com.group11.repository.TicketRepository;
 import com.group11.services.TicketService;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,23 +29,8 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public List<Seat> getSeat() {
-        return ticketRepository.getSeat();
-    }
-
-    @Override
-    public Seat getSeatId(int i) {
-        return ticketRepository.getSeatId(i);
-    }
-
-    @Override
     public Ticket getTicketId(int i) {
         return ticketRepository.getTicketId(i);
-    }
-
-    @Override
-    public List<Seat> getSeat(int i) {
-        return ticketRepository.getSeat(i);
     }
 
 }

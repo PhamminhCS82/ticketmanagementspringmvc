@@ -6,10 +6,7 @@
 package com.group11.controllers;
 
 import com.group11.pojos.Route;
-import com.group11.pojos.Seat;
 import com.group11.pojos.Ticket;
-import com.group11.pojos.Trip;
-import com.group11.services.CommentService;
 import com.group11.services.LocationService;
 import com.group11.services.TicketService;
 import com.group11.services.UserService;
@@ -25,7 +22,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
@@ -45,18 +41,13 @@ public class HomeController {
 //    private OrderService orderService;
     @Autowired
     private UserService userService;
-     @Autowired
-    private CommentService commentService;
-
 
     @ModelAttribute
     public void common(Model model, HttpSession session, @RequestParam(value = "kw", required = false, defaultValue = "") String kw) {
         model.addAttribute("locations", this.locationService.getRoute());
-        model.addAttribute("seats", this.ticketService.getSeat());
         model.addAttribute("getDriver", this.userService.getRole());
         model.addAttribute("getTripName", this.locationService.getTripName());
-        
-         model.addAttribute("currentUser",session.getAttribute("currentUser"));
+        model.addAttribute("currentUser", session.getAttribute("currentUser"));
     }
 
     @GetMapping("/")
@@ -74,21 +65,6 @@ public class HomeController {
         }
         return "index";
     }
-//      @GetMapping("/route")
-//    public String indexx(Model model,@RequestParam(required = false) Map<String, String> params) {
-//        String kw = params.getOrDefault("kw", null);
-//         int page = Integer.parseInt(params.getOrDefault("page", "1"));// getOrdefault neu co lay ko co de mac dinh
-//        String cateId = params.get("CateId");
-//        if (cateId == null) {
-//            model.addAttribute("products", this.locationService.getTrip(kw, page));
-//            
-//
-////        } else {
-//////            Route c =this.locationService.getStationId(Integer.parseInt(cateId));
-//////            model.addAttribute("products", c.getProductCollection());
-////        }
-//        return "route-trip";
-//    }
 
     @GetMapping("/route")
     public String saleState(Model model, @RequestParam(required = false) Map<String, String> params) {
@@ -98,23 +74,21 @@ public class HomeController {
         if (cateId == null) {
             model.addAttribute("routeTrip", this.locationService.getTrip(kw, page));
             model.addAttribute("counter", this.locationService.countTrip());
-           
 
         } else {
             Route c = this.locationService.getRouteId(Integer.parseInt(cateId));
             model.addAttribute("routeTrip", c.getTripCollection());
+            model.addAttribute("selected-route", c);
         }
         return "route-trip";
     }
 
-
-
-//    @GetMapping("/trip/{routeId}")
-//    public String detail(Model model, @PathVariable(value = "routeId") int ticketId, HttpSession session) {
-//        session.setAttribute("choosedcar", this.locationService.getTripId(ticketId)
-//                .getPassengerCar());
-//        model.addAttribute("trip", this.locationService.getTripId(ticketId));
-//    }
+    @GetMapping("/trip/{routeId}")
+    public String detail(Model model, @PathVariable(value = "routeId") int ticketId, HttpSession session) {
+        session.setAttribute("choosedTrip", this.locationService.getTripId(ticketId));
+        model.addAttribute("trip", this.locationService.getTripId(ticketId));
+        return "ticket-trip";
+    }
 
 //    @GetMapping(value = "/orderticket/{ticket_id}")
 //    public String ticket(Model model, @PathVariable(value = "ticket_id") int ticketId) {

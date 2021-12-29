@@ -8,15 +8,22 @@ package com.group11.services;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import com.group11.pojos.User;
 import java.util.List;
+
 /**
  *
  * @author pminh
  */
 public interface UserService extends UserDetailsService {
-    boolean addUser(User user);
-     boolean updateUser(User user);
+
+    boolean addUser(User user, String userRole);
+
+    boolean updateUser(User user);
+
     List<User> getUsers(String username);
+
     User getUserId(int id);
+
     User getUserByname(String id);
+
     List<User> getRole();
 }

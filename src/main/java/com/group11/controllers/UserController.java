@@ -6,6 +6,7 @@
 package com.group11.controllers;
 
 import com.group11.pojos.Passengercar;
+import com.group11.pojos.Trip;
 import com.group11.pojos.User;
 import com.group11.services.UserService;
 import javax.servlet.http.HttpSession;
@@ -41,32 +42,34 @@ public class UserController {
 
     @PostMapping("/buyform")
     public String buyForm(Model model, @ModelAttribute(value = "user") User user, HttpSession session) {
-        Passengercar car = (Passengercar) session.getAttribute("choosedcar");
-        if (this.userDetailsService.addUser(user) == true && car != null) {
-            return String.format("forward:/buy?car_id=%d", car.getId());
+        Trip trip = (Trip) session.getAttribute("choosedTrip");
+        if(session.getAttribute("user") != null)
+            return String.format("forward:/buy?trip_id=%d", trip.getId());
+        else if (this.userDetailsService.addUser(user, User.Roles.GUEST.toString()) == true && trip != null) {
+            return String.format("forward:/buy?trip_id=%d", trip.getId());
         }
         return "buyform";
     }
 
+    @GetMapping("/signup")
+    public String registerView(Model model) {
+        model.addAttribute("user", new User());
+        return "signup";
+    }
+    
     @PostMapping("/signup")
     public String signupView(Model model, @ModelAttribute(value = "user") User user) {
         if (user.getPassword().isEmpty() 
                 || !user.getPassword().equals(user.getConfirmPassword())) 
             model.addAttribute("errMsg", "Mat khau KHONG khop!!!");
         else {
-            if (this.userDetailsService.addUser(user) == true) {
+            if (this.userDetailsService.addUser(user, User.Roles.USER.toString()) == true) {
                 return "redirect:/signin";
             }
             
             model.addAttribute("errMsg", "Co loi xay ra, vui long quay lai sau!!!");
         }
         
-        return "signup";
-    }
-
-    @GetMapping("/signup")
-    public String registerView(Model model) {
-        model.addAttribute("user", new User());
         return "signup";
     }
     

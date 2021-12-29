@@ -12,7 +12,7 @@
         <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
             <div class="col-md-9 ftco-animate pb-5 text-center">
                 <p class="breadcrumbs"><span class="mr-2"><a href="<c:url value="/" />">Trang chủ <i class="fa fa-chevron-right"></i></a></span> <span>Đăng nhập <i class="fa fa-chevron-right"></i></span></p>
-                <h1 class="mb-0 bread">Đăng nhập</h1>
+                <h1 class="mb-0 bread">${selected-route.name}</h1>
             </div>
         </div>
     </div>
@@ -30,7 +30,7 @@
 
                                 <div >
                                     <h6>${p.name}</h6>
-                                    <h5>${p.time} </h5>
+                                    <h5>${p.dateTime} </h5>
                                     <h5>${p.idroute.start} </h5>
                                     <h5>${p.idroute.finish} </h5>
                                     <a href="<c:url value="/trip/${p.id}" />">Thông tin vé</a>

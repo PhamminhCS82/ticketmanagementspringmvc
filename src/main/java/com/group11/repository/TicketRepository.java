@@ -5,9 +5,7 @@
  */
 package com.group11.repository;
 
-import com.group11.pojos.Seat;
 import com.group11.pojos.Ticket;
-import java.util.List;
 
 /**
  *
@@ -16,11 +14,6 @@ import java.util.List;
 public interface TicketRepository {
 
     boolean addTicket(Ticket p);
-
-    List<Seat> getSeat();
-    List<Seat> getSeat(int id);
-
-    Seat getSeatId(int id);
 
     Ticket getTicketId(int id);
 

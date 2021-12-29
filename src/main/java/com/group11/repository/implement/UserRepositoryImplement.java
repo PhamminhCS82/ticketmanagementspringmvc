@@ -33,7 +33,7 @@ public class UserRepositoryImplement implements UserRepository {
     private LocalSessionFactoryBean sessionFactoryBean;
 
     @Override
-    public boolean addUser(User user) {
+    public boolean addUser(User user, String userRole) {
         Session session = this.sessionFactoryBean.getObject().getCurrentSession();
         try {
             session.save(user);

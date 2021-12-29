@@ -5,17 +5,17 @@
  */
 package com.group11.controllers;
 
-import com.group11.pojos.Passengercar;
-import com.group11.services.TicketService;
-import java.util.Map;
+import com.group11.pojos.Seats;
+import com.group11.pojos.Trip;
+import com.group11.services.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
-import com.group11.services.PassengercarService;
+import com.group11.utils.Utils;
 import freemarker.ext.beans.MapModel;
+import java.util.List;
 import org.springframework.web.bind.annotation.PostMapping;
 
 /**
@@ -28,19 +28,20 @@ public class BuyTicketController {
 //    private TicketService ticketService;
 
     @Autowired
-    private PassengercarService passengerCarService;
+    private LocationService locationService;
 //    @ModelAttribute
 //    public void addAttributes(Model model){
 //        model.addAttribute("seats", this.ticketService.getSeat());
 //    }
 
     @PostMapping("/buy")
-    public String chooseSeatView(Model model, @RequestParam(value = "car_id") Integer carId) {
-        Passengercar car = this.passengerCarService.getCarById(carId);
-        model.addAttribute("seatofcar", car.getSeatCollection());
-        model.addAttribute("carinfo", car);
-        model.addAttribute("tripinfo", car.getIdtrip());
-        System.out.println(car.getIdtrip().getName());
+    public String chooseSeatView(Model model, @RequestParam(value = "trip_id") Integer tripId) {
+        Trip trip = locationService.getTripId(tripId);
+        List<Seats> seats = Utils.countSeats(trip.getPassengercar().getNumOfSeats(), trip.getTicketCollection());
+        model.addAttribute("seatofcar", seats);
+        model.addAttribute("carinfo", trip.getPassengercar());
+        model.addAttribute("tripinfo", trip);
+
         return "buyticket";
     }
 
