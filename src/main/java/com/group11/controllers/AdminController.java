@@ -65,7 +65,8 @@ public class AdminController {
         }catch(ParseException ex){
             ex.printStackTrace();
         }
-        model.addAttribute("totalbyMonth", this.statsService.totalbyMonth(kw, fromDate, toDate)); 
+        model.addAttribute("totalbyMonth", this.statsService.totalbyMonth(kw, fromDate, toDate));
+        model.addAttribute("totalbyYear", this.statsService.totalbyYear(kw, fromDate, toDate)); 
         return "admin";
     }
 
@@ -175,10 +176,18 @@ public class AdminController {
     }
 
     @GetMapping("/admin/route-delete/{id}")
-    public String RouteDelete(Model model, @PathVariable(value = "id") int a) {
-
-        Route u = this.locationService.getRouteId(a);
-        this.locationService.deleteRoute(u);
+    public String RouteDelete(Model model, @RequestParam(required = false) Map<String, String> params) {
+          String id = params.getOrDefault("id", null);
+        boolean t;
+         if (id != null) {
+            t = this.locationService.deleteRoute(Integer.parseInt(id));
+            if (t == true) {
+                return "redirect:/";
+            }
+        }
+//     
+//        Route u = this.locationService.getRouteId(a);
+//        this.locationService.deleteRoute(u);
 //        model.addAttribute("product",product);
         return "admin";
     }

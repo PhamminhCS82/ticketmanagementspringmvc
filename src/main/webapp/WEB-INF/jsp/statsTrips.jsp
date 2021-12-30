@@ -25,7 +25,7 @@
                                     <th>Tên chuyến</th>
                                     <th>Điểm đi</th>
                                     <th>Điểm đến </th>   
-                                    <th><a href="<c:url value="/admin/add-trips"/>"><i class="fa fa-plus">Thêm chuyến</i></a></th>
+                                    <th><a href="<c:url value="/admin/add-routes"/>"><i class="fa fa-plus">Thêm tuyến</i></a></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -63,22 +63,20 @@
                                 <tr>
                                      <th>Tên tuyến</th>
                                     <th>Tên chuyến</th>
-                                    <th>Ngày đi</th>
-                                    <th>Giờ khởi hành </th>  
+                                    <th>Ngày đi</th> 
                                     <th>Giá</th> 
-                                    <th><a href="<c:url value="/admin/add-routes"/>"><i class="fa fa-plus">Thêm tuyến</i></a></th>
+                                    <th><a href="<c:url value="/admin/add-trips"/>"><i class="fa fa-plus">Thêm tuyến</i></a></th>
                                 </tr>
                             </thead>
                             <tbody>
                                   
                                 <c:forEach items="${routeStats}" var="r">
                                     <tr>  
-                                        <td>${r[5]}</td>
+                                        <td>${r[4]}</td>
                                         <td>                                         
                                             ${r[1]}                                    
                                         </td>
                                         <td>${r[3]}</td>
-                                        <td>${r[4]}</td>
                                         <td>${r[2]}</td>
                                         <td><div class="w3-xlarge"><a href="<c:url value="/admin/edit-trips/${r[0]}"/>?edit=${r[0]}"><i class="fa fa-pencil-square-o"></i></a></div>
                                          <div class="w3-xlarge"><a href="<c:url value="/admin/trip-delete/${r[0]}"/>"><i class="fa fa-trash"></i></a></div></td>  

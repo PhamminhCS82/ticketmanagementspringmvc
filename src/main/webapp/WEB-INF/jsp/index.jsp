@@ -87,33 +87,6 @@
 </section>
 
 
-<section>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4">
-                <c:forEach var="p" items="${locations}">
-                    <div class="card">
-
-                        <c:url value="/route" var="catPath">
-                            <c:param name="CateId" value="${p.id}"></c:param>
-                        </c:url>
-                        <a class="nav-link" href="${catPath}"">${p.name}</a>
-                    </div>
-                </c:forEach>
-
-            </div>
-        </div>
-        <ul class="pagination justify-content-center">
-            <c:forEach begin="1" end="${Math.ceil(counter/6)}" var="i">
-                <li class="page-item"><a class="page-link" href="<c:url value="/route"/>?page=${i}">${i}</a></li>
-                </c:forEach>
-        </ul></div>
-
-</section>
-
-
-
-
 <section class="ftco-section">
     <div class="container">
         <div class="row justify-content-center pb-4">
@@ -123,18 +96,42 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4 ftco-animate">
+             <c:forEach var="p" items="${locations}">
+            <div class="card-body">
+            <div class="col-md-12 ftco-animate">
+                
                 <div class="project-wrap">
-                    <a href="#" class="img" style="background-image: url('resources/images/destination-1.jpg');">
+                   
+                        
+                    <a  href="${catPath}"class="img" style="background-image: url('resources/images/destination-1.jpg');">
                         <span class="price">$550/person</span>
                     </a>
+                       
+               
+
+                        <c:url value="/route" var="catPath">
+                            <c:param name="CateId" value="${p.id}"></c:param>
+                        </c:url>
+                       
+
+                
                     <div class="text p-4">
                         <span class="days">8 Days Tour</span>
-                        <h3><a href="#">Banaue Rice Terraces</a></h3>
+                        <h3><a href="${catPath}">${p.name}</a></h3>
                         <p class="location"><span class="fa fa-map-marker"></span> Banaue, Ifugao, Philippines</p>
                     </div>
+                   
+                </div>
                 </div>
             </div>
+                         </c:forEach>
+           
         </div>
     </div>
+      <ul class="pagination justify-content-center">
+            <c:forEach begin="1" end="${Math.ceil(counter/6)}" var="i">
+                <li class="page-item"><a class="page-link" href="<c:url value="/route"/>?page=${i}">${i}</a></li>
+                </c:forEach>
+        </ul>
 </section>
+

@@ -75,6 +75,50 @@ public class UserController {
         return "signup";
     }
 
+    @GetMapping("/admin/add-drivers")
+    public String adminriver(Model model) {
+        model.addAttribute("user", new User());
+        return "add-driver";
+    }
+
+    @PostMapping("/admin/add-drivers")
+    public String addriver(Model model, @ModelAttribute(value = "user") User user) {
+        if (user.getPassword().isEmpty()
+                || !user.getPassword().equals(user.getConfirmPassword())) {
+            model.addAttribute("errMsg", "Mat khau KHONG khop!!!");
+        } else {
+            if (this.userDetailsService.addUser(user, User.Roles.DRIVER.toString()) == true) {
+                return "redirect:/admin";
+            }
+
+            model.addAttribute("errMsg", "Co loi xay ra, vui long quay lai sau!!!");
+        }
+
+        return "add-driver";
+    }
+
+    @GetMapping("/admin/add-employs")
+    public String adminemploy(Model model) {
+        model.addAttribute("user", new User());
+        return "add-employ";
+    }
+
+    @PostMapping("/admin/add-employs")
+    public String addploy(Model model, @ModelAttribute(value = "user") User user) {
+        if (user.getPassword().isEmpty()
+                || !user.getPassword().equals(user.getConfirmPassword())) {
+            model.addAttribute("errMsg", "Mat khau KHONG khop!!!");
+        } else {
+            if (this.userDetailsService.addUser(user, User.Roles.EMPLOYEE.toString()) == true) {
+                return "redirect:/admin";
+            }
+
+            model.addAttribute("errMsg", "Co loi xay ra, vui long quay lai sau!!!");
+        }
+
+        return "add-employ";
+    }
+
     @GetMapping("/signin")
     public String signinView() {
         return "signin";

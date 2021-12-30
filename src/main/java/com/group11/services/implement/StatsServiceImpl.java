@@ -58,5 +58,10 @@ public class StatsServiceImpl implements StatsService{
     public List<Object[]> totalbyMonth(String kw, Date fromDate, Date toDate) {
        return this.statsReposotory.totalbyMonth(kw, fromDate,toDate);
     }
+
+    @Override
+    public List<Object[]> totalbyYear(String kw, Date fromDate, Date toDate) {
+         return this.statsReposotory.totalbyYear(kw, fromDate,toDate);
+    }
     
 }

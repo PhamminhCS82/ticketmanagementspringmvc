@@ -32,7 +32,7 @@
                                     <th>Phone</th> 
                                     <th>User Role</th>
                                     
-                                    <th></th>
+                                    <th><a href="<c:url value="/admin/add-drivers"/>"><i class="fa fa-plus">Thêm tài xế</i></a></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -81,7 +81,7 @@
                                     <th>Phone</th> 
                                     <th>User Role</th>
                                     
-                                    <th></th>
+                                     <th><a href="<c:url value="/admin/add-employs"/>"><i class="fa fa-plus">Thêm nhân viên</i></a></th>
                                 </tr>
                             </thead>
                             <tbody>

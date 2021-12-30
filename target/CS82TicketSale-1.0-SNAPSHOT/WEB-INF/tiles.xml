@@ -78,6 +78,16 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content"
                        value="/WEB-INF/jsp/add-route.jsp" />
     </definition>
+     <definition name="add-driver" extends="baseAdminLayout">
+        <put-attribute name="title" value="Thêm tài xế" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/add-driver.jsp" />
+    </definition>
+         <definition name="add-employ" extends="baseAdminLayout">
+        <put-attribute name="title" value="Thêm nhân viên" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/add-employ.jsp" />
+    </definition>
          <definition name="pass-stats" extends="baseAdminLayout">
         <put-attribute name="title" value="Thêm chuyến" />
         <put-attribute name="content"

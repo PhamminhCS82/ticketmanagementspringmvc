@@ -137,10 +137,10 @@ public class StatsRepositoryIpml implements StatsRepository {
          List<Predicate> predicates = new ArrayList<>();
          
         predicates.add(builder.equal(rootP.get("user"), rootU.get("id")));
-        predicates.add(builder.equal(rootP.get("idtrip"), rootT.get("id")));
+        predicates.add(builder.equal(rootT.get("passengercar"), rootP.get("id")));
 //        predicates.add(builder.equal(rootU.get("firstname"),rootP.get("user")));
         
-        query.multiselect( rootP.get("id"),rootU.get("firstname"),rootT.get("name"),rootT.get("time"),rootT.get("time"),rootP.get("carnumber"));
+        query.multiselect( rootP.get("id"),rootU.get("firstname"),rootP.get("carnumber"),rootT.get("name"));
          query.where(predicates.toArray(new Predicate[]{}));
 //          Predicate p = builder.equal(rootU.get("firstname"),rootP.get("user"));
 //            query = query.where(p);
@@ -157,31 +157,67 @@ public class StatsRepositoryIpml implements StatsRepository {
         Session session = this.sessionFactory.getObject().getCurrentSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Object[]> query = builder.createQuery(Object[].class);
-         Root rootT = query.from(Ticket.class);
-         Root rootO= query.from(OrderTicket.class);
+         Root rootT = query.from(OrderTicket.class);
+         Root rootQ= query.from(Ticket.class);
         Root rootC = query.from(Passengercar.class);
         Root rootTrip = query.from(Trip.class);
         
         List<Predicate> pre= new ArrayList<>();
-        pre.add(builder.equal(rootT.get("passengercar"), rootC.get("id")));
-        pre.add(builder.equal(rootC.get("idtrip"), rootTrip.get("id")));
+        pre.add(builder.equal(rootQ.get("idorder"), rootT.get("id")));
+//        pre.add(builder.equal(rootC.get("idtrip"), rootTrip.get("id")));
         
-        query.multiselect( builder.function("MONTH", Integer.class, rootT.get("usedDate")),
-                builder.function("YEAR", Integer.class, rootT.get("usedDate")),rootT.get("price"));
+        query.multiselect( builder.function("MONTH", Integer.class, rootT.get("createdDate")),
+                builder.function("YEAR", Integer.class, rootT.get("createdDate")),rootQ.get("price"));
         
         if(kw!= null && !kw.isEmpty()){
             pre.add(builder.like(rootTrip.get("name").as(String.class), String.format("%%%s%%", kw)));
         }
         if(fromDate!= null){
-            pre.add(builder.greaterThanOrEqualTo(rootT.get("usedDate"), fromDate));
+            pre.add(builder.greaterThanOrEqualTo(rootT.get("createdDate"), fromDate));
         }
         if(toDate!= null){
-            pre.add(builder.lessThanOrEqualTo(rootT.get("usedDate"), toDate));
+            pre.add(builder.lessThanOrEqualTo(rootT.get("createdDate"), toDate));
         }
         query.where(pre.toArray(new Predicate[]{}));
-        query.groupBy(builder.function("MONTH", Integer.class, rootT.get("usedDate")),
-                builder.function("YEAR", Integer.class, rootT.get("usedDate")));
-        query = query.orderBy(builder.asc(rootT.get("usedDate")));
+        query.groupBy(builder.function("MONTH", Integer.class, rootT.get("createdDate")),
+                builder.function("YEAR", Integer.class, rootT.get("createdDate")));
+        query = query.orderBy(builder.asc(rootT.get("createdDate")));
+        
+        Query q= session.createQuery(query);
+        
+        return q.getResultList();
+    }
+
+    @Override
+    public List<Object[]> totalbyYear(String kw, Date fromDate, Date toDate) {
+            Session session = this.sessionFactory.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Object[]> query = builder.createQuery(Object[].class);
+         Root rootT = query.from(OrderTicket.class);
+         Root rootQ= query.from(Ticket.class);
+        Root rootC = query.from(Passengercar.class);
+        Root rootTrip = query.from(Trip.class);
+        
+        List<Predicate> pre= new ArrayList<>();
+        pre.add(builder.equal(rootQ.get("idorder"), rootT.get("id")));
+//        pre.add(builder.equal(rootC.get("idtrip"), rootTrip.get("id")));
+        
+        query.multiselect( 
+                builder.function("YEAR", Integer.class, rootT.get("createdDate")),rootQ.get("price"));
+        
+        if(kw!= null && !kw.isEmpty()){
+            pre.add(builder.like(rootTrip.get("name").as(String.class), String.format("%%%s%%", kw)));
+        }
+        if(fromDate!= null){
+            pre.add(builder.greaterThanOrEqualTo(rootT.get("createdDate"), fromDate));
+        }
+        if(toDate!= null){
+            pre.add(builder.lessThanOrEqualTo(rootT.get("createdDate"), toDate));
+        }
+        query.where(pre.toArray(new Predicate[]{}));
+        query.groupBy(
+                builder.function("YEAR", Integer.class, rootT.get("createdDate")));
+        query = query.orderBy(builder.asc(rootT.get("createdDate")));
         
         Query q= session.createQuery(query);
         
