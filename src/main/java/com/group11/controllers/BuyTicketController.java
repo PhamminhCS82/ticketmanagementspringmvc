@@ -34,7 +34,11 @@ public class BuyTicketController {
 //        model.addAttribute("seats", this.ticketService.getSeat());
 //    }
 
-    @PostMapping("/buy")
+//    @GetMapping("/buy")
+//    public String getChooseSeatView(Model model) {
+//        return "buyticket";
+//    }
+    @GetMapping("/buy")
     public String chooseSeatView(Model model, @RequestParam(value = "trip_id") Integer tripId) {
         Trip trip = locationService.getTripId(tripId);
         List<Seats> seats = Utils.countSeats(trip.getPassengercar().getNumOfSeats(), trip.getTicketCollection());

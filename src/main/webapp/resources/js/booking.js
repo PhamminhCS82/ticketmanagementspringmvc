@@ -10,6 +10,7 @@ const seats = document.querySelectorAll('.row .seat:not(.occupied');
 const count = document.getElementById('count');
 const selections = {};
 const reserveButton = document.getElementById('reserveButton');
+const onelinePayButton = document.getElementById('onlinePayButton');
 const totalElem = document.getElementById("total-container");
 const hiddenTotalElem = document.getElementById("hidden-total");
 const hiddenSeatElem = document.getElementById("hidden-seats");
@@ -60,10 +61,36 @@ container.addEventListener('click', (e) => {
             result.push(selections[key].id);
         }
         result.length ? reserveButton.disabled = false : reserveButton.disabled = true;
+        result.length ? onlinePayButton.disabled = false : onlinePayButton.disabled = true;
         seatsElem.innerHTML = result.join(",");
         updateSelectedCount();
     }
 });
+
+function payMent(userId, id, price) {
+    fetch("http://localhost:8080/CS82TicketSale/api/payment", {
+        method: 'post',
+        body: JSON.stringify({
+            "userId": userId,
+            "seats": results,
+            "tripId": id,
+            "price": parseInt(price)
+        }),
+        headers: {
+            "Content-type": "application/json"
+        }
+    }).then(function (result) {
+        return result.json();
+    }).then(function (data) {
+        console.info(data);
+        if(data.return_code === 1){
+            window.location= data.order_url;
+        }
+        else {
+            alert("Có lỗi xảy ra thử lại sau");
+        }
+    });
+}
 
 function pay(userId, id, price) {
     fetch("http://localhost:8080/CS82TicketSale/api/pay", {

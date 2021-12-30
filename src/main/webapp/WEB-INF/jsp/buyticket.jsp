@@ -11,12 +11,9 @@
 <div class="row seatbox">
     <div class="col-3-sm-3">
         <div class="movie-container">
-            <label>Số ghế:</label>
+            <label>Số ghế tối đa:</label>
             <select id="movie">
-                <option value=${tripinfo.price}>1 ghế</option>
-                <option value=${tripinfo.price}>2 ghế</option>
-                <option value=${tripinfo.price}>3 ghế</option>
-                <option value=${tripinfo.price}>4 ghế</option>
+                <option value=${tripinfo.price}>5 ghế</option>
             </select>
         </div>
 
@@ -67,12 +64,28 @@
     </div>
     <div class="col-3-sm-3 info">
         <h1>Thông tin cá nhân</h1>
-        <ul>
-            <li><b>Họ và tên:</b> <span>${user.surname} ${user.firstname} </span></li>
-            <li><b>Số điện thoại:</b> <span> ${user.phone}</span></li>
-            <li><b>Email:</b> <span> ${user.email}</span></li>
-
-        </ul>
+        <c:if test="${pageContext.request.userPrincipal.name == null}">
+            <ul>
+                <li><b>Họ và tên:</b> <span>${user.surname} ${user.firstname} </span></li>
+                <li><b>Số điện thoại:</b> <span> ${user.phone}</span></li>
+                <li><b>Email:</b> <span> ${user.email}</span></li>
+                <div class="row">
+                    <button onclick="payMent(${user.id},${carinfo.id}, ${tripinfo.price})" type="submit" class="btn btn-primary" name="submit" id="onlinePayButton" disabled>Thanh toán trực tuyến</button>
+                    <button onclick="pay(${user.id},${carinfo.id}, ${tripinfo.price})" type="submit" class="btn btn-primary" name="submit" id="reserveButton" disabled>Đặt vé</button>
+                </div>
+            </ul>
+        </c:if>
+        <c:if test="${pageContext.request.userPrincipal.name != null}">
+            <ul>
+                <li><b>Họ và tên:</b> <span>${currentUser.surname} ${currentUser.firstname} </span></li>
+                <li><b>Số điện thoại:</b> <span> ${currentUser.phone}</span></li>
+                <li><b>Email:</b> <span> ${currentUser.email}</span></li>
+                <div class="row-cols-lg-1">
+                    <button onclick="payMent(${currentUser.id},${carinfo.id}, ${tripinfo.price})" type="submit" class="btn btn-primary" name="submit" id="onlinePayButton" disabled>Thanh toán trực tuyến</button>
+                    <button onclick="pay(${currentUser.id},${carinfo.id}, ${tripinfo.price})" type="submit" class="btn btn-primary" name="submit" id="reserveButton" disabled>Đặt vé</button>
+                </div>
+            </ul>
+        </c:if>
         <h1>Thông tin chuyến</h1>
         <ul>
             <li><b>Tên chuyến :</b> <span> ${tripinfo.name}</span></li>
@@ -81,36 +94,7 @@
             <li><b>Ngày/ Giờ khởi hành:</b> <span> ${tripinfo.dateTime}</span></li>
             <li><b>Số xe:</b> <span> ${carinfo.carnumber}</span></li>
             <li><b>Giá</b> <span> ${tripinfo.price}</span></li>
-            <button onclick="pay(${user.id},${carinfo.id}, ${tripinfo.price})" type="submit" class="btn btn-primary" name="submit" id="reserveButton" disabled>Đặt vé</button>
-            <!-- Button to Open the Modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                Open modal
-            </button>
 
-            <!-- The Modal -->
-            <div class="modal" id="myModal">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-
-                        <!-- Modal Header -->
-                        <div class="modal-header">
-                            <h4 class="modal-title">Modal Heading</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-
-                        <!-- Modal body -->
-                        <div class="modal-body">
-                            Modal body..
-                        </div>
-
-                        <!-- Modal footer -->
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
         </ul>
     </div>
 </div>

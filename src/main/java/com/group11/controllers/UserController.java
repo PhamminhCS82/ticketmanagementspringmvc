@@ -5,7 +5,6 @@
  */
 package com.group11.controllers;
 
-import com.group11.pojos.Passengercar;
 import com.group11.pojos.Trip;
 import com.group11.pojos.User;
 import com.group11.services.UserService;
@@ -35,7 +34,11 @@ public class UserController {
     private UserService userDetailsService;
 
     @GetMapping("/buyform")
-    public String buyFormView(Model model) {
+    public String buyFormView(Model model, HttpSession session) {
+        User u = (User) session.getAttribute("currentUser");
+        if (u != null) {
+            return "index";
+        }
         model.addAttribute("user", new User());
         return "buyform";
     }
@@ -43,10 +46,9 @@ public class UserController {
     @PostMapping("/buyform")
     public String buyForm(Model model, @ModelAttribute(value = "user") User user, HttpSession session) {
         Trip trip = (Trip) session.getAttribute("choosedTrip");
-        if(session.getAttribute("user") != null)
-            return String.format("forward:/buy?trip_id=%d", trip.getId());
-        else if (this.userDetailsService.addUser(user, User.Roles.GUEST.toString()) == true && trip != null) {
-            return String.format("forward:/buy?trip_id=%d", trip.getId());
+        if (this.userDetailsService.addUser(user, User.Roles.GUEST.toString()) == true && trip != null) {
+            session.setAttribute("user", model.getAttribute("user"));
+            return String.format("redirect:/buy?trip_id=%d", trip.getId());
         }
         return "buyform";
     }
@@ -56,23 +58,23 @@ public class UserController {
         model.addAttribute("user", new User());
         return "signup";
     }
-    
+
     @PostMapping("/signup")
     public String signupView(Model model, @ModelAttribute(value = "user") User user) {
-        if (user.getPassword().isEmpty() 
-                || !user.getPassword().equals(user.getConfirmPassword())) 
+        if (user.getPassword().isEmpty()
+                || !user.getPassword().equals(user.getConfirmPassword())) {
             model.addAttribute("errMsg", "Mat khau KHONG khop!!!");
-        else {
+        } else {
             if (this.userDetailsService.addUser(user, User.Roles.USER.toString()) == true) {
                 return "redirect:/signin";
             }
-            
+
             model.addAttribute("errMsg", "Co loi xay ra, vui long quay lai sau!!!");
         }
-        
+
         return "signup";
     }
-    
+
     @GetMapping("/signin")
     public String signinView() {
         return "signin";

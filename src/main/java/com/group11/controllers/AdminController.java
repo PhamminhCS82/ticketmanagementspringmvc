@@ -47,7 +47,7 @@ public class AdminController {
 
     @RequestMapping("/admin")
     public String admin(Model model, @RequestParam(required = false) Map<String, String> params) {
-             String kw = params.getOrDefault("kw", null);
+        String kw = params.getOrDefault("kw", null);
         SimpleDateFormat d = new SimpleDateFormat("yyyy-MM-dd");
 
         Date fromDate = null;

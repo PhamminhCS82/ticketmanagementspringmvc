@@ -40,8 +40,12 @@
                     <%--</form:select>--%>
                     -->
 
-
+                    <c:if test="${pageContext.request.userPrincipal.name == null}">
                     <a href="<c:url value="/buyform" />">Mua vé</a>
+                    </c:if>
+                    <c:if test="${pageContext.request.userPrincipal.name!= null}">
+                    <a href="<c:url value="/buy?trip_id=${trip.id}" />">Mua vé</a>
+                    </c:if>
                 </ul>
 
             </div>
