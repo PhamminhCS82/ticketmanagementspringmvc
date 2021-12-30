@@ -10,7 +10,7 @@ const seats = document.querySelectorAll('.row .seat:not(.occupied');
 const count = document.getElementById('count');
 const selections = {};
 const reserveButton = document.getElementById('reserveButton');
-const onelinePayButton = document.getElementById('onlinePayButton');
+const onlinePayButton = document.getElementById('onlinePayButton');
 const totalElem = document.getElementById("total-container");
 const hiddenTotalElem = document.getElementById("hidden-total");
 const hiddenSeatElem = document.getElementById("hidden-seats");
@@ -84,7 +84,8 @@ function payMent(userId, id, price) {
     }).then(function (data) {
         console.info(data);
         if(data.return_code === 1){
-            window.location= data.order_url;
+            window.open(data.order_url, "_blank");
+            window.location = "http://localhost:8080/CS82TicketSale/";
         }
         else {
             alert("Có lỗi xảy ra thử lại sau");

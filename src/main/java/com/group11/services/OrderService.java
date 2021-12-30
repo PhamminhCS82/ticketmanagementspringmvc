@@ -6,6 +6,7 @@
 package com.group11.services;
 
 import com.group11.pojos.Tickets;
+import java.math.BigDecimal;
 
 /**
  *
@@ -13,4 +14,5 @@ import com.group11.pojos.Tickets;
  */
 public interface OrderService {
     boolean addOrder(Tickets ticket);
+    boolean addOnlineOrder(Tickets tickets, BigDecimal amount, String onlinePayId);
 }

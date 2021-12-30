@@ -147,6 +147,12 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="title" value="Xác nhận" />
         <put-attribute name="content"
                        value="/WEB-INF/jsp/buyconfirm.jsp" />
+    </definition>
+    
+    <definition name="order-detail" extends="baseLayout2">
+        <put-attribute name="title" value="Hóa đơn" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/order-detail.jsp" />
 
     </definition>
 </tiles-definitions>

@@ -103,6 +103,8 @@ public class ApiBuyTicketController {
         MediaType.APPLICATION_JSON_VALUE
     })
     public ResponseEntity<String> payment(@RequestBody final Tickets params, HttpSession session) throws UnsupportedEncodingException, IOException {
+
+        session.setAttribute("orderTicket", params);
         Random rand = new Random();
         final User u = this.userDetailsService.getUserId(params.getUserId());
         BigDecimal p = BigDecimal.valueOf(params.getSeats().length);
@@ -110,17 +112,19 @@ public class ApiBuyTicketController {
         final int random_id = rand.nextInt(1000000);
         final Map embed_data = new HashMap() {
             {
-                put("redirecturl", "https://docs.zalopay.vn/result");
+                put("redirecturl", "http://localhost:8080/CS82TicketSale/api/order-payment");
             }
         };
-        
+
         final Map[] item = {
-            new HashMap(){{
-                put("itemid", "veXe");
-                put("itemname", "So ghe ngoi");
-                put("itemprice", total);
-                put("itemquantity", params.getSeats().length);
-            }}
+            new HashMap() {
+                {
+                    put("itemid", "veXe");
+                    put("itemname", "So ghe ngoi");
+                    put("itemprice", total);
+                    put("itemquantity", params.getSeats().length);
+                }
+            }
         };
         try {
             Map<String, Object> order;
@@ -170,9 +174,7 @@ public class ApiBuyTicketController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @GetMapping(path = "/api/getOrder", produces = {
-        
-    })
+    @GetMapping(path = "/api/getOrder", produces = {})
     public ResponseEntity<String> status(HttpSession session) throws IOException, URISyntaxException {
         String app_trans_id = session.getAttribute("app_trans").toString();  // Input your app_trans_id
         String data = Utils.config.get("appid") + "|" + app_trans_id + "|" + Utils.config.get("key1");
@@ -206,5 +208,7 @@ public class ApiBuyTicketController {
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
+
+    
 
 }

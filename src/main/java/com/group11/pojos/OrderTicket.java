@@ -6,6 +6,7 @@
 package com.group11.pojos;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -24,6 +25,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -60,6 +62,11 @@ public class OrderTicket implements Serializable {
     private User user;
     @OneToMany(mappedBy = "idorder")
     private Collection<Ticket> ticketCollection;
+    @Size(max = 45)
+    @Column(name = "online_pay")
+    private String onlinePay;
+    @Column(name = "total_price")
+    private BigDecimal totalPrice;
 
     public OrderTicket() {
     }
@@ -114,6 +121,8 @@ public class OrderTicket implements Serializable {
         this.ticketCollection = ticketCollection;
     }
 
+    
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -137,6 +146,34 @@ public class OrderTicket implements Serializable {
     @Override
     public String toString() {
         return "com.group11.pojos.OrderTicket[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the onlinePay
+     */
+    public String getOnlinePay() {
+        return onlinePay;
+    }
+
+    /**
+     * @param onlinePay the onlinePay to set
+     */
+    public void setOnlinePay(String onlinePay) {
+        this.onlinePay = onlinePay;
+    }
+
+    /**
+     * @return the totalPrice
+     */
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
+    }
+
+    /**
+     * @param totalPrice the totalPrice to set
+     */
+    public void setTotalPrice(BigDecimal totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
 }

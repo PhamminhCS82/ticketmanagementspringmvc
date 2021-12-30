@@ -8,6 +8,7 @@ package com.group11.services.implement;
 import com.group11.pojos.Tickets;
 import com.group11.repository.OrderRepository;
 import com.group11.services.OrderService;
+import java.math.BigDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,10 @@ public class OrderServiceImplement implements OrderService{
     @Override
     public boolean addOrder(Tickets tickets) {
         return this.orderRepository.addOrder(tickets);
+    }
+    @Override
+    public boolean addOnlineOrder(Tickets tickets, BigDecimal amount, String onlinePayId) {
+        return this.orderRepository.addOnlineOrder(tickets, amount, onlinePayId);
     }
     
 }

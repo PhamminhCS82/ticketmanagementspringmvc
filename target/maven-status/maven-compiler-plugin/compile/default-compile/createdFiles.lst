@@ -30,7 +30,6 @@ com\group11\pojos\Ticket.class
 com\configs\handlers\MyAccessDeniedHandler.class
 com\group11\controllers\TripController.class
 com\group11\pojos\OrderTicket_.class
-com\group11\controllers\ApiBuyTicketController$5.class
 com\group11\pojos\Trip.class
 com\group11\repository\CommentRepository.class
 com\group11\services\implement\UserServiceImplement.class
@@ -44,10 +43,8 @@ com\group11\controllers\AdminController.class
 com\group11\formatter\UserFormatter.class
 com\group11\services\PassengercarService.class
 com\group11\pojos\Route.class
-com\group11\utils\Utils$3.class
 com\group11\formatter\RouteFormatter.class
 com\group11\configs\TilesConfig.class
-com\group11\controllers\ApiBuyTicketController$4.class
 com\group11\controllers\ApiCommentController.class
 com\group11\controllers\HomeController.class
 com\group11\pojos\Comment_.class
@@ -63,7 +60,6 @@ com\group11\pojos\User$Roles.class
 com\group11\repository\implement\LocationRepositoryImpl.class
 com\group11\pojos\Passengercar.class
 com\group11\pojos\Ticket_.class
-com\group11\controllers\ApiBuyTicketController$6.class
 com\group11\pojos\Passengercar_.class
 com\group11\repository\PassengercarRepository.class
 com\group11\repository\StatsRepository.class
