@@ -30,6 +30,11 @@
                         Đã có lỗi xảy ra!!!
                     </div>
                 </c:if>
+                <c:if test="${param.accessDenied != null}">
+                    <div class="alert alert-danger">
+                        Ban khong co quyen truy cap!!!
+                    </div>
+                </c:if>
                 <form method="post" action="${action}" class="bg-light p-5 contact-form">
                     <div class="form-group">
                         <input type="text" id="username" name="username" class="form-control" placeholder="Tài khoản">

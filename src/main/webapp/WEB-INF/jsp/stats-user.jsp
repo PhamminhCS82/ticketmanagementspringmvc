@@ -96,7 +96,7 @@
                                         <td>${u.password}</td>
                                         <td>${u.email}</td>
                                         <td>${u.phone}</td>
-                                        <td>${u.userrole}</td>
+                                        <td>${u.userRole}</td>
                                         <td><div class="w3-xlarge"><a href="<c:url value="/admin/edit-users/${u.id}"/>?edit=${u.id}"><i class="fa fa-pencil-square-o"></i></a></div></td>  
                                     </tr>
                                 </c:forEach>                            

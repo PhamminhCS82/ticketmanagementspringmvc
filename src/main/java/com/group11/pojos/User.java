@@ -44,16 +44,16 @@ import org.springframework.web.multipart.MultipartFile;
     @NamedQuery(name = "User.findByPhone", query = "SELECT u FROM User u WHERE u.phone = :phone"),
     @NamedQuery(name = "User.findByActive", query = "SELECT u FROM User u WHERE u.active = :active"),
     @NamedQuery(name = "User.findByAvatar", query = "SELECT u FROM User u WHERE u.avatar = :avatar"),
-    @NamedQuery(name = "User.findByUserrole", query = "SELECT u FROM User u WHERE u.userrole = :userrole")})
+    @NamedQuery(name = "User.findByUserrole", query = "SELECT u FROM User u WHERE u.userRole = :userRole")})
 public class User implements Serializable {
     
 
     public static enum Roles {
-        USER,
+        ROLE_USER,
         DRIVER,
         EMPLOYEE,
         GUEST,
-        ADMIN
+        ROLE_ADMIN
     }
     private static final long serialVersionUID = 1L;
     @Id
@@ -85,9 +85,9 @@ public class User implements Serializable {
     @Column(name = "avatar")
     private String avatar;
     @Size(max = 45)
-    @Column(name = "userrole")
-    private String userrole;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @Column(name = "user_role")
+    private String userRole;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
     private Collection<OrderTicket> orderTicketCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
     private Collection<Comment> commentCollection;
@@ -108,7 +108,7 @@ public class User implements Serializable {
         this.surname = surname;
         this.email = email;
         this.phone = phone;
-        this.userrole = userRole;
+        this.userRole = userRole;
         this.active = 1;
     }
 
@@ -117,7 +117,7 @@ public class User implements Serializable {
         this.surname = surname;
         this.email = email;
         this.phone = phone;
-        this.userrole = userRole;
+        this.userRole = userRole;
         this.active = 1;
     }
 
@@ -128,7 +128,7 @@ public class User implements Serializable {
         this.email = email;
         this.username = username;
         this.password = password;
-        this.userrole = userRole;
+        this.userRole = userRole;
         this.active = 1;
     }
 
@@ -209,11 +209,11 @@ public class User implements Serializable {
     }
 
     public String getUserrole() {
-        return userrole;
+        return userRole;
     }
 
     public void setUserrole(String userrole) {
-        this.userrole = userrole;
+        this.userRole = userrole;
     }
 
     @XmlTransient

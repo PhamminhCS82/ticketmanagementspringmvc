@@ -112,7 +112,7 @@ public class ApiBuyTicketController {
         final int random_id = rand.nextInt(1000000);
         final Map embed_data = new HashMap() {
             {
-                put("redirecturl", "http://localhost:8080/CS82TicketSale/api/order-payment");
+                put("redirecturl", "http://localhost:8080/CS82TicketSale/order-payment");
             }
         };
 

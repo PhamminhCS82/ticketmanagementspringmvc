@@ -65,7 +65,7 @@ public class UserController {
                 || !user.getPassword().equals(user.getConfirmPassword())) {
             model.addAttribute("errMsg", "Mat khau KHONG khop!!!");
         } else {
-            if (this.userDetailsService.addUser(user, User.Roles.USER.toString()) == true) {
+            if (this.userDetailsService.addUser(user, User.Roles.ROLE_USER.toString()) == true) {
                 return "redirect:/signin";
             }
 

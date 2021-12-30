@@ -96,42 +96,40 @@
             </div>
         </div>
         <div class="row">
-             <c:forEach var="p" items="${locations}">
-            <div class="card-body">
-            <div class="col-md-12 ftco-animate">
-                
-                <div class="project-wrap">
-                   
-                        
-                    <a  href="${catPath}"class="img" style="background-image: url('resources/images/destination-1.jpg');">
-                        <span class="price">$550/person</span>
-                    </a>
-                       
-               
+            <c:forEach var="p" items="${locations}">
+                <div class="card-body">
+                    <div class="col-md-12 ftco-animate">
 
-                        <c:url value="/route" var="catPath">
-                            <c:param name="CateId" value="${p.id}"></c:param>
-                        </c:url>
-                       
+                        <div class="project-wrap">
 
-                
-                    <div class="text p-4">
-                        <span class="days">8 Days Tour</span>
-                        <h3><a href="${catPath}">${p.name}</a></h3>
-                        <p class="location"><span class="fa fa-map-marker"></span> Banaue, Ifugao, Philippines</p>
+
+                            <a  href="${catPath}"class="img" style="background-image: url('resources/images/destination-1.jpg');">
+                            </a>
+
+
+
+                            <c:url value="/route" var="catPath">
+                                <c:param name="CateId" value="${p.id}"></c:param>
+                            </c:url>
+
+
+
+                            <div class="text p-4">
+                                <h3><a href="${catPath}">${p.name}</a></h3>
+                                <p class="location"><span class="fa fa-map-marker"></span> ${p.start} - ${p.finish}</p>
+                            </div>
+
+                        </div>
                     </div>
-                   
                 </div>
-                </div>
-            </div>
-                         </c:forEach>
-           
+            </c:forEach>
+
         </div>
     </div>
-      <ul class="pagination justify-content-center">
-            <c:forEach begin="1" end="${Math.ceil(counter/6)}" var="i">
-                <li class="page-item"><a class="page-link" href="<c:url value="/route"/>?page=${i}">${i}</a></li>
-                </c:forEach>
-        </ul>
+    <ul class="pagination justify-content-center">
+        <c:forEach begin="1" end="${Math.ceil(counter/6)}" var="i">
+            <li class="page-item"><a class="page-link" href="<c:url value="/route"/>?page=${i}">${i}</a></li>
+            </c:forEach>
+    </ul>
 </section>
 

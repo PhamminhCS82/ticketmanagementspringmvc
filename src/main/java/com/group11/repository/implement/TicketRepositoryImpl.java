@@ -7,6 +7,7 @@ package com.group11.repository.implement;
 
 import com.group11.pojos.Ticket;
 import com.group11.repository.TicketRepository;
+import java.util.List;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -44,6 +45,11 @@ public class TicketRepositoryImpl implements TicketRepository {
     public Ticket getTicketId(int i) {
         Session s = sessionFactory.getObject().getCurrentSession();
         return s.get(Ticket.class, i);
+    }
+
+    @Override
+    public List<Ticket> getAllUserTicket(int userId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

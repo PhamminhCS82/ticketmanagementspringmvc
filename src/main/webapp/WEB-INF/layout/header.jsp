@@ -26,6 +26,7 @@
                         <li class="nav-item"><a href="<c:url value="/user/edit-users/${pageContext.request.userPrincipal.name}" />" class="nav-link">
                                 <img style="width:30px;" src="${currentUser.avatar}" class="rounded-circle" />
                             </a></li>
+                        <li class="nav-item "><a href="<c:url value="/order-history" />" class="nav-link">Lịch sử</a></li>
                         </c:if>
                         <c:if test="${currentUser.avatar == null}">
                         <li class="nav-item"><a href="<c:url value="/user/edit-users/${pageContext.request.userPrincipal.name}" />" class="nav-link">

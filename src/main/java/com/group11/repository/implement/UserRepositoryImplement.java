@@ -97,7 +97,7 @@ public class UserRepositoryImplement implements UserRepository {
         Root root = query.from(User.class);
         query = query.select(root);
 
-        Predicate p = builder.equal(root.get("userrole").as(String.class), "DRIVER");
+        Predicate p = builder.equal(root.get("userRole").as(String.class), "DRIVER");
         query.where(p);
 
         Query q = session.createQuery(query);

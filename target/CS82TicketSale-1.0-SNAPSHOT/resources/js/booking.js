@@ -86,6 +86,7 @@ function payMent(userId, id, price) {
         if(data.return_code === 1){
             window.open(data.order_url, "_blank");
             window.location = "http://localhost:8080/CS82TicketSale/";
+            
         }
         else {
             alert("Có lỗi xảy ra thử lại sau");

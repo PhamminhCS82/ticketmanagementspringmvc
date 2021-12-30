@@ -5,8 +5,12 @@
  */
 package com.group11.repository;
 
+import com.group11.pojos.OrderTicket;
+import com.group11.pojos.Ticket;
 import com.group11.pojos.Tickets;
+import com.group11.pojos.User;
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  *
@@ -16,4 +20,7 @@ public interface OrderRepository {
     
     boolean addOrder(Tickets ticket);
     boolean addOnlineOrder(Tickets tickets, BigDecimal amount, String onlinePayId);
+    OrderTicket getOrderById(int id);
+    List<OrderTicket> getOrderByUser(User u);
+    List<Ticket> getOrderDetailByOrder(OrderTicket ot);
 }

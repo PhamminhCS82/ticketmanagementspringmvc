@@ -8,21 +8,19 @@
 <h2>Bordered Table</h2>
 <p>The .table-bordered class adds borders on all sides of the table and the cells:</p>            
 <table class="table table-bordered">
+
     <tbody>
         <tr>
-            <td>John</td>
-            <td>Doe</td>
-            <td>john@example.com</td>
+            <td><b>Mã hóa đơn điện tử</b></td>
+            <td><b>Hình thức thanh toán</b></td>
+            <td><b>Số tiền</b></td>
+            <td><b>Trạng thái</b></td>
         </tr>
         <tr>
-            <td>Mary</td>
-            <td>Moe</td>
-            <td>mary@example.com</td>
-        </tr>
-        <tr>
-            <td>July</td>
-            <td>Dooley</td>
-            <td>july@example.com</td>
+            <td>${onlineId}</td>
+            <td>Ví điện tử ZaloPay</td>
+            <td>${totalPrice}</td>
+            <td>${orderResult}</td>
         </tr>
     </tbody>
 </table>

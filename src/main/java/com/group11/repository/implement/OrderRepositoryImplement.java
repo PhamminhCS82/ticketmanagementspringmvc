@@ -9,11 +9,18 @@ import com.group11.pojos.OrderTicket;
 import com.group11.pojos.Ticket;
 import com.group11.pojos.Tickets;
 import com.group11.pojos.Trip;
+import com.group11.pojos.User;
 import com.group11.repository.OrderRepository;
 import com.group11.repository.LocationRepository;
 import com.group11.repository.UserRepository;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -52,7 +59,7 @@ public class OrderRepositoryImplement implements OrderRepository {
             session.save(order);
             Trip trip = locationRepository.getTripId(tickets.getTripId());
             Integer[] seats = tickets.getSeats();
-            for (int seat: seats) {
+            for (int seat : seats) {
                 Ticket ticket = new Ticket();
                 ticket.setIdorder(order);
                 ticket.setSeatName(seat);
@@ -69,6 +76,8 @@ public class OrderRepositoryImplement implements OrderRepository {
         }
         return false;
     }
+
+    @Transactional
     @Override
     public boolean addOnlineOrder(Tickets tickets, BigDecimal amount, String onlinePayId) {
         try {
@@ -82,7 +91,7 @@ public class OrderRepositoryImplement implements OrderRepository {
             session.save(order);
             Trip trip = locationRepository.getTripId(tickets.getTripId());
             Integer[] seats = tickets.getSeats();
-            for (int seat: seats) {
+            for (int seat : seats) {
                 Ticket ticket = new Ticket();
                 ticket.setIdorder(order);
                 ticket.setSeatName(seat);
@@ -98,6 +107,41 @@ public class OrderRepositoryImplement implements OrderRepository {
             ex.printStackTrace();
         }
         return false;
+    }
+
+    @Transactional
+    @Override
+    public List<OrderTicket> getOrderByUser(User user) {
+        Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<OrderTicket> query = builder.createQuery(OrderTicket.class);
+        Root root = query.from(OrderTicket.class);
+        query = query.select(root);
+        Predicate p = builder.equal(root.get("user").as(User.class), user);
+        query = query.where(p);
+        Query q = session.createQuery(query);
+        return q.getResultList();
+    }
+
+    @Transactional
+    @Override
+    public List<Ticket> getOrderDetailByOrder(OrderTicket ot) {
+        Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Ticket> query = builder.createQuery(Ticket.class);
+        Root root = query.from(Ticket.class);
+        query = query.select(root);
+        Predicate p = builder.equal(root.get("idorder").as(OrderTicket.class), ot);
+        query = query.where(p);
+        Query q = session.createQuery(query);
+        return q.getResultList();
+    }
+    
+    @Transactional
+    @Override
+    public OrderTicket getOrderById(int i) {
+        Session session = this.sessionFactoryBean.getObject().getCurrentSession();
+        return session.get(OrderTicket.class, i);
     }
 
 }
