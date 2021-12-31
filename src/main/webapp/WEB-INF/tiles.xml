@@ -165,4 +165,9 @@ Software Foundation//DTD Tiles Configuration 3.0//EN"
         <put-attribute name="content"
                        value="/WEB-INF/jsp/history-detail.jsp" />
     </definition>
+    <definition name="order-success" extends="baseLayout2">
+        <put-attribute name="title" value="Thành công" />
+        <put-attribute name="content"
+                       value="/WEB-INF/jsp/order-success.jsp" />
+    </definition>
 </tiles-definitions>

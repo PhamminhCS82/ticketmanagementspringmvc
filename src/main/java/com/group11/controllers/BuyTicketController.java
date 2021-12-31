@@ -58,9 +58,9 @@ public class BuyTicketController {
         return "buyticket";
     }
 
-    @PostMapping("/confirm")
-    public String confirmView(MapModel model) {
-        return "buyconfirm";
+    @GetMapping("/confirm")
+    public String confirmView() {
+        return "order-success";
     }
     
     @GetMapping("/order-payment")

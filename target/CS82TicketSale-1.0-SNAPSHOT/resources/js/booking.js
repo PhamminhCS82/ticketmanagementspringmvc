@@ -109,8 +109,8 @@ function pay(userId, id, price) {
     }).then(function (res) {
         return res.json();
     }).then(function (code) {
-        console.info(code);
-        //window.location="http://localhost:8080/CS82TicketSale/";
+        if(code === "OK")
+            window.location="http://localhost:8080/CS82TicketSale/confirm";
     });
 
 }
